@@ -1,18 +1,18 @@
-if exists("g:loaded_toggle") || &cp
+if exists("g:loaded_switch") || &cp
   finish
 endif
 
-let g:loaded_toggle = '0.0.1' " version number
+let g:loaded_switch = '0.0.1' " version number
 let s:keepcpo = &cpo
 set cpo&vim
 
-let g:toggle_definitions =
+let g:switch_definitions =
       \ [
       \   [ 'WORD', ['&&', '||'] ],
       \   [ 'word', ['true', 'false'] ],
       \ ]
 
-autocmd FileType eruby let b:toggle_definitions =
+autocmd FileType eruby let b:switch_definitions =
       \ [
       \   [ 'line', {
       \     '<%= \(.*\) %>':    '<%# \1 %>',
@@ -21,15 +21,15 @@ autocmd FileType eruby let b:toggle_definitions =
       \   }]
       \ ]
 
-command! Toggle call s:Toggle()
-function! s:Toggle()
-  let definitions = extend([], g:toggle_definitions)
+command! Switch call s:Switch()
+function! s:Switch()
+  let definitions = extend([], g:switch_definitions)
 
-  if exists('b:toggle_definitions')
-    call extend(definitions, b:toggle_definitions)
+  if exists('b:switch_definitions')
+    call extend(definitions, b:switch_definitions)
   endif
 
-  call toggle#Toggle(definitions)
+  call switch#Switch(definitions)
 endfunction
 
 let &cpo = s:keepcpo

@@ -1,13 +1,13 @@
 let s:type_list = type([])
 let s:type_dict = type({})
 
-function! toggle#Toggle(definitions)
+function! switch#Switch(definitions)
   try
     let saved_cursor = getpos('.')
     let line         = getline('.')
 
     for definition in a:definitions
-      let toggle_type = definition[0]
+      let switch_type = definition[0]
       let mapping     = s:CanonicalMapping(definition[1])
 
       for [pattern, replacement] in items(mapping)
