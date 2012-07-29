@@ -27,16 +27,25 @@ autocmd FileType ruby let b:switch_definitions =
       \     ':\(\k\+\)\s\+=>': '\1:',
       \     '\<\(\k\+\):':     ':\1 =>',
       \   },
+      \   {
+      \     'if true or (\(.*\))':   'if false and (\1)',
+      \     'if false and (\(.*\))': 'if \1',
+      \   },
+      \   {
+      \     'if \(.*\)': 'if true or (\1)',
+      \   },
       \   ['should ', 'should_not '],
       \ ]
 
 command! Switch call s:Switch()
 function! s:Switch()
-  let definitions = extend([], g:switch_definitions)
+  let definitions = []
 
   if exists('b:switch_definitions')
     call extend(definitions, b:switch_definitions)
   endif
+
+  let definitions = extend(definitions, g:switch_definitions)
 
   call switch#Switch(definitions)
 endfunction
