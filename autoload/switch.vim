@@ -3,25 +3,33 @@ let s:type_dict = type({})
 
 function! switch#Switch(definitions)
   try
-    let saved_cursor = getpos('.')
+    let saved_cursor     = getpos('.')
+    let min_match_length = -1
+    let min_match        = []
 
     for definition in a:definitions
       let mapping = s:CanonicalMapping(definition)
 
       for [pattern, replacement] in items(mapping)
-        let [match_start, match_end] = s:Match(pattern)
+        let [match_start, match_end, match_length] = s:Match(pattern)
 
-        if match_start > 0
-          let pattern = s:LimitPatternToColumns(pattern, match_start, match_end)
-          call s:Replace(pattern, replacement)
-          return 1
+        if match_start > 0 && (min_match_length < 0 || min_match_length > match_length)
+          let min_match_length = match_length
+          let min_match        = [pattern, replacement, match_start, match_end]
         endif
       endfor
 
       unlet definition
     endfor
 
-    return 0
+    if min_match_length > 0
+      let [pattern, replacement, start, end] = min_match
+      let pattern = s:LimitPatternToColumns(pattern, start, end)
+      call s:Replace(pattern, replacement)
+      return 1
+    else
+      return 0
+    endif
   finally
     call setpos('.', saved_cursor)
   endtry
@@ -60,7 +68,7 @@ function! s:Match(pattern)
 
     call search(a:pattern, 'bcW', line('.'))
     if search(a:pattern, 'cW', line('.')) <= 0
-      return [-1, -1]
+      return [-1, -1, -1]
     endif
 
     let match_start = col('.')
@@ -68,9 +76,9 @@ function! s:Match(pattern)
     let match_end = col('.')
 
     if match_start > col || match_end < col
-      return [-1, -1]
+      return [-1, -1, -1]
     else
-      return [match_start, match_end]
+      return [match_start, match_end, (match_end - match_start + 1)]
     endif
   finally
     call setpos('.', saved_cursor)
@@ -92,7 +100,7 @@ function! s:LimitPatternToColumns(pattern, start, end)
     let pattern = '\%>'.(a:start - 1).'c'.a:pattern
   endif
 
-  if a:end >= col('$') - 2
+  if a:end >= col('$') - 1
     let pattern = a:pattern.'$'
   else
     let pattern = pattern.'\%<'.(a:end + 2).'c'
