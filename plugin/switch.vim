@@ -21,6 +21,16 @@ autocmd FileType eruby let b:switch_definitions =
       \   }]
       \ ]
 
+autocmd FileType ruby let b:switch_definitions =
+      \ [
+      \   ['word', {
+      \       ':\(\k\+\)\s\+=>': '\1:',
+      \       '\<\(\k\+\):':     ':\1 =>',
+      \     }
+      \   ],
+      \   [ 'word', ['should ', 'should_not '] ]
+      \ ]
+
 command! Switch call s:Switch()
 function! s:Switch()
   let definitions = extend([], g:switch_definitions)
