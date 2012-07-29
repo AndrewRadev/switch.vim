@@ -8,27 +8,26 @@ set cpo&vim
 
 let g:switch_definitions =
       \ [
-      \   [ 'WORD', ['&&', '||'] ],
-      \   [ 'word', ['true', 'false'] ],
+      \   ['&&', '||'],
+      \   ['true', 'false'],
       \ ]
 
 autocmd FileType eruby let b:switch_definitions =
       \ [
-      \   [ 'line', {
+      \   {
       \     '<%= \(.*\) %>':    '<%# \1 %>',
       \     '<%# \(.*\) %>':    '<%=raw \1 %>',
-      \     '<%=raw \(.*\) %>': '<%= \1 %>'
-      \   }]
+      \     '<%=raw \(.*\) %>': '<%= \1 %>',
+      \   }
       \ ]
 
 autocmd FileType ruby let b:switch_definitions =
       \ [
-      \   ['word', {
-      \       ':\(\k\+\)\s\+=>': '\1:',
-      \       '\<\(\k\+\):':     ':\1 =>',
-      \     }
-      \   ],
-      \   [ 'word', ['should ', 'should_not '] ]
+      \   {
+      \     ':\(\k\+\)\s\+=>': '\1:',
+      \     '\<\(\k\+\):':     ':\1 =>',
+      \   },
+      \   ['should ', 'should_not '],
       \ ]
 
 command! Switch call s:Switch()
