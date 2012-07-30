@@ -18,7 +18,14 @@ autocmd FileType eruby let b:switch_definitions =
       \     '<%= \(.*\) %>':    '<%# \1 %>',
       \     '<%# \(.*\) %>':    '<%=raw \1 %>',
       \     '<%=raw \(.*\) %>': '<%= \1 %>',
-      \   }
+      \   },
+      \   {
+      \     '<% if true or (\(.*\)) %>':   '<% if false and (\1) %>',
+      \     '<% if false and (\(.*\)) %>': '<% if \1 %>',
+      \   },
+      \   {
+      \     '<% if \(.*\) %>': '<% if true or (\1) %>',
+      \   },
       \ ]
 
 autocmd FileType ruby let b:switch_definitions =
