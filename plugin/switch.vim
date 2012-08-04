@@ -15,7 +15,8 @@ let g:switch_definitions =
 autocmd FileType eruby let b:switch_definitions =
       \ [
       \   {
-      \     '<%= \(.*\) %>':    '<%# \1 %>',
+      \     '<%= \(.*\) %>':    '<% \1 %>',
+      \     '<% \(.*\) -\?%>':  '<%# \1 %>',
       \     '<%# \(.*\) %>':    '<%=raw \1 %>',
       \     '<%=raw \(.*\) %>': '<%= \1 %>',
       \   },
@@ -25,6 +26,10 @@ autocmd FileType eruby let b:switch_definitions =
       \   },
       \   {
       \     '<% if \(.*\) %>': '<% if true or (\1) %>',
+      \   },
+      \   {
+      \     ':\(\k\+\)\s\+=>': '\1:',
+      \     '\<\(\k\+\):':     ':\1 =>',
       \   },
       \ ]
 
