@@ -52,12 +52,19 @@ autocmd FileType ruby let b:switch_definitions =
 command! Switch call s:Switch()
 function! s:Switch()
   let definitions = []
+  let definitions = extend(definitions, g:switch_definitions)
+
+  if exists('g:switch_custom_definitions')
+    call extend(definitions, g:switch_custom_definitions)
+  endif
 
   if exists('b:switch_definitions')
     call extend(definitions, b:switch_definitions)
   endif
 
-  let definitions = extend(definitions, g:switch_definitions)
+  if exists('b:switch_custom_definitions')
+    call extend(definitions, b:switch_custom_definitions)
+  endif
 
   call switch#Switch(definitions)
 endfunction
