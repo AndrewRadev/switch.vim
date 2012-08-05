@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "ruby definitions" do
   let(:filename) { 'test.rb' }
 
+  # TODO (2012-08-05) Priority tests? (move `search('flag').switch`)
   specify "true/false" do
     set_file_contents 'flag = true'
 
