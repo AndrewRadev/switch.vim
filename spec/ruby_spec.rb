@@ -41,4 +41,45 @@ describe "ruby definitions" do
       }
     EOF
   end
+
+  specify "rspec should/should_not" do
+    set_file_contents '1.should eq 1'
+
+    VIM.search('should').switch
+    assert_file_contents '1.should_not eq 1'
+
+    VIM.switch
+    assert_file_contents '1.should eq 1'
+  end
+
+  specify "if-clauses" do
+    set_file_contents <<-EOF
+      if predicate?
+        puts 'Hello, World!'
+      end
+    EOF
+
+    VIM.search 'if'
+
+    VIM.switch
+    assert_file_contents <<-EOF
+      if true or (predicate?)
+        puts 'Hello, World!'
+      end
+    EOF
+
+    VIM.switch
+    assert_file_contents <<-EOF
+      if false and (predicate?)
+        puts 'Hello, World!'
+      end
+    EOF
+
+    VIM.switch
+    assert_file_contents <<-EOF
+      if predicate?
+        puts 'Hello, World!'
+      end
+    EOF
+  end
 end
