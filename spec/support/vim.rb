@@ -6,11 +6,6 @@ module Support
       VIM.edit filename
     end
 
-    def switch
-      VIM.command 'Switch'
-      VIM.write
-    end
-
     def file_contents
       IO.read(filename).strip
     end

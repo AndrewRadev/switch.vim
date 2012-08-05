@@ -5,19 +5,17 @@ describe "ruby definitions" do
 
   specify "true/false" do
     set_file_contents 'flag = true'
-    VIM.search('true')
 
-    switch
+    VIM.search('true').switch
     assert_file_contents 'flag = false'
 
-    switch
+    VIM.switch
     assert_file_contents 'flag = true'
 
     VIM.search('flag').switch
     assert_file_contents 'flag = true'
   end
 
-  # TODO (2012-08-04) Vimrunner: fluid interface
   specify "hash style" do
     set_file_contents <<-EOF
       foo = {
