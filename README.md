@@ -43,18 +43,18 @@ There are three main principles that the substition follows:
    definitions is respected. For instance, in eruby, the following code can be
    transformed:
 
-   ``` ruby
+   ``` erb
    <% if foo? %>
-   # could switch into:
+   could switch into:
    <%# if foo? %>
-   # but instead, it would switch into:
+   but instead, it would switch into:
    <% if true and (foo?) %>
    ```
 
    The second switch will be performed, simply because in the definition list,
    the pattern was placed at a higher spot. In this case, this seems to make
    sense to prioritize one over the other. If it's needed to prioritize in a
-   different way, the definition list should be redefined by the user
+   different way, the definition list should be redefined by the user.
 
 ## Customization
 
@@ -105,7 +105,7 @@ this definition in `ftplugin/eruby.vim`.
 
 Another interesting example is the following definition:
 
-```
+``` vim
 autocmd FileType php let b:switch_definitions =
     \ [
     \   { '<?php echo \(.*\) ?>': '<?php \1 ?>' },
