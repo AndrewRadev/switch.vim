@@ -3,7 +3,6 @@ require 'spec_helper'
 describe "ruby definitions" do
   let(:filename) { 'test.rb' }
 
-  # TODO (2012-08-05) Priority tests? (move `search('flag').switch`)
   specify "true/false" do
     set_file_contents 'flag = true'
 
@@ -82,5 +81,23 @@ describe "ruby definitions" do
         puts 'Hello, World!'
       end
     EOF
+  end
+
+  describe "(overrides)" do
+    specify "true/false overrides hash style" do
+      set_file_contents <<-EOF
+        foo = { :one => true }
+      EOF
+
+      VIM.search('true').switch
+      assert_file_contents <<-EOF
+        foo = { :one => false }
+      EOF
+
+      VIM.normal('u').search('one').switch
+      assert_file_contents <<-EOF
+        foo = { one: true }
+      EOF
+    end
   end
 end
