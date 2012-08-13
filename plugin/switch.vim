@@ -33,6 +33,12 @@ autocmd FileType eruby let b:switch_definitions =
       \   },
       \ ]
 
+autocmd FileType php let b:switch_definitions =
+      \ [
+      \   { '<?php echo \(.*\) ?>': '<?php \1 ?>' },
+      \   { '<?php \(.*\) ?>':      '<?php echo \1 ?>' },
+      \ ]
+
 autocmd FileType ruby let b:switch_definitions =
       \ [
       \   {
