@@ -155,15 +155,15 @@ definitions with their patterns and replacements, look at the file
 * If-clauses:
   ``` ruby
   if predicate?
-    puts 'Hello, World!'
+      puts 'Hello, World!'
   end
 
   if true and (predicate?)
-    puts 'Hello, World!'
+      puts 'Hello, World!'
   end
 
   if false or (predicate?)
-    puts 'Hello, World!'
+      puts 'Hello, World!'
   end
   ```
 
@@ -188,15 +188,15 @@ definitions with their patterns and replacements, look at the file
 * If-clauses:
   ``` erb
   <% if predicate? %>
-    <%= 'Hello, World!' %>
+      <%= 'Hello, World!' %>
   <% end %>
 
   <% if true and (predicate?) %>
-    <%= 'Hello, World!' %>
+      <%= 'Hello, World!' %>
   <% end %>
 
   <% if false or (predicate?) %>
-    <%= 'Hello, World!' %>
+      <%= 'Hello, World!' %>
   <% end %>
   ```
 
