@@ -123,15 +123,97 @@ well. It's good to have such cases in mind when designing switches.
 
 ## Builtins
 
-TODO
+Here's a list of all the built-in switch definitions. To see the actual
+definitions with their patterns and replacements, look at the file
+[plugin/switch.vim](https://github.com/AndrewRadev/switch.vim/blob/master/plugin/switch.vim).
 
-## Settings
+### Global
 
-TODO
+* Boolean conditions:
+  ```
+  foo && bar
 
-g:switch_definitions
+  foo || bar
+  ```
 
-b:switch_definitions
+* Boolean constants:
+  ```
+  flag = true
+
+  flag = false
+  ```
+
+### Ruby
+
+* Hash style:
+  ``` ruby
+  foo = { :one => 'two' }
+
+  foo = { one: 'two' }
+  ```
+
+* If-clauses:
+  ``` ruby
+  if predicate?
+    puts 'Hello, World!'
+  end
+
+  if true and (predicate?)
+    puts 'Hello, World!'
+  end
+
+  if false or (predicate?)
+    puts 'Hello, World!'
+  end
+  ```
+
+* Rspec should/should_not:
+  ``` ruby
+  1.should eq 1
+
+  1.should_not eq 1
+  ```
+
+### PHP
+
+* "Echo" in tags:
+  ``` php
+  <?php "Text" ?>
+
+  <?php echo "Text" ?>
+  ```
+
+### Eruby
+
+* If-clauses:
+  ``` erb
+  <% if predicate? %>
+    <%= 'Hello, World!' %>
+  <% end %>
+
+  <% if true and (predicate?) %>
+    <%= 'Hello, World!' %>
+  <% end %>
+
+  <% if false or (predicate?) %>
+    <%= 'Hello, World!' %>
+  <% end %>
+  ```
+
+* Tag type:
+  ``` erb
+  <% something %>
+  <%# something %>
+  <%=raw something %>
+  <%= something %>
+  ```
+
+* Hash style:
+  ``` erb
+  <% foo = { :one => 'two' } %>
+
+  <% foo = { one: 'two' } %>
+  ```
 
 ## Similar work
 

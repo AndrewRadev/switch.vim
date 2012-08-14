@@ -4,6 +4,7 @@ CONTENTS                                                *switch* *switch-content
     Installation................................: |switch-installation|
     Usage.......................................: |switch-usage|
     Settings....................................: |switch-settings|
+    Similar plugins.............................: |switch-similar-plugins|
     Issues......................................: |switch-issues|
 
 
@@ -28,8 +29,6 @@ directory: plugin, autoload, doc.
 
 ==============================================================================
 USAGE                                                     *switch-usage* *:Switch*
-
-TODO other plugins
 
 The main entry point of the plugin is a single command, |:Switch|. When the
 command is executed, the plugin looks for one of a few specific patterns under
@@ -148,16 +147,155 @@ well. It's good to have such cases in mind when designing switches.
 ==============================================================================
 BUILTINS                                                       *switch-builtins*
 
-TODO
+Here's a list of all the built-in switch definitions. To see the actual
+definitions with their patterns and replacements, look at the file
+plugin/switch.vim.
+
+Global ~
+
+Boolean conditions:
+>
+    foo && bar
+
+    foo || bar
+<
+
+Boolean constants:
+>
+    flag = true
+
+    flag = false
+<
+
+Ruby ~
+
+Hash style:
+>
+    foo = { :one => 'two' }
+
+    foo = { one: 'two' }
+<
+
+If-clauses:
+>
+    if predicate?
+      puts 'Hello, World!'
+    end
+
+    if true and (predicate?)
+      puts 'Hello, World!'
+    end
+
+    if false or (predicate?)
+      puts 'Hello, World!'
+    end
+<
+
+Rspec should/should_not:
+>
+    1.should eq 1
+
+    1.should_not eq 1
+<
+
+PHP ~
+
+"Echo" in tags:
+>
+    <?php "Text" ?>
+
+    <?php echo "Text" ?>
+<
+
+
+Eruby ~
+
+If-clauses:
+>
+    <% if predicate? %>
+      <%= 'Hello, World!' %>
+    <% end %>
+
+    <% if true and (predicate?) %>
+      <%= 'Hello, World!' %>
+    <% end %>
+
+    <% if false or (predicate?) %>
+      <%= 'Hello, World!' %>
+    <% end %>
+>
+
+Tag type:
+>
+    <% something %>
+    <%# something %>
+    <%=raw something %>
+    <%= something %>
+<
+
+Hash style:
+>
+    <% foo = { :one => 'two' } %>
+
+    <% foo = { one: 'two' } %>
+<
 
 ==============================================================================
-SETTINGS                                                       *switch-settings*
+SETTINGS                                                *switch-similar-plugins*
 
-TODO
+                                                          *g:switch_definitions*
+>
+    g:switch_definitions
+<
 
-g:switch_definitions
+This variable contains the global switch definitions -- patterns that are
+attempted against every filetype. Changing the contents of this variable would
+change the attempted patterns.
 
-b:switch_definitions
+Example:
+
+Putting the following in .vimrc would disable the original behaviour and make
+the plugin switch between "on" and "off":
+>
+    let g:switch_definitions = [
+          \   ['on', 'off']
+          \ ]
+<
+
+                                                          *b:switch_definitions*
+>
+    b:switch_definitions
+<
+
+This variable contains buffer-local switch definitions. Its default contents
+are set depending on the filetype.
+
+Example:
+
+Putting the following in ftplugin/html.vim would switch between single-line
+<div> and <span> tags, though it probably won't work in complicated cases.
+>
+    let g:switch_definitions =
+          \ [
+          \   {
+          \     '<div\(.\{-}\)>\(.\{-}\)</div>': '<span\1>\2</span>',
+          \     '<span\(.\{-}\)>\(.\{-}\)</span>': '<div\1>\2</div>',
+          \   }
+          \ ]
+<
+
+==============================================================================
+SIMILAR PLUGINS                                                *switch-settings*
+
+This plugin is very similar to two other ones:
+  - toggle.vim: http://www.vim.org/scripts/script.php?script_id=895
+  - cycle.vim: https://github.com/zef/vim-cycle
+
+Both of these work on replacing a specific word under the cursor with a
+different one. The benefit of switch.vim is that it works for much more
+complicated patterns. The drawback is that this makes extending it more
+involved. I encourage anyone that doesn't need the additional power in
+switch.vim to take a look at one of these two.
 
 ==============================================================================
 ISSUES                                                           *switch-issues*
