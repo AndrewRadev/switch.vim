@@ -1,5 +1,6 @@
-PATH
-  remote: /home/andrew/projects/vimrunner
+GIT
+  remote: https://github.com/AndrewRadev/vimrunner
+  revision: 2816ef1a63b133203a21df2e9de35f2c991caef9
   specs:
     vimrunner (0.1.0)
 
