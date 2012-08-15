@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/AndrewRadev/switch.vim.png?branch=master)](http://travis-ci.org/AndrewRadev/switch.vim)
+
 ## Usage
 
 The main entry point of the plugin is a single command, `:Switch`. When the
