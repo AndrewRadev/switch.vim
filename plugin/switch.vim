@@ -55,6 +55,14 @@ autocmd FileType ruby let b:switch_definitions =
       \   ['should ', 'should_not '],
       \ ]
 
+autocmd FileType cpp let b:switch_definitions =
+      \ [
+      \   {
+      \     '\(\k\+\)\.': '\1->',
+      \     '\(\k\+\)->': '\1.',
+      \   }
+      \ ]
+
 command! Switch call s:Switch()
 function! s:Switch()
   let definitions = []
