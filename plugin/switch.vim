@@ -63,6 +63,14 @@ autocmd FileType cpp let b:switch_definitions =
       \   }
       \ ]
 
+autocmd FileType coffee let b:switch_definitions =
+      \ [
+      \   {
+      \     '^\(.*\)->': '\1=>',
+      \     '^\(.*\)=>': '\1->',
+      \   }
+      \ ]
+
 command! Switch call s:Switch()
 function! s:Switch()
   let definitions = []
