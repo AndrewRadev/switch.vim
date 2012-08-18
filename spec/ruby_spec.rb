@@ -83,6 +83,16 @@ describe "ruby definitions" do
     EOF
   end
 
+  specify "tap" do
+    set_file_contents 'bar = user.comments.map(&:author).name'
+
+    VIM.search('comments').switch
+    assert_file_contents 'bar = user.tap { |o| puts o.inspect }.comments.map(&:author).name'
+
+    VIM.switch
+    assert_file_contents 'bar = user.comments.map(&:author).name'
+  end
+
   describe "(overrides)" do
     specify "true/false overrides hash style" do
       set_file_contents <<-EOF

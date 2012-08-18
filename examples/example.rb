@@ -4,4 +4,6 @@ if something || something_else
   foo = {
     :bar => 'baz', :bla => 'bla'
   }
+
+  bar = user.comments.map(&:author).name
 end

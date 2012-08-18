@@ -53,6 +53,10 @@ autocmd FileType ruby let b:switch_definitions =
       \     'if \(.*\)': 'if true or (\1)',
       \   },
       \   ['should ', 'should_not '],
+      \   {
+      \     '\.\%(tap\)\@!\(\k\+\)':        '.tap { |o| puts o.inspect }.\1',
+      \     '\.tap { |o| puts o.inspect }': '',
+      \   }
       \ ]
 
 autocmd FileType cpp let b:switch_definitions =
