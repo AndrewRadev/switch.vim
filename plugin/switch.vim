@@ -8,6 +8,8 @@ set cpo&vim
 
 let g:switch_builtins =
       \ {
+      \   'ampersands': ['&&', '||'],
+      \   'true_false': ['true', 'false'],
       \   'ruby_hash_style': {
       \     ':\(\k\+\)\s\+=>': '\1:',
       \     '\<\(\k\+\):':     ':\1 =>',
@@ -49,8 +51,8 @@ let g:switch_builtins =
 
 let g:switch_definitions =
       \ [
-      \   ['&&', '||'],
-      \   ['true', 'false'],
+      \   g:switch_builtins.ampersands,
+      \   g:switch_builtins.true_false,
       \ ]
 
 autocmd FileType eruby let b:switch_definitions =

@@ -89,8 +89,8 @@ CUSTOMIZATION                                             *switch-customization*
 There are two variables that hold the global definition list and the
 buffer-local definition list -- |g:switch_definitions| and
 |b:switch_definitions|, respectively. In order to customize these to perform
-the switches you want, you can directly override them. For their default
-contents, please see the file plugin/switch.vim.
+the switches you want, you need to override them. For their default contents,
+please see the file plugin/switch.vim or read up on |switch-builtins|
 
 The format of the variables is a simple List of items. Each item can be either
 a List or a Dict. Example for a List:
@@ -145,6 +145,24 @@ pattern asserts that, in this place of the text, there is no "echo".
 Otherwise, the second pattern would match as well. Using the |\@!| pattern in
 strategic places is important in many cases.
 
+In order to make it easier to extend, while keeping built-in functionality,
+you can take patterns from the |g:switch_builtins| and include them in your
+own switch definitions. Something like this:
+>
+    autocmd FileType ruby let b:switch_definitions =
+        \ [
+        \   g:switch_builtins.ruby_hash_style,
+        \   g:switch_builtins.ruby_if_clause,
+        \
+        \   { 'my_own_pattern': 'my_own_replacement' },
+        \
+        \   g:switch_builtins.rspec_should,
+        \   g:switch_builtins.ruby_tap,
+        \ ]
+<
+See the section below, |switch-builtins| for information on the built-in
+patterns, including their names in the |g:switch_builtins| dictionary.
+
 ==============================================================================
 BUILTINS                                                       *switch-builtins*
 
@@ -154,30 +172,27 @@ plugin/switch.vim.
 
 Global ~
 
-Boolean conditions:
+Boolean conditions (g:switch_builtins.ampersands):
 >
     foo && bar
-
     foo || bar
 <
 
-Boolean constants:
+Boolean constants (g:switch_builtins.true_false):
 >
     flag = true
-
     flag = false
 <
 
 Ruby ~
 
-Hash style:
+Hash style (g:switch_builtins.ruby_hash_style):
 >
     foo = { :one => 'two' }
-
     foo = { one: 'two' }
 <
 
-If-clauses:
+If-clauses (g:switch_builtins.ruby_if_clause):
 >
     if predicate?
       puts 'Hello, World!'
@@ -192,26 +207,29 @@ If-clauses:
     end
 <
 
-Rspec should/should_not:
+Rspec should/should_not (g:switch_builtins.rspec_should):
 >
     1.should eq 1
-
     1.should_not eq 1
+<
+
+Ruby tap (g:switch_builtins.ruby_tap):
+>
+    foo = user.comments.map(&:author).first
+    foo = user.comments.tap { |o| puts o.inspect }.map(&:author).first
 <
 
 PHP ~
 
-"Echo" in tags:
+"Echo" in tags (g:switch_builtins.php_echo):
 >
     <?php "Text" ?>
-
     <?php echo "Text" ?>
 <
 
-
 Eruby ~
 
-If-clauses:
+If-clauses (g:switch_builtins.eruby_if_clause):
 >
     <% if predicate? %>
       <%= 'Hello, World!' %>
@@ -226,7 +244,7 @@ If-clauses:
     <% end %>
 >
 
-Tag type:
+Tag type (g:switch_builtins.eruby_tag_type):
 >
     <% something %>
     <%# something %>
@@ -234,11 +252,26 @@ Tag type:
     <%= something %>
 <
 
-Hash style:
+Hash style (g:switch_builtins.ruby_hash_style):
 >
     <% foo = { :one => 'two' } %>
-
     <% foo = { one: 'two' } %>
+<
+
+C++ ~
+
+Pointer dots/arrows (g:switch_builtins.cpp_pointer):
+>
+    Object* foo = bar.baz;
+    Object* foo = bar->baz;
+<
+
+Coffeescript ~
+
+Arrows (g:switch_builtins.coffee_arrow):
+>
+    functionCall (foo) ->
+    functionCall (foo) =>
 <
 
 ==============================================================================
@@ -284,6 +317,19 @@ Putting the following in ftplugin/html.vim would switch between single-line
           \   }
           \ ]
 <
+
+                                                             *g:switch_builtins*
+>
+    g:switch_builtins
+<
+
+This variable contains all built-in switch definitions. It makes it simple to
+re-use definitions for different filetypes and to retain original
+functionality when extending.
+
+For example, g:switch_builtins.ruby_hash_style contains a pattern that can be
+used for ruby, eruby, slim and haml.
+
 
 ==============================================================================
 SIMILAR PLUGINS                                                *switch-settings*
