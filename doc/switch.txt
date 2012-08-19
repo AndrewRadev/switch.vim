@@ -132,17 +132,18 @@ Another interesting example is the following definition:
 >
     autocmd FileType php let b:switch_definitions =
         \ [
-        \   { '<?php echo \(.*\) ?>': '<?php \1 ?>' },
-        \   { '<?php \(.*\) ?>':      '<?php echo \1 ?>' },
+        \   {
+        \     '<?php echo \(.\{-}\) ?>':        '<?php \1 ?>',
+        \     '<?php \%(echo\)\@!\(.\{-}\) ?>': '<?php echo \1 ?>',
+        \   }
         \ ]
 <
-In this case, when in the php filetype, the |b:switch_definitions| variable
-will hold two dictionaries of transformations. Due to the first definition, if
-the plugin encounters something like: "<?php echo 'OK' ?>", it will turn into
-"<?php 'OK' ?>", and due to the second definition, the reverse transformation
-would occur. This is split into two definitions to ensure that the one with
-"echo" in it is checked first -- the second one would match the same text as
-well. It's good to have such cases in mind when designing switches.
+In this case, when in the "php" filetype, the plugin will attempt to remove
+the "echo" in "<?php echo 'something' ?>" or vice-versa. However, the second
+pattern wouldn't work properly if it didn't contain "\%(echo\)\@!". This
+pattern asserts that, in this place of the text, there is no "echo".
+Otherwise, the second pattern would match as well. Using the |\@!| pattern in
+strategic places is important in many cases.
 
 ==============================================================================
 BUILTINS                                                       *switch-builtins*
