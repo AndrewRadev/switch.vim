@@ -49,41 +49,45 @@ let g:switch_builtins =
       \   },
       \ }
 
-let g:switch_definitions =
-      \ [
-      \   g:switch_builtins.ampersands,
-      \   g:switch_builtins.true_false,
-      \ ]
+if exists('g:switch_no_builtins')
+  let g:switch_definitions = []
+else
+  let g:switch_definitions =
+        \ [
+        \   g:switch_builtins.ampersands,
+        \   g:switch_builtins.true_false,
+        \ ]
 
-autocmd FileType eruby let b:switch_definitions =
-      \ [
-      \   g:switch_builtins.eruby_if_clause,
-      \   g:switch_builtins.eruby_tag_type,
-      \   g:switch_builtins.ruby_hash_style,
-      \ ]
+  autocmd FileType eruby let b:switch_definitions =
+        \ [
+        \   g:switch_builtins.eruby_if_clause,
+        \   g:switch_builtins.eruby_tag_type,
+        \   g:switch_builtins.ruby_hash_style,
+        \ ]
 
-autocmd FileType php let b:switch_definitions =
-      \ [
-      \   g:switch_builtins.php_echo,
-      \ ]
+  autocmd FileType php let b:switch_definitions =
+        \ [
+        \   g:switch_builtins.php_echo,
+        \ ]
 
-autocmd FileType ruby let b:switch_definitions =
-      \ [
-      \   g:switch_builtins.ruby_hash_style,
-      \   g:switch_builtins.ruby_if_clause,
-      \   g:switch_builtins.rspec_should,
-      \   g:switch_builtins.ruby_tap,
-      \ ]
+  autocmd FileType ruby let b:switch_definitions =
+        \ [
+        \   g:switch_builtins.ruby_hash_style,
+        \   g:switch_builtins.ruby_if_clause,
+        \   g:switch_builtins.rspec_should,
+        \   g:switch_builtins.ruby_tap,
+        \ ]
 
-autocmd FileType cpp let b:switch_definitions =
-      \ [
-      \   g:switch_builtins.cpp_pointer,
-      \ ]
+  autocmd FileType cpp let b:switch_definitions =
+        \ [
+        \   g:switch_builtins.cpp_pointer,
+        \ ]
 
-autocmd FileType coffee let b:switch_definitions =
-      \ [
-      \   g:switch_builtins.coffee_arrow,
-      \ ]
+  autocmd FileType coffee let b:switch_definitions =
+        \ [
+        \   g:switch_builtins.coffee_arrow,
+        \ ]
+endif
 
 command! Switch call s:Switch()
 function! s:Switch()

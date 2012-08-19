@@ -331,6 +331,15 @@ For example, g:switch_builtins.ruby_hash_style contains a pattern that can be
 used for ruby, eruby, slim and haml.
 
 
+                                                          *g:switch_no_builtins*
+>
+    g:switch_no_builtins
+<
+If this variable is set, no builtins will be set by the plugin. This might be
+useful to avoid any surprising switch definitions outside of your control. You
+can still set your own definitions, of course.
+
+
 ==============================================================================
 SIMILAR PLUGINS                                                *switch-settings*
 
