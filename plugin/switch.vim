@@ -15,11 +15,9 @@ let g:switch_definitions =
 autocmd FileType eruby let b:switch_definitions =
       \ [
       \   {
-      \     '<% if true or (\(.*\)) %>':   '<% if false and (\1) %>',
-      \     '<% if false and (\(.*\)) %>': '<% if \1 %>',
-      \   },
-      \   {
-      \     '<% if \(.*\) %>': '<% if true or (\1) %>',
+      \     '<% if true or (\(.*\)) %>':          '<% if false and (\1) %>',
+      \     '<% if false and (\(.*\)) %>':        '<% if \1 %>',
+      \     '<% if \%(true\|false\)\@!\(.*\) %>': '<% if true or (\1) %>',
       \   },
       \   {
       \     '<%= \(.*\) %>':    '<% \1 %>',
@@ -46,11 +44,9 @@ autocmd FileType ruby let b:switch_definitions =
       \     '\<\(\k\+\):':     ':\1 =>',
       \   },
       \   {
-      \     'if true or (\(.*\))':   'if false and (\1)',
-      \     'if false and (\(.*\))': 'if \1',
-      \   },
-      \   {
-      \     'if \(.*\)': 'if true or (\1)',
+      \     'if true or (\(.*\))':         'if false and (\1)',
+      \     'if false and (\(.*\))':       'if \1',
+      \     'if \%(true\|false\)\@!\(.*\)': 'if true or (\1)',
       \   },
       \   ['should ', 'should_not '],
       \   {
