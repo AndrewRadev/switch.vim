@@ -91,6 +91,10 @@ describe "ruby definitions" do
 
     VIM.switch
     assert_file_contents 'bar = user.comments.map(&:author).name'
+
+    set_file_contents 'bar = user.tap { |o| puts o.to_sql }.comments.map(&:author).name'
+    VIM.search('tap').switch
+    assert_file_contents 'bar = user.comments.map(&:author).name'
   end
 
   specify "string type" do

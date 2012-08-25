@@ -20,8 +20,8 @@ let g:switch_builtins =
       \     'if \%(true\|false\)\@!\(.*\)': 'if true or (\1)',
       \   },
       \   'ruby_tap': {
-      \     '\.\%(tap\)\@!\(\k\+\)':        '.tap { |o| puts o.inspect }.\1',
-      \     '\.tap { |o| puts o.inspect }': '',
+      \     '\.\%(tap\)\@!\(\k\+\)':   '.tap { |o| puts o.inspect }.\1',
+      \     '\.tap { |o| \%(.\{-}\) }': '',
       \   },
       \   'ruby_string': {
       \     '"\(\k\+\)"':                '''\1''',
