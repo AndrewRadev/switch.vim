@@ -23,6 +23,11 @@ let g:switch_builtins =
       \     '\.\%(tap\)\@!\(\k\+\)':        '.tap { |o| puts o.inspect }.\1',
       \     '\.tap { |o| puts o.inspect }': '',
       \   },
+      \   'ruby_string': {
+      \     '"\(\k\+\)"':                '''\1''',
+      \     '''\(\k\+\)''':              ':\1',
+      \     ':\(\k\+\)\@>\%(\s*=>\)\@!': '"\1"\2',
+      \   },
       \   'rspec_should': ['should ', 'should_not '],
       \   'eruby_if_clause': {
       \     '<% if true or (\(.*\)) %>':          '<% if false and (\1) %>',
@@ -76,6 +81,7 @@ else
         \   g:switch_builtins.ruby_if_clause,
         \   g:switch_builtins.rspec_should,
         \   g:switch_builtins.ruby_tap,
+        \   g:switch_builtins.ruby_string,
         \ ]
 
   autocmd FileType cpp let b:switch_definitions =

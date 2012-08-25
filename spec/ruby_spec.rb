@@ -93,6 +93,19 @@ describe "ruby definitions" do
     assert_file_contents 'bar = user.comments.map(&:author).name'
   end
 
+  specify "string type" do
+    set_file_contents 'foo = "bar"'
+
+    VIM.search('bar').switch
+    assert_file_contents "foo = 'bar'"
+
+    VIM.switch
+    assert_file_contents "foo = :bar"
+
+    VIM.switch
+    assert_file_contents 'foo = "bar"'
+  end
+
   describe "(overrides)" do
     specify "true/false overrides hash style" do
       set_file_contents <<-EOF
