@@ -1,18 +1,19 @@
 require 'spec_helper'
 
 describe "ruby definitions" do
+  let(:vim) { @vim }
   let(:filename) { 'test.rb' }
 
   specify "true/false" do
     set_file_contents 'flag = true'
 
-    VIM.search('true').switch
+    vim.search('true').switch
     assert_file_contents 'flag = false'
 
-    VIM.switch
+    vim.switch
     assert_file_contents 'flag = true'
 
-    VIM.search('flag').switch
+    vim.search('flag').switch
     assert_file_contents 'flag = true'
   end
 
@@ -23,8 +24,8 @@ describe "ruby definitions" do
         :three => 4
       }
     EOF
-    VIM.search('one').switch
-    VIM.search('three').switch
+    vim.search('one').switch
+    vim.search('three').switch
     assert_file_contents <<-EOF
       foo = {
         one: 'two',
@@ -32,8 +33,8 @@ describe "ruby definitions" do
       }
     EOF
 
-    VIM.search('one').switch
-    VIM.search('three').switch
+    vim.search('one').switch
+    vim.search('three').switch
     assert_file_contents <<-EOF
       foo = {
         :one => 'two',
@@ -45,10 +46,10 @@ describe "ruby definitions" do
   specify "rspec should/should_not" do
     set_file_contents '1.should eq 1'
 
-    VIM.search('should').switch
+    vim.search('should').switch
     assert_file_contents '1.should_not eq 1'
 
-    VIM.switch
+    vim.switch
     assert_file_contents '1.should eq 1'
   end
 
@@ -59,23 +60,23 @@ describe "ruby definitions" do
       end
     EOF
 
-    VIM.search 'if'
+    vim.search 'if'
 
-    VIM.switch
+    vim.switch
     assert_file_contents <<-EOF
       if true or (predicate?)
         puts 'Hello, World!'
       end
     EOF
 
-    VIM.switch
+    vim.switch
     assert_file_contents <<-EOF
       if false and (predicate?)
         puts 'Hello, World!'
       end
     EOF
 
-    VIM.switch
+    vim.switch
     assert_file_contents <<-EOF
       if predicate?
         puts 'Hello, World!'
@@ -86,27 +87,27 @@ describe "ruby definitions" do
   specify "tap" do
     set_file_contents 'bar = user.comments.map(&:author).name'
 
-    VIM.search('comments').switch
+    vim.search('comments').switch
     assert_file_contents 'bar = user.tap { |o| puts o.inspect }.comments.map(&:author).name'
 
-    VIM.switch
+    vim.switch
     assert_file_contents 'bar = user.comments.map(&:author).name'
 
     set_file_contents 'bar = user.tap { |o| puts o.to_sql }.comments.map(&:author).name'
-    VIM.search('tap').switch
+    vim.search('tap').switch
     assert_file_contents 'bar = user.comments.map(&:author).name'
   end
 
   specify "string type" do
     set_file_contents 'foo = "bar"'
 
-    VIM.search('bar').switch
+    vim.search('bar').switch
     assert_file_contents "foo = 'bar'"
 
-    VIM.switch
+    vim.switch
     assert_file_contents "foo = :bar"
 
-    VIM.switch
+    vim.switch
     assert_file_contents 'foo = "bar"'
   end
 
@@ -116,12 +117,12 @@ describe "ruby definitions" do
         foo = { :one => true }
       EOF
 
-      VIM.search('true').switch
+      vim.search('true').switch
       assert_file_contents <<-EOF
         foo = { :one => false }
       EOF
 
-      VIM.normal('u').search('one').switch
+      vim.normal('u').search('one').switch
       assert_file_contents <<-EOF
         foo = { one: true }
       EOF

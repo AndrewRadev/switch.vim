@@ -1,15 +1,16 @@
 require 'spec_helper'
 
 describe "eruby definitions" do
+  let(:vim) { @vim }
   let(:filename) { 'test.erb' }
 
   specify "true/false" do
     set_file_contents '<% flag = true %>'
 
-    VIM.search('true').switch
+    vim.search('true').switch
     assert_file_contents '<% flag = false %>'
 
-    VIM.switch
+    vim.switch
     assert_file_contents '<% flag = true %>'
   end
 
@@ -20,8 +21,8 @@ describe "eruby definitions" do
         :three => 4
       } %>
     EOF
-    VIM.search('one').switch
-    VIM.search('three').switch
+    vim.search('one').switch
+    vim.search('three').switch
     assert_file_contents <<-EOF
       <% foo = {
         one: 'two',
@@ -29,8 +30,8 @@ describe "eruby definitions" do
       } %>
     EOF
 
-    VIM.search('one').switch
-    VIM.search('three').switch
+    vim.search('one').switch
+    vim.search('three').switch
     assert_file_contents <<-EOF
       <% foo = {
         :one => 'two',
@@ -46,23 +47,23 @@ describe "eruby definitions" do
       <% end %>
     EOF
 
-    VIM.search '<% if'
+    vim.search '<% if'
 
-    VIM.switch
+    vim.switch
     assert_file_contents <<-EOF
       <% if true or (predicate?) %>
         <%= 'Hello, World!' %>
       <% end %>
     EOF
 
-    VIM.switch
+    vim.switch
     assert_file_contents <<-EOF
       <% if false and (predicate?) %>
         <%= 'Hello, World!' %>
       <% end %>
     EOF
 
-    VIM.switch
+    vim.switch
     assert_file_contents <<-EOF
       <% if predicate? %>
         <%= 'Hello, World!' %>
@@ -73,14 +74,14 @@ describe "eruby definitions" do
   specify "tag type" do
     set_file_contents '<%= something %>'
 
-    VIM.switch; assert_file_contents '<% something %>'
-    VIM.switch; assert_file_contents '<%# something %>'
-    VIM.switch; assert_file_contents '<%=raw something %>'
-    VIM.switch; assert_file_contents '<%= something %>'
+    vim.switch; assert_file_contents '<% something %>'
+    vim.switch; assert_file_contents '<%# something %>'
+    vim.switch; assert_file_contents '<%=raw something %>'
+    vim.switch; assert_file_contents '<%= something %>'
 
     set_file_contents '<% something -%>'
 
-    VIM.switch; assert_file_contents '<%# something %>'
+    vim.switch; assert_file_contents '<%# something %>'
   end
 
   describe "(overrides)" do
@@ -91,14 +92,14 @@ describe "eruby definitions" do
         <% end %>
       EOF
 
-      VIM.search('false').switch
+      vim.search('false').switch
       assert_file_contents <<-EOF
         <% if true and (predicate?) %>
           <%= 'Hello, World!' %>
         <% end %>
       EOF
 
-      VIM.normal('u').search('if').switch
+      vim.normal('u').search('if').switch
       assert_file_contents <<-EOF
         <% if predicate? %>
           <%= 'Hello, World!' %>
@@ -111,12 +112,12 @@ describe "eruby definitions" do
         <% foo = { :one => true } %>
       EOF
 
-      VIM.search('true').switch
+      vim.search('true').switch
       assert_file_contents <<-EOF
         <% foo = { :one => false } %>
       EOF
 
-      VIM.normal('u').search('one').switch
+      vim.normal('u').search('one').switch
       assert_file_contents <<-EOF
         <% foo = { one: true } %>
       EOF
@@ -125,20 +126,20 @@ describe "eruby definitions" do
     specify "true/false overrides tag type" do
       set_file_contents '<% true %>'
 
-      VIM.search('true').switch
+      vim.search('true').switch
       assert_file_contents '<% false %>'
 
-      VIM.normal('u').search('<%').switch
+      vim.normal('u').search('<%').switch
       assert_file_contents '<%# true %>'
     end
 
     specify "hash style overrides tag type" do
       set_file_contents '<% {:one => two} %>'
 
-      VIM.search('one').switch
+      vim.search('one').switch
       assert_file_contents '<% {one: two} %>'
 
-      VIM.normal('u').search('<%').switch
+      vim.normal('u').search('<%').switch
       assert_file_contents '<%# {:one => two} %>'
     end
 
@@ -147,7 +148,7 @@ describe "eruby definitions" do
         <% if predicate? %>
       EOF
 
-      VIM.switch
+      vim.switch
       assert_file_contents <<-EOF
         <% if true or (predicate?) %>
       EOF

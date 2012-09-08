@@ -1,16 +1,17 @@
 require 'spec_helper'
 
 describe "coffee" do
+  let(:vim) { @vim }
   let(:filename) { 'test.coffee' }
 
   specify "pointers" do
     set_file_contents 'functionCall (foo) ->'
-    VIM.set 'filetype', 'coffee'
+    vim.set 'filetype', 'coffee'
 
-    VIM.switch
+    vim.switch
     assert_file_contents 'functionCall (foo) =>'
 
-    VIM.switch
+    vim.switch
     assert_file_contents 'functionCall (foo) ->'
   end
 end

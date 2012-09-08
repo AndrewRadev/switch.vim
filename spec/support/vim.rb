@@ -3,7 +3,7 @@ module Support
     def set_file_contents(string)
       string = normalize_string(string)
       File.open(filename, 'w') { |f| f.write(string) }
-      VIM.edit filename
+      @vim.edit filename
     end
 
     def file_contents

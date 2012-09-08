@@ -1,27 +1,28 @@
 require 'spec_helper'
 
 describe "global definitions" do
+  let(:vim) { @vim }
   let(:filename) { 'test.txt' }
 
   specify "&&/||" do
     set_file_contents 'foo && bar'
-    VIM.search '&&'
+    vim.search '&&'
 
-    VIM.switch
+    vim.switch
     assert_file_contents 'foo || bar'
 
-    VIM.switch
+    vim.switch
     assert_file_contents 'foo && bar'
   end
 
   specify "true/false" do
     set_file_contents 'flag = true'
-    VIM.search 'true'
+    vim.search 'true'
 
-    VIM.switch
+    vim.switch
     assert_file_contents 'flag = false'
 
-    VIM.switch
+    vim.switch
     assert_file_contents 'flag = true'
   end
 end
