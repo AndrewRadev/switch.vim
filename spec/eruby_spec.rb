@@ -84,6 +84,19 @@ describe "eruby definitions" do
     vim.switch; assert_file_contents '<%# something %>'
   end
 
+  specify "string type" do
+    set_file_contents '<% foo = "bar" %>'
+
+    vim.search('bar').switch
+    assert_file_contents "<% foo = 'bar' %>"
+
+    vim.switch
+    assert_file_contents "<% foo = :bar %>"
+
+    vim.switch
+    assert_file_contents '<% foo = "bar" %>'
+  end
+
   describe "(overrides)" do
     specify "true/false overrides if-clauses" do
       set_file_contents <<-EOF

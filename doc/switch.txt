@@ -218,6 +218,13 @@ Ruby tap (g:switch_builtins.ruby_tap):
     foo = user.comments.map(&:author).first
     foo = user.comments.tap { |o| puts o.inspect }.map(&:author).first
 <
+Ruby string style (g:switch_builtins.ruby_string):
+>
+    foo = 'bar'
+    foo = "baz"
+    foo = :baz
+<
+Note that it only works for single-word strings.
 
 PHP ~
 
