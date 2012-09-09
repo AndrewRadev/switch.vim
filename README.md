@@ -173,13 +173,13 @@ definitions with their patterns and replacements, look at the file
   1.should_not eq 1
   ```
 
-* Ruby tap (g:switch_builtins.ruby_tap):
+* Ruby tap:
   ``` ruby
   foo = user.comments.map(&:author).first
   foo = user.comments.tap { |o| puts o.inspect }.map(&:author).first
   ```
 
-* Ruby string style (g:switch_builtins.ruby_string):
+* Ruby string style:
   ``` ruby
   foo = 'bar'
   foo = "baz"
@@ -226,21 +226,19 @@ definitions with their patterns and replacements, look at the file
   <% foo = { one: 'two' } %>
   ```
 
-### C++
+### C++ pointer dots/arrows:
 
-* Pointer dots/arrows:
-  ``` cpp
-  Object* foo = bar.baz;
-  Object* foo = bar->baz;
-  ```
+``` cpp
+Object* foo = bar.baz;
+Object* foo = bar->baz;
+```
 
-### Coffeescript
+### Coffeescript arrows
 
-* Arrows
-  ``` coffeescript
-  functionCall (foo) ->
-  functionCall (foo) =>
-  ```
+``` coffeescript
+functionCall (foo) ->
+functionCall (foo) =>
+```
 
 ## Similar work
 
