@@ -187,13 +187,12 @@ definitions with their patterns and replacements, look at the file
   ```
   (Note that it only works for single-word strings.)
 
-### PHP
+### PHP "echo" in tags:
 
-* "Echo" in tags:
-  ``` php
-  <?php "Text" ?>
-  <?php echo "Text" ?>
-  ```
+``` php
+<?php "Text" ?>
+<?php echo "Text" ?>
+```
 
 ### Eruby
 
