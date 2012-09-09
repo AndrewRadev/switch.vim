@@ -135,14 +135,12 @@ definitions with their patterns and replacements, look at the file
 * Boolean conditions:
   ```
   foo && bar
-
   foo || bar
   ```
 
 * Boolean constants:
   ```
   flag = true
-
   flag = false
   ```
 
@@ -151,7 +149,6 @@ definitions with their patterns and replacements, look at the file
 * Hash style:
   ``` ruby
   foo = { :one => 'two' }
-
   foo = { one: 'two' }
   ```
 
@@ -173,16 +170,28 @@ definitions with their patterns and replacements, look at the file
 * Rspec should/should_not:
   ``` ruby
   1.should eq 1
-
   1.should_not eq 1
   ```
+
+* Ruby tap (g:switch_builtins.ruby_tap):
+  ``` ruby
+  foo = user.comments.map(&:author).first
+  foo = user.comments.tap { |o| puts o.inspect }.map(&:author).first
+  ```
+
+* Ruby string style (g:switch_builtins.ruby_string):
+  ``` ruby
+  foo = 'bar'
+  foo = "baz"
+  foo = :baz
+  ```
+  (Note that it only works for single-word strings.)
 
 ### PHP
 
 * "Echo" in tags:
   ``` php
   <?php "Text" ?>
-
   <?php echo "Text" ?>
   ```
 
@@ -214,8 +223,23 @@ definitions with their patterns and replacements, look at the file
 * Hash style:
   ``` erb
   <% foo = { :one => 'two' } %>
-
   <% foo = { one: 'two' } %>
+  ```
+
+### C++
+
+* Pointer dots/arrows:
+  ``` cpp
+  Object* foo = bar.baz;
+  Object* foo = bar->baz;
+  ```
+
+### Coffeescript
+
+* Arrows
+  ``` coffeescript
+  functionCall (foo) ->
+  functionCall (foo) =>
   ```
 
 ## Similar work
