@@ -4,7 +4,7 @@ describe "coffee" do
   let(:vim) { @vim }
   let(:filename) { 'test.coffee' }
 
-  specify "pointers" do
+  specify "arrows" do
     set_file_contents 'functionCall (foo) ->'
     vim.set 'filetype', 'coffee'
 
