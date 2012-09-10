@@ -2,6 +2,8 @@ let s:type_list = type([])
 let s:type_dict = type({})
 
 function! switch#Switch(definitions)
+  silent! normal! zO
+
   try
     let saved_cursor     = getpos('.')
     let min_match_length = -1
