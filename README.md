@@ -142,6 +142,9 @@ definitions with their patterns and replacements, look at the file
   ```
   flag = true
   flag = false
+
+  flag = True
+  flag = False
   ```
 
 ### Ruby
@@ -173,13 +176,13 @@ definitions with their patterns and replacements, look at the file
   1.should_not eq 1
   ```
 
-* Ruby tap:
+* Tap:
   ``` ruby
   foo = user.comments.map(&:author).first
   foo = user.comments.tap { |o| puts o.inspect }.map(&:author).first
   ```
 
-* Ruby string style:
+* String style:
   ``` ruby
   foo = 'bar'
   foo = "baz"
