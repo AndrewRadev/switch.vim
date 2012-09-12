@@ -2,6 +2,8 @@
 
 ## Usage
 
+You can find a screencast demonstrating the plugin [here](http://youtu.be/zIOOLZJb87U).
+
 The main entry point of the plugin is a single command, `:Switch`. When the
 command is executed, the plugin looks for one of a few specific patterns under
 the cursor and performs a substition depending on the pattern. For example, if
