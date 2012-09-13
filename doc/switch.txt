@@ -74,7 +74,7 @@ There are three main principles that the substition follows:
     # could switch into:
     <%# if foo? %>
     # but instead, it would switch into:
-    <% if true and (foo?) %>
+    <% if true or (foo?) %>
 <
 
    The second switch will be performed, simply because in the definition list,
@@ -203,11 +203,11 @@ If-clauses (g:switch_builtins.ruby_if_clause):
       puts 'Hello, World!'
     end
 
-    if true and (predicate?)
+    if true or (predicate?)
       puts 'Hello, World!'
     end
 
-    if false or (predicate?)
+    if false and (predicate?)
       puts 'Hello, World!'
     end
 <
@@ -247,11 +247,11 @@ If-clauses (g:switch_builtins.eruby_if_clause):
       <%= 'Hello, World!' %>
     <% end %>
 
-    <% if true and (predicate?) %>
+    <% if true or (predicate?) %>
       <%= 'Hello, World!' %>
     <% end %>
 
-    <% if false or (predicate?) %>
+    <% if false and (predicate?) %>
       <%= 'Hello, World!' %>
     <% end %>
 >

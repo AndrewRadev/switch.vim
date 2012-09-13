@@ -52,7 +52,7 @@ There are three main principles that the substition follows:
    could switch into:
    <%# if foo? %>
    but instead, it would switch into:
-   <% if true and (foo?) %>
+   <% if true or (foo?) %>
    ```
 
    The second switch will be performed, simply because in the definition list,
@@ -163,11 +163,11 @@ definitions with their patterns and replacements, look at the file
     puts 'Hello, World!'
   end
 
-  if true and (predicate?)
+  if true or (predicate?)
     puts 'Hello, World!'
   end
 
-  if false or (predicate?)
+  if false and (predicate?)
     puts 'Hello, World!'
   end
   ```
@@ -207,11 +207,11 @@ definitions with their patterns and replacements, look at the file
     <%= 'Hello, World!' %>
   <% end %>
 
-  <% if true and (predicate?) %>
+  <% if true or (predicate?) %>
     <%= 'Hello, World!' %>
   <% end %>
 
-  <% if false or (predicate?) %>
+  <% if false and (predicate?) %>
     <%= 'Hello, World!' %>
   <% end %>
   ```
