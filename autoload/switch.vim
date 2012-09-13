@@ -73,11 +73,9 @@ function! s:Match(pattern)
       return [-1, -1, -1]
     endif
 
-    " Note the strwidth() check for multibyte chars
     let match_start = col('.')
     call search(a:pattern, 'cWe', line('.'))
-    let current_char = getline('.')[col('.') - 1]
-    let match_end = col('.') - 1 + strwidth(current_char)
+    let match_end = col('.')
 
     if match_start > col || match_end < col
       return [-1, -1, -1]
