@@ -256,7 +256,12 @@ complicated patterns. The drawback is that this makes extending it more
 involved. I encourage anyone that doesn't need the additional power in
 switch.vim to take a look at one of these two.
 
-# Issues
+## Contributing
+
+If you'd like to hack on the plugin, please see
+[CONTRIBUTING.md](CONTRIBUTING.md) first.
+
+## Issues
 
 Any issues and suggestions are very welcome on the
 [github bugtracker](https://github.com/AndrewRadev/switch.vim/issues).
