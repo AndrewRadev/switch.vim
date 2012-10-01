@@ -43,6 +43,16 @@ describe "ruby definitions" do
     EOF
   end
 
+  specify "hash style (whitespace)" do
+    set_file_contents 'foo:bar'
+    vim.switch
+    assert_file_contents 'foo:bar'
+
+    set_file_contents 'foo: bar'
+    vim.switch
+    assert_file_contents ':foo => bar'
+  end
+
   specify "rspec should/should_not" do
     set_file_contents '1.should eq 1'
 
