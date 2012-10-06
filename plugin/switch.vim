@@ -29,6 +29,18 @@ let g:switch_builtins =
       \     '''\(\k\+\)''':              ':\1',
       \     ':\(\k\+\)\@>\%(\s*=>\)\@!': '"\1"\2',
       \   },
+      \   'ruby_array_shorthand': {
+      \     '\[\%(\k\|[''", ]\)\+\]': {
+      \       '\[':                    '%w(',
+      \       '[''"]\(\k\+\)[''"],\=': '\1',
+      \       ']':                     ')',
+      \     },
+      \     '%w(\%(\k\|\s\)\+)': {
+      \       '%w(':      '[',
+      \       '\(\k\+\) ': '''\1'', ',
+      \       '\(\k\+\))': '''\1'']',
+      \     },
+      \   },
       \   'rspec_should': ['should ', 'should_not '],
       \   'eruby_if_clause': {
       \     '<% if true or (\(.*\)) %>':          '<% if false and (\1) %>',
@@ -85,6 +97,7 @@ else
         \   g:switch_builtins.rspec_should,
         \   g:switch_builtins.ruby_tap,
         \   g:switch_builtins.ruby_string,
+        \   g:switch_builtins.ruby_array_shorthand,
         \ ]
 
   autocmd FileType cpp let b:switch_definitions =

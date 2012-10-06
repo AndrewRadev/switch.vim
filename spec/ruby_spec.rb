@@ -121,6 +121,16 @@ describe "ruby definitions" do
     assert_file_contents 'foo = "bar"'
   end
 
+  specify "array shorthands" do
+    set_file_contents "['one', 'two']"
+
+    vim.search('[').switch
+    assert_file_contents "%w(one two)"
+
+    vim.switch
+    assert_file_contents "['one', 'two']"
+  end
+
   describe "(overrides)" do
     specify "true/false overrides hash style" do
       set_file_contents <<-EOF
