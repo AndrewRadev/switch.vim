@@ -14,13 +14,15 @@ describe "multibyte support" do
   end
 
   specify "works for multibyte replacements" do
-    vim.command("let g:switch_definitions = [['是', '否']]")
-
     set_file_contents '是'
+    vim.command("let b:switch_definitions = [['是', '否']]")
+
     vim.switch
     assert_file_contents '否'
 
     set_file_contents '是|'
+    vim.command("let b:switch_definitions = [['是', '否']]")
+
     vim.switch
     assert_file_contents '否|'
   end

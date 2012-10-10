@@ -5,16 +5,24 @@ require_relative './support/vim'
 RSpec.configure do |config|
   config.include Support::Vim
 
-  # cd into a temporary directory for every example.
-  config.around do |example|
-    @vim = Vimrunner.start
-    @vim.add_plugin(File.expand_path('.'), 'plugin/switch.vim')
+  config.before(:suite) do
+    VIM = Vimrunner.start_gvim
+    VIM.add_plugin(File.expand_path('.'), 'plugin/switch.vim')
 
-    def @vim.switch
+    def VIM.switch
       command 'Switch'
       write
       self
     end
+  end
+
+  config.after(:suite) do
+    VIM.kill
+  end
+
+  # cd into a temporary directory for every example.
+  config.around do |example|
+    @vim = VIM
 
     Dir.mktmpdir do |dir|
       Dir.chdir(dir) do
@@ -22,7 +30,5 @@ RSpec.configure do |config|
         example.call
       end
     end
-
-    @vim.kill
   end
 end
