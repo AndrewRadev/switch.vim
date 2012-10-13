@@ -129,10 +129,10 @@ In this case, when in the "php" filetype, the plugin will attempt to remove
 the "echo" in "<?php echo 'something' ?>" or vice-versa. However, the second
 pattern wouldn't work properly if it didn't contain "\%(echo\)\@!". This
 pattern asserts that, in this place of the text, there is no "echo".
-Otherwise, the second pattern would match as well. Using the |\@!| pattern in
+Otherwise, the second pattern would match as well. Using the `\@!` pattern in
 strategic places is important in many cases.
 
-For more complicated substitions, you can use the nested form.
+For even more complicated substitions, you can use the nested form.
 
 ### Nested dict definitions
 
