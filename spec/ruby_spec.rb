@@ -43,6 +43,22 @@ describe "ruby definitions" do
     EOF
   end
 
+  specify "hash style (single line)" do
+    set_file_contents <<-EOF
+      foo = { :one => 'two', :three => 4 }
+    EOF
+
+    vim.search('three').switch
+    assert_file_contents <<-EOF
+      foo = { :one => 'two', three: 4 }
+    EOF
+
+    vim.search('three').switch
+    assert_file_contents <<-EOF
+      foo = { :one => 'two', :three => 4 }
+    EOF
+  end
+
   specify "hash style (whitespace)" do
     set_file_contents 'foo:bar'
     vim.switch
