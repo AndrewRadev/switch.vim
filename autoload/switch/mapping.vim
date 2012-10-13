@@ -13,7 +13,7 @@ function! switch#mapping#New(definition)
 endfunction
 
 function! s:NewListMapping(definition)
-  return s:NewDictMapping(s:CanonicalMapping(a:definition))
+  return s:NewDictMapping(s:MakeDict(a:definition))
 endfunction
 
 function! s:NewDictMapping(definition)
@@ -30,6 +30,12 @@ endfunction
 " Methods:
 " ========
 
+" One of the central algorithms in the plugin, takes care of finding the start
+" and end of a match in the buffer.
+"
+" Returns a Match object with data for the match. Returns a null match if the
+" pattern is not found or the cursor is not in it.
+"
 function! switch#mapping#Match() dict
   let match_start  = -1
   let match_end    = -1
@@ -75,6 +81,9 @@ function! switch#mapping#Match() dict
   return switch#match#Null()
 endfunction
 
+" Replaces the pattern from the match data with its replacement. Takes care of
+" both simple replacements and nested ones.
+"
 function! switch#mapping#Replace(match) dict
   let pattern     = a:match.pattern
   let replacement = self.definitions[pattern]
@@ -98,32 +107,34 @@ endfunction
 " Private:
 " ========
 
-function! s:CanonicalMapping(mapping)
+" Transforms the given list of words to a dictionary mapping. This function
+" may be removed if the word-list logic starts to differ significantly from
+" the pattern-replacement-dict one.
+"
+function! s:MakeDict(mapping)
   let mapping = a:mapping
+  let index   = 0
+  let len     = len(mapping)
+  let dict    = {}
 
-  if type(mapping) == s:type_dict
-    return mapping
-  elseif type(mapping) == s:type_list
-    let index = 0
-    let len   = len(mapping)
-    let dict  = {}
+  for string in mapping
+    let next_index = index + 1
+    if next_index >= len
+      let next_index = 0
+    endif
 
-    for string in mapping
-      let next_index = index + 1
-      if next_index >= len
-        let next_index = 0
-      endif
+    let pattern       = '\V'.string.'\m'
+    let replacement   = mapping[next_index]
+    let dict[pattern] = replacement
+    let index         = next_index
+  endfor
 
-      let pattern       = '\V'.string.'\m'
-      let replacement   = mapping[next_index]
-      let dict[pattern] = replacement
-      let index         = next_index
-    endfor
-
-    return dict
-  endif
+  return dict
 endfunction
 
+" Limits the given pattern to only work in the given [start, end] interval by
+" anchoring it to these column positions.
+"
 function! s:LimitPattern(pattern, start, end)
   let pattern = a:pattern
 
