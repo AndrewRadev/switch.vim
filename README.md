@@ -21,6 +21,8 @@ to map it to "-", place the following in your .vimrc:
 ``` vim
 nnoremap - :Switch<cr>
 ```
+See the "customization" section below for information on how to create several
+mappings with different definitions.
 
 There are three main principles that the substition follows:
 
@@ -69,7 +71,9 @@ the switches you want, you can directly override them. For their default
 contents, please see the file plugin/switch.vim.
 
 The format of the variables is a simple List of items. Each item can be either
-a List or a Dict. Example for a List:
+a List or a Dict.
+
+### List definitions
 
 ``` vim
 let g:switch_definitions =
@@ -84,7 +88,9 @@ will be changed to "bar". If it sees "bar", it will change it to "baz", and
 is implemented (in a slightly different way) by the "toggle.vim" plugin.
 
 The more complicated (and more powerful) way to define a switch pattern is by
-using a Dict:
+using a Dict.
+
+### Dict definitions
 
 ``` vim
 autocmd FileType eruby let b:switch_definitions =
@@ -125,6 +131,75 @@ pattern wouldn't work properly if it didn't contain "\%(echo\)\@!". This
 pattern asserts that, in this place of the text, there is no "echo".
 Otherwise, the second pattern would match as well. Using the |\@!| pattern in
 strategic places is important in many cases.
+
+For more complicated substitions, you can use the nested form.
+
+### Nested dict definitions
+
+The following expression replaces underscored identifier names with their
+camelcased versions.
+
+``` vim
+let b:switch_definitions = [
+      \   {
+      \     '\<[a-z0-9]\+_\k\+\>': {
+      \       '_\(.\)': '\U\1'
+      \     },
+      \     '\<[a-z0-9]\+[A-Z]\k\+\>': {
+      \       '\([A-Z]\)': '_\l\1'
+      \     },
+      \   }
+      \ ]
+```
+
+If the cursor is on "foo_bar_baz", then switching would produce "fooBarBaz"
+and vice-versa. The logic is as follows:
+
+  - The keys of the dict are patterns, just like the "normal" dict version.
+  - The values of the dict are dicts with patterns for keys and replacements
+    for values.
+
+The goal of this form is to enable substituting several different kinds of
+patterns within the limits of another one. In this example, there's no way to
+define this switch using the simpler form, since there's an unknown number of
+underscores in the variable name and all of them need to be replaced in order
+to make the switch complete.
+
+The nested patterns differ from the simple one in that each one of them is
+replaced globally, only within the limits of the "parent" pattern.
+
+Note that this particular example is **NOT** included as a built-in, since it
+may overshadow other ones and is probably not that useful, either (it's rare
+that a language would require changing between the two forms). An example
+usage may be within javascript, if your server-side variables are underscored
+and the client-side ones need to be camelcased.
+
+You could also use a separate mapping for that.
+
+### Separate mappings
+
+While it was recommended to define a mapping for `:Switch`, you could actually
+define several mappings with your own custom definitions:
+
+``` vim
+let g:variable_style_switch_definitions = [
+      \   {
+      \     '\<[a-z0-9]\+_\k\+\>': {
+      \       '_\(.\)': '\U\1'
+      \     },
+      \     '\<[a-z0-9]\+[A-Z]\k\+\>': {
+      \       '\([A-Z]\)': '_\l\1'
+      \     },
+      \   }
+      \ ]
+nnoremap + :call switch#Switch(g:variable_style_switch_definitions)<cr>
+nnoremap - :Switch<cr>
+```
+
+With this, typing `-` would invoke the built-in switch definitions, while
+typing `+` would switch between camelcase and underscored variable styles.
+This may be particularly useful if you have several clashing switches on
+patterns that match similar things.
 
 ## Builtins
 
