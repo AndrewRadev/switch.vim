@@ -33,6 +33,10 @@ endfunction
 " One of the central algorithms in the plugin, takes care of finding the start
 " and end of a match in the buffer.
 "
+" Note that the start of the pattern is its first character, while the end is
+" the next character that is not a part of the match, or the end of the line
+" (`col('$')`).
+"
 " Returns a Match object with data for the match. Returns a null match if the
 " pattern is not found or the cursor is not in it.
 "
@@ -56,16 +60,19 @@ function! switch#mapping#Match() dict
 
       " find the end of the pattern
       call search(pattern, 'cWe', lnum)
+      let match_end = col('.')
 
-      " apply extra logic for multibyte characters
-      if col('.') + 1 == col('$')
-        let match_end = col('.')
+      " set the end of the pattern to the next character, or EOL. Extra logic
+      " is for multibyte characters.
+      normal! l
+      if col('.') == match_end
+        " no movement, we must be at the end
+        let match_end = col('$')
       else
-        normal! l
         let match_end = col('.')
       endif
 
-      if match_start > col || match_end < col
+      if match_start > col || match_end <= col
         " then the cursor is not in the pattern
         continue
       else
@@ -132,7 +139,7 @@ function! s:MakeDict(mapping)
   return dict
 endfunction
 
-" Limits the given pattern to only work in the given [start, end] interval by
+" Limits the given pattern to only work in the given [start, end) interval by
 " anchoring it to these column positions.
 "
 function! s:LimitPattern(pattern, start, end)
@@ -142,7 +149,7 @@ function! s:LimitPattern(pattern, start, end)
     let pattern = '\%>'.(a:start - 1).'c'.pattern
   endif
 
-  if a:end > 1 && a:end < col('$') - 1
+  if a:end > 1 && a:end < col('$')
     let pattern = pattern.'\%<'.(a:end + 1).'c'
   endif
 
