@@ -306,6 +306,14 @@ Ruby string style (g:switch_builtins.ruby_string):
 <
 Note that it only works for single-word strings.
 
+Ruby array shorthands (g:switch_builtins.ruby_array_shorthand):
+>
+    ['one', 'two', 'three']
+    %w(one two three)
+<
+In this case, be careful to not have the cursor on one of the strings, or
+you'll trigger the string switch as seen above.
+
 PHP ~
 
 "Echo" in tags (g:switch_builtins.php_echo):

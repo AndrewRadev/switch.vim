@@ -267,6 +267,13 @@ definitions with their patterns and replacements, look at the file
   ```
   (Note that it only works for single-word strings.)
 
+* Array shorthands:
+  ``` ruby
+  ['one', 'two', 'three']
+  %w(one two three)
+  ```
+  (In this case, be careful to not have the cursor on one of the strings, or you'll trigger the string switch as seen above.)
+
 ### PHP "echo" in tags:
 
 ``` php
