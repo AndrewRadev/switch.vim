@@ -1,19 +1,19 @@
 " Constructor:
 " ============
 
-function! switch#match#New(mapping, pattern, start, end, length)
-  let match = switch#match#NewNull()
+function! switch#match#New(mapping, pattern, start, end)
+  let match = switch#match#Null()
 
   let match.mapping = a:mapping
   let match.pattern = a:pattern
   let match.start   = a:start
   let match.end     = a:end
-  let match.length  = a:length
+  let match.length  = (a:end - a:start) + 1
 
   return match
 endfunction
 
-function! switch#match#NewNull()
+function! switch#match#Null()
   let match = {
         \ 'mapping': {},
         \ 'start':   -1,

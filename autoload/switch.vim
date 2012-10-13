@@ -3,7 +3,7 @@ function! switch#Switch(definitions)
 
   try
     let saved_cursor = getpos('.')
-    let min_match    = switch#match#NewNull()
+    let min_match    = switch#match#Null()
 
     for definition in a:definitions
       let mapping = switch#mapping#New(definition)
