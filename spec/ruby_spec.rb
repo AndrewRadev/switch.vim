@@ -79,6 +79,19 @@ describe "ruby definitions" do
     assert_file_contents '1.should eq 1'
   end
 
+  specify "rspec be_true/be_false" do
+    set_file_contents 'value.should be_true'
+
+    vim.search('be_true').switch
+    assert_file_contents 'value.should be_false'
+
+    vim.switch
+    assert_file_contents 'value.should be_true'
+
+    vim.search('value').switch
+    assert_file_contents 'value.should be_true'
+  end
+
   specify "if-clauses" do
     set_file_contents <<-EOF
       if predicate?

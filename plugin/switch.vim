@@ -42,6 +42,7 @@ let g:switch_builtins =
       \     },
       \   },
       \   'rspec_should': ['should ', 'should_not '],
+      \   'rspec_be_true_false': ['be_true', 'be_false'],
       \   'eruby_if_clause': {
       \     '<% if true or (\(.*\)) %>':          '<% if false and (\1) %>',
       \     '<% if false and (\(.*\)) %>':        '<% if \1 %>',
@@ -95,6 +96,7 @@ else
         \   g:switch_builtins.ruby_hash_style,
         \   g:switch_builtins.ruby_if_clause,
         \   g:switch_builtins.rspec_should,
+        \   g:switch_builtins.rspec_be_true_false,
         \   g:switch_builtins.ruby_tap,
         \   g:switch_builtins.ruby_string,
         \   g:switch_builtins.ruby_array_shorthand,
