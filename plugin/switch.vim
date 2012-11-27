@@ -9,8 +9,14 @@ set cpo&vim
 let g:switch_builtins =
       \ {
       \   'ampersands': ['&&', '||'],
-      \   'capital_true_false': ['True', 'False'],
-      \   'true_false': ['true', 'false'],
+      \   'capital_true_false': {
+      \     '\CTrue':  'False',
+      \     '\CFalse': 'True',
+      \   },
+      \   'true_false': {
+      \     '\Ctrue':  'false',
+      \     '\Cfalse': 'true',
+      \   },
       \   'ruby_hash_style': {
       \     ':\(\k\+\)\s\+=>': '\1:',
       \     '\<\(\k\+\): ':    ':\1 => ',
