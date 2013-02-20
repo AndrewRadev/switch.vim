@@ -1,8 +1,11 @@
 [![Build Status](https://secure.travis-ci.org/AndrewRadev/switch.vim.png?branch=master)](http://travis-ci.org/AndrewRadev/switch.vim)
 
-## Usage
+## Screencast!
 
-You can find a screencast demonstrating the plugin [here](http://youtu.be/zIOOLZJb87U).
+This plugin is easier to demonstrate than explain. You can find a screencast
+[here](http://youtu.be/zIOOLZJb87U).
+
+## Usage
 
 The main entry point of the plugin is a single command, `:Switch`. When the
 command is executed, the plugin looks for one of a few specific patterns under
