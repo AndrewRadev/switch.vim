@@ -69,9 +69,11 @@ There are three main principles that the substition follows:
 
 There are two variables that hold the global definition list and the
 buffer-local definition list -- `g:switch_definitions` and
-`b:switch_definitions`, respectively. In order to customize these to perform
-the switches you want, you can directly override them. For their default
-contents, please see the file plugin/switch.vim.
+`b:switch_definitions`, respectively. These contain the definitions for the
+built-ins provided by the plugin. In order to add the switches you want, you
+should override `g:switch_custom_definitions` and
+`b:switch_custom_definitions` instead.
+
 
 The format of the variables is a simple List of items. Each item can be either
 a List or a Dict.
@@ -79,7 +81,7 @@ a List or a Dict.
 ### List definitions
 
 ``` vim
-let g:switch_definitions =
+let g:switch_custom_definitions =
     \ [
     \   ['foo', 'bar', 'baz']
     \ ]
@@ -96,7 +98,7 @@ using a Dict.
 ### Dict definitions
 
 ``` vim
-autocmd FileType eruby let b:switch_definitions =
+autocmd FileType eruby let b:switch_custom_definitions =
     \ [
     \   {
     \     ':\(\k\+\)\s\+=>': '\1:',
@@ -119,7 +121,7 @@ this definition in `ftplugin/eruby.vim`.
 Another interesting example is the following definition:
 
 ``` vim
-autocmd FileType php let b:switch_definitions =
+autocmd FileType php let b:switch_custom_definitions =
       \ [
       \   {
       \     '<?php echo \(.\{-}\) ?>':        '<?php \1 ?>',
@@ -143,7 +145,7 @@ The following expression replaces underscored identifier names with their
 camelcased versions.
 
 ``` vim
-let b:switch_definitions = [
+let b:switch_custom_definitions = [
       \   {
       \     '\<[a-z0-9]\+_\k\+\>': {
       \       '_\(.\)': '\U\1'

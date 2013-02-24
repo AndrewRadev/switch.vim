@@ -91,16 +91,17 @@ CUSTOMIZATION                                             *switch-customization*
 
 There are two variables that hold the global definition list and the
 buffer-local definition list -- |g:switch_definitions| and
-|b:switch_definitions|, respectively. In order to customize these to perform
-the switches you want, you need to override them. For their default contents,
-please see the file plugin/switch.vim or read up on |switch-builtins|
+|b:switch_definitions|, respectively. These contain the definitions for the
+built-ins provided by the plugin. In order to add the switches you want, you
+should override |g:switch_custom_definitions| and
+|b:switch_custom_definitions| instead.
 
-The format of the variables is a simple List of items. Each item can be either
-a List or a Dict.
+The format of all of these variables is a simple List of items. Each item can
+be either a List or a Dict.
 
 List definitions ~
 >
-    let g:switch_definitions =
+    let g:switch_custom_definitions =
         \ [
         \   ['foo', 'bar', 'baz']
         \ ]
@@ -115,7 +116,7 @@ using a Dict.
 
 Dict definitions ~
 >
-    autocmd FileType eruby let b:switch_definitions =
+    autocmd FileType eruby let b:switch_custom_definitions =
         \ [
         \   {
         \     ':\(\k\+\)\s\+=>': '\1:',
@@ -132,11 +133,11 @@ of its replacement patterns work as well.
 
 Notice the use of "autocmd FileType eruby" to set the buffer-local variable
 whenever an eruby file is loaded. The same effect could be achieved by placing
-this definition in ftplugin/eruby.vim.
+the "let" clause in ftplugin/eruby.vim instead.
 
 Another interesting example is the following definition:
 >
-    autocmd FileType php let b:switch_definitions =
+    autocmd FileType php let b:switch_custom_definitions =
         \ [
         \   {
         \     '<?php echo \(.\{-}\) ?>':        '<?php \1 ?>',
@@ -159,7 +160,7 @@ The following expression replaces underscored identifier names with their
 camelcased versions.
 
 >
-    let b:switch_definitions = [
+    let b:switch_custom_definitions = [
         \   {
         \     '\<[a-z0-9]\+_\k\+\>': {
         \       '_\(.\)': '\U\1'
@@ -220,19 +221,19 @@ patterns that match similar things.
 
 Builtins ~
 
-In order to make it easier to extend, while keeping built-in functionality,
-you can take patterns from the |g:switch_builtins| and include them in your
-own switch definitions. Something like this:
+If you want to only use some built-in definitions, you can set the
+|g:switch_no_builtins| variable to 1 and then just use your
+|g:switch_custom_definitions| and |b:switch_custom_definitions| variables to
+re-use the built-in definitions. To make this easier, you can use the
+patterns from the |g:switch_builtins| list:
 >
     autocmd FileType ruby let b:switch_definitions =
         \ [
         \   g:switch_builtins.ruby_hash_style,
-        \   g:switch_builtins.ruby_if_clause,
         \
         \   { 'my_own_pattern': 'my_own_replacement' },
         \
         \   g:switch_builtins.rspec_should,
-        \   g:switch_builtins.ruby_tap,
         \ ]
 <
 See the section below, |switch-builtins| for information on the built-in
@@ -374,19 +375,19 @@ SETTINGS                                                *switch-similar-plugins*
 
                                                           *g:switch_definitions*
 >
-    g:switch_definitions
+    g:switch_custom_definitions
 <
 
-This variable contains the global switch definitions -- patterns that are
+This variable contains your custom switch definitions -- patterns that are
 attempted against every filetype. Changing the contents of this variable would
-change the attempted patterns.
+make the plugin attempt these patterns in addition to the built-ins.
 
 Example:
 
-Putting the following in .vimrc would disable the original behaviour and make
-the plugin switch between "on" and "off":
+Putting the following in .vimrc would make the plugin switch between "on" and
+"off":
 >
-    let g:switch_definitions = [
+    let g:switch_custom_definitions = [
           \   ['on', 'off']
           \ ]
 <
@@ -396,15 +397,14 @@ the plugin switch between "on" and "off":
     b:switch_definitions
 <
 
-This variable contains buffer-local switch definitions. Its default contents
-are set depending on the filetype.
+This variable contains your custom buffer-local switch definitions.
 
 Example:
 
 Putting the following in ftplugin/html.vim would switch between single-line
 <div> and <span> tags, though it probably won't work in complicated cases.
 >
-    let g:switch_definitions =
+    let g:switch_custom_definitions =
           \ [
           \   {
           \     '<div\(.\{-}\)>\(.\{-}\)</div>': '<span\1>\2</span>',
@@ -419,8 +419,8 @@ Putting the following in ftplugin/html.vim would switch between single-line
 <
 
 This variable contains all built-in switch definitions. It makes it simple to
-re-use definitions for different filetypes and to retain original
-functionality when extending.
+re-use definitions for different filetypes and to cherry-pick original
+functionality if needed.
 
 For example, g:switch_builtins.ruby_hash_style contains a pattern that can be
 used for ruby, eruby, slim and haml.
@@ -432,7 +432,8 @@ used for ruby, eruby, slim and haml.
 <
 If this variable is set, no builtins will be set by the plugin. This might be
 useful to avoid any surprising switch definitions outside of your control. You
-can still set your own definitions, of course.
+can still set your own definitions, of course, and you can re-use some
+built-ins by taking them from the |g:switch_builtins| dict.
 
 
 ==============================================================================
