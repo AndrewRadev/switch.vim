@@ -35,6 +35,10 @@ let g:switch_builtins =
       \     '''\(\k\+\)''':              ':\1',
       \     ':\(\k\+\)\@>\%(\s*=>\)\@!': '"\1"\2',
       \   },
+      \   'ruby_short_blocks': {
+      \     '\(\k\+\)(&:\(\S\+\))':                   '\1 { |x| x\.\2 }',
+      \     '\(\k\+\)\s\={ |\(\k\+\)| \2.\(\S\+\) }': '\1(&:\3)',
+      \   },
       \   'ruby_array_shorthand': {
       \     '\[\%(\k\|[''", ]\)\+\]': {
       \       '\[':                    '%w(',
@@ -102,6 +106,7 @@ autocmd FileType ruby let b:switch_definitions =
       \   g:switch_builtins.rspec_be_true_false,
       \   g:switch_builtins.ruby_tap,
       \   g:switch_builtins.ruby_string,
+      \   g:switch_builtins.ruby_short_blocks,
       \   g:switch_builtins.ruby_array_shorthand,
       \ ]
 

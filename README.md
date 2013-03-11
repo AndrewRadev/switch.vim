@@ -272,6 +272,13 @@ definitions with their patterns and replacements, look at the file
   ```
   (Note that it only works for single-word strings.)
 
+
+* Ruby block shorthands (g:switch_builtins.ruby_short_blocks):
+  ``` ruby
+  do_something { |x| x.some_work! }
+  do_something(&:some_work!)
+  ```
+
 * Array shorthands:
   ``` ruby
   ['one', 'two', 'three']

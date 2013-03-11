@@ -150,6 +150,16 @@ describe "ruby definitions" do
     assert_file_contents 'foo = "bar"'
   end
 
+  specify "short blocks" do
+    set_file_contents 'do_something { |x| x.some_work! }'
+
+    vim.switch
+    assert_file_contents 'do_something(&:some_work!)'
+
+    vim.switch
+    assert_file_contents 'do_something { |x| x.some_work! }'
+  end
+
   specify "array shorthands" do
     set_file_contents "['one', 'two']"
 

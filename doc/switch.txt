@@ -307,6 +307,11 @@ Ruby string style (g:switch_builtins.ruby_string):
 <
 Note that it only works for single-word strings.
 
+Ruby block shorthands (g:switch_builtins.ruby_short_blocks):
+>
+    do_something { |x| x.some_work! }
+    do_something(&:some_work!)
+<
 Ruby array shorthands (g:switch_builtins.ruby_array_shorthand):
 >
     ['one', 'two', 'three']
