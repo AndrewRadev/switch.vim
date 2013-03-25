@@ -18,8 +18,8 @@ let g:switch_builtins =
       \     '\Cfalse': 'true',
       \   },
       \   'ruby_hash_style': {
-      \     ':\(\k\+\)\s*=>': '\1:',
-      \     '\<\(\k\+\):':   ':\1 =>',
+      \     ':\(\k\+\)\s*=>\s*': '\1: ',
+      \     '\<\(\k\+\):':       ':\1 =>',
       \   },
       \   'ruby_if_clause': {
       \     'if true or (\(.*\))':          'if false and (\1)',
