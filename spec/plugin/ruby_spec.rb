@@ -64,6 +64,10 @@ describe "ruby definitions" do
     vim.switch
     assert_file_contents 'foo:bar'
 
+    set_file_contents ':foo=>bar'
+    vim.switch
+    assert_file_contents 'foo: bar'
+
     set_file_contents 'foo: bar'
     vim.switch
     assert_file_contents ':foo => bar'
