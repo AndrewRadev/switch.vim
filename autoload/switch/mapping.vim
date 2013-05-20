@@ -63,7 +63,10 @@ function! switch#mapping#Match() dict
       let match_end = col('.')
 
       " set the end of the pattern to the next character, or EOL. Extra logic
-      " is for multibyte characters.
+      " is for multibyte characters. The 'whichwrap' option is reset to the
+      " default in order to avoid "l" wrapping around.
+      let original_whichwrap = &whichwrap
+      set whichwrap&vim
       normal! l
       if col('.') == match_end
         " no movement, we must be at the end
@@ -71,6 +74,7 @@ function! switch#mapping#Match() dict
       else
         let match_end = col('.')
       endif
+      let &whichwrap = original_whichwrap
 
       if match_start > col || match_end <= col
         " then the cursor is not in the pattern
