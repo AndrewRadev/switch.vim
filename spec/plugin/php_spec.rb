@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "php" do
-  let(:vim) { @vim }
   let(:filename) { 'test.php' }
 
   specify "echo" do

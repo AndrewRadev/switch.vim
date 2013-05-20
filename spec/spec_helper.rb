@@ -1,32 +1,26 @@
 require 'vimrunner'
-require 'vimrunner/testing'
-require_relative './support/vim'
+require 'vimrunner/rspec'
+require_relative 'support/vim'
 
-RSpec.configure do |config|
-  config.include Vimrunner::Testing
-  config.include Support::Vim
+Vimrunner::RSpec.configure do |config|
+  config.reuse_server = true
 
-  config.before(:suite) do
-    VIM = Vimrunner.start_gvim
-    VIM.add_plugin(File.expand_path('.'), 'plugin/switch.vim')
+  plugin_path = File.expand_path('.')
 
-    def VIM.switch
+  config.start_vim do
+    vim = Vimrunner.start_gvim
+    vim.add_plugin(plugin_path, 'plugin/switch.vim')
+
+    def vim.switch
       command 'Switch'
       write
       self
     end
-  end
 
-  config.after(:suite) do
-    VIM.kill
+    vim
   end
+end
 
-  # cd into a temporary directory for every example.
-  config.around do |example|
-    @vim = VIM
-
-    tmpdir(@vim) do
-      example.call
-    end
-  end
+RSpec.configure do |config|
+  config.include Support::Vim
 end

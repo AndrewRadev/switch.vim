@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "ruby definitions" do
-  let(:vim) { @vim }
   let(:filename) { 'test.rb' }
 
   specify "true/false" do

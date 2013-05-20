@@ -1,8 +1,6 @@
 require 'spec_helper'
-require 'pry'
 
 describe "regression fixes" do
-  let(:vim) { @vim }
   let(:filename) { 'test.txt' }
 
   it "is not affected by &whichwrap" do

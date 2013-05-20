@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "coffee" do
-  let(:vim) { @vim }
   let(:filename) { 'test.coffee' }
 
   specify "arrows" do

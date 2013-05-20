@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "global definitions" do
-  let(:vim) { @vim }
   let(:filename) { 'test.txt' }
 
   specify "&&/||" do

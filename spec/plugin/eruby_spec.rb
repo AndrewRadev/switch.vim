@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "eruby definitions" do
-  let(:vim) { @vim }
   let(:filename) { 'test.erb' }
 
   specify "true/false" do

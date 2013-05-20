@@ -4,7 +4,6 @@ require 'spec_helper'
 
 describe "multibyte support" do
   let(:filename) { 'test.txt' }
-  let(:vim) { @vim }
 
   specify "doesn't get confused by multibyte characters on the line" do
     set_file_contents '是; flag = true'
