@@ -175,9 +175,10 @@ replaced globally, only within the limits of the "parent" pattern.
 
 Note that this particular example is **NOT** included as a built-in, since it
 may overshadow other ones and is probably not that useful, either (it's rare
-that a language would require changing between the two forms). An example
-usage may be within javascript, if your server-side variables are underscored
-and the client-side ones need to be camelcased.
+that a language would require changing between the two forms). An example usage
+may be within javascript, if your server-side variables are underscored and the
+client-side ones need to be camelcased. For something more complete, you can
+take a look at [this gist](https://gist.github.com/othree/5655583).
 
 You could also use a separate mapping for that.
 
