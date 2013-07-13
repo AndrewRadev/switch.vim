@@ -141,6 +141,7 @@ function! s:Switch()
   endif
 
   call switch#Switch(definitions)
+  silent! call repeat#set(":Switch\<cr>")
 endfunction
 
 let &cpo = s:keepcpo
