@@ -20,4 +20,18 @@ describe "regression fixes" do
 
     vim.set 'whichwrap&vim'
   end
+
+  specify "limits subpatterns" do
+    def filename
+      'test.rb'
+    end
+
+    set_file_contents "['zero'] + ['one', 'two']"
+
+    vim.search("['one").switch
+    assert_file_contents "['zero'] + %w(one two)"
+
+    vim.switch
+    assert_file_contents "['zero'] + ['one', 'two']"
+  end
 end

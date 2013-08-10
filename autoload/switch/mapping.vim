@@ -98,16 +98,24 @@ endfunction
 function! switch#mapping#Replace(match) dict
   let pattern     = a:match.pattern
   let replacement = self.definitions[pattern]
-  let pattern     = s:LimitPattern(pattern, a:match.start, a:match.end)
 
   if type(replacement) == s:type_dict
+    " maintain change delta for adjusting match limits
+    let delta = 0
+
     for [pattern, sub_replacement] in items(replacement)
+      let last_column     = col('$')
+      let pattern         = s:LimitPattern(pattern, a:match.start, a:match.end + delta)
       let pattern         = escape(pattern, '/')
       let sub_replacement = escape(sub_replacement, '/&')
 
       exe 's/'.pattern.'/'.sub_replacement.'/ge'
+
+      " length of the line may have changed, adjust
+      let delta += col('$') - last_column
     endfor
   else
+    let pattern     = s:LimitPattern(pattern, a:match.start, a:match.end)
     let pattern     = escape(pattern, '/')
     let replacement = escape(replacement, '/&')
 
