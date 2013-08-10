@@ -109,6 +109,7 @@ function! switch#mapping#Replace(match) dict
       let pattern         = escape(pattern, '/')
       let sub_replacement = escape(sub_replacement, '/&')
 
+      silent! foldopen!
       exe 's/'.pattern.'/'.sub_replacement.'/ge'
 
       " length of the line may have changed, adjust
