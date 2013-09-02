@@ -1,4 +1,4 @@
-*switch.txt*	Replace specific patterns with associated substitutions
+*switch.txt*	Switch segments of text with predefined replacements
 
 ==============================================================================
 CONTENTS                                                *switch* *switch-contents*
