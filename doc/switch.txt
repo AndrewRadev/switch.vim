@@ -1,3 +1,5 @@
+*switch.txt*	Replace specific patterns with associated substitutions
+
 ==============================================================================
 CONTENTS                                                *switch* *switch-contents*
 
