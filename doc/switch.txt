@@ -378,6 +378,32 @@ Arrows (g:switch_builtins.coffee_arrow):
     functionCall (foo) =>
 <
 
+Clojure ~
+
+String style (g:switch_builtins.clojure_string):
+>
+    "baz"
+    'bar
+    :baz
+<
+Note that it only works for single-word strings, such as baz, b-a-z, or **.
+
+If-clauses (g:switch_builtins.clojure_if_clause):
+>
+    (if predicate?
+      (prn "Hello, world!")
+      (prn "oh..."))
+
+    (if (or true predicate?)
+      (prn "Hello, world!")
+      (prn "oh..."))
+
+    (if (and false predicate?)
+      (prn "Hello, world!")
+      (prn "oh..."))
+<
+Note that it also works for if-not, when, and when-not.
+
 ==============================================================================
 SETTINGS                                                *switch-similar-plugins*
 

@@ -76,6 +76,16 @@ let g:switch_builtins =
       \     '^\(.*\)->': '\1=>',
       \     '^\(.*\)=>': '\1->',
       \   },
+      \   'clojure_string': {
+      \     '"\(\k\+\)"': '''\1',
+      \     '''\(\k\+\)': ':\1',
+      \     ':\(\k\+\)':  '"\1"\2',
+      \   },
+      \   'clojure_if_clause': {
+      \     '(\(if\|if-not\|when\|when-not\) (or true \(.*\))':   '(\1 (and false \2)',
+      \     '(\(if\|if-not\|when\|when-not\) (and false \(.*\))': '(\1 \2',
+      \     '(\(if\|if-not\|when\|when-not\) (\@!\(.*\)':         '(\1 (or true \2)',
+      \   },
       \ }
 
 let g:switch_definitions =
@@ -118,6 +128,12 @@ autocmd FileType cpp let b:switch_definitions =
 autocmd FileType coffee let b:switch_definitions =
       \ [
       \   g:switch_builtins.coffee_arrow,
+      \ ]
+
+autocmd FileType clojure let b:switch_definitions =
+      \ [
+      \   g:switch_builtins.clojure_string,
+      \   g:switch_builtins.clojure_if_clause,
       \ ]
 
 command! Switch call s:Switch()

@@ -339,6 +339,32 @@ functionCall (foo) ->
 functionCall (foo) =>
 ```
 
+### Clojure
+
+* String style:
+  ``` clojure
+  "baz"
+  'bar
+  :baz
+  ```
+  (Note that it only works for single-word strings, such as `baz`, `b-a-z`, or `**`.)
+
+* If-clauses:
+  ``` clojure
+  (if predicate?
+    (prn "Hello, world!")
+    (prn "oh..."))
+
+  (if (or true predicate?)
+    (prn "Hello, world!")
+    (prn "oh..."))
+
+  (if (and false predicate?)
+    (prn "Hello, world!")
+    (prn "oh..."))
+  ```
+  (Note that it also works for `if-not`, `when`, and `when-not`.)
+
 ## Similar work
 
 This plugin is very similar to two other ones:
