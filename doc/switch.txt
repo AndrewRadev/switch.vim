@@ -5,6 +5,8 @@ CONTENTS                                                *switch* *switch-content
 
     Installation................................: |switch-installation|
     Usage.......................................: |switch-usage|
+    Customization...............................: |switch-customization|
+    Builtins....................................: |switch-builtins|
     Settings....................................: |switch-settings|
     Similar plugins.............................: |switch-similar-plugins|
     Issues......................................: |switch-issues|
@@ -379,7 +381,7 @@ Arrows (g:switch_builtins.coffee_arrow):
 <
 
 ==============================================================================
-SETTINGS                                                *switch-similar-plugins*
+SETTINGS                                                       *switch-settings*
 
                                                           *g:switch_definitions*
 >
@@ -445,7 +447,7 @@ built-ins by taking them from the |g:switch_builtins| dict.
 
 
 ==============================================================================
-SIMILAR PLUGINS                                                *switch-settings*
+SIMILAR PLUGINS                                         *switch-similar-plugins*
 
 This plugin is very similar to two other ones:
   - toggle.vim: http://www.vim.org/scripts/script.php?script_id=895
