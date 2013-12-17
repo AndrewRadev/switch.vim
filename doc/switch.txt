@@ -406,6 +406,18 @@ If-clauses (g:switch_builtins.clojure_if_clause):
 <
 Note that it also works for if-not, when, and when-not.
 
+Scala ~
+
+String style (g:switch_builtins.scala_string):
+>
+    "foo bar"
+    s"foo bar"
+    f"foo bar"
+    """foo bar"""
+    s"""foo bar"""
+    f"""foo bar"""
+<
+
 ==============================================================================
 SETTINGS                                                       *switch-settings*
 
