@@ -86,6 +86,14 @@ let g:switch_builtins =
       \     '(\(if\|if-not\|when\|when-not\) (and false \(.*\))': '(\1 \2',
       \     '(\(if\|if-not\|when\|when-not\) (\@!\(.*\)':         '(\1 (or true \2)',
       \   },
+      \   'scala_string': {
+      \     '[sf"]\@<!"\(\%(\\.\|.\)\{-}\)""\@!': 's"\1"',
+      \     's"\(\%(\\.\|.\)\{-}\)"':             'f"\1"',
+      \     'f"\(\%(\\.\|.\)\{-}\)"':             '"""\1"""',
+      \     '[sf"]\@<!"""\(.\{-}\)"""':           's"""\1"""',
+      \     's"""\(.\{-}\)"""':                   'f"""\1"""',
+      \     'f"""\(.\{-}\)"""':                   '"\1"',
+      \   },
       \ }
 
 let g:switch_definitions =
@@ -134,6 +142,10 @@ autocmd FileType clojure let b:switch_definitions =
       \ [
       \   g:switch_builtins.clojure_string,
       \   g:switch_builtins.clojure_if_clause,
+      \ ]
+autocmd FileType scala let b:switch_definitions =
+      \ [
+      \   g:switch_builtins.scala_string,
       \ ]
 
 command! Switch call s:Switch()

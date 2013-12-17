@@ -365,6 +365,18 @@ functionCall (foo) =>
   ```
   (Note that it also works for `if-not`, `when`, and `when-not`.)
 
+### Scala
+
+* String style:
+  ``` scala
+  "foo bar"
+  s"foo bar"
+  f"foo bar"
+  """foo bar"""
+  s"""foo bar"""
+  f"""foo bar"""
+  ```
+
 ## Similar work
 
 This plugin is very similar to two other ones:
