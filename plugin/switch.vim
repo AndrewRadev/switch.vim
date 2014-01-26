@@ -2,7 +2,7 @@ if exists("g:loaded_switch") || &cp
   finish
 endif
 
-let g:loaded_switch = '0.1.1' " version number
+let g:loaded_switch = '0.2.0' " version number
 let s:keepcpo = &cpo
 set cpo&vim
 
