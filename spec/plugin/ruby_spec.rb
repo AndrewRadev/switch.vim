@@ -95,6 +95,16 @@ describe "ruby definitions" do
     assert_file_contents 'value.should be_true'
   end
 
+  specify "rspec expect(...).to/to_not" do
+    set_file_contents 'expect(value).to be_present'
+
+    vim.search('expect').switch
+    assert_file_contents 'expect(value).to_not be_present'
+
+    vim.switch
+    assert_file_contents 'expect(value).to be_present'
+  end
+
   specify "if-clauses" do
     set_file_contents <<-EOF
       if predicate?

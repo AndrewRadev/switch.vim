@@ -52,6 +52,10 @@ let g:switch_builtins =
       \     },
       \   },
       \   'rspec_should': ['should ', 'should_not '],
+      \   'rspec_expect': {
+      \     '\(expect(.*)\.to\) ':     '\1_not ',
+      \     '\(expect(.*)\.to\)_not ': '\1 ',
+      \   },
       \   'rspec_be_true_false': ['be_true', 'be_false'],
       \   'eruby_if_clause': {
       \     '<% if true or (\(.*\)) %>':          '<% if false and (\1) %>',
@@ -121,6 +125,7 @@ autocmd FileType ruby let b:switch_definitions =
       \   g:switch_builtins.ruby_hash_style,
       \   g:switch_builtins.ruby_if_clause,
       \   g:switch_builtins.rspec_should,
+      \   g:switch_builtins.rspec_expect,
       \   g:switch_builtins.rspec_be_true_false,
       \   g:switch_builtins.ruby_tap,
       \   g:switch_builtins.ruby_string,
