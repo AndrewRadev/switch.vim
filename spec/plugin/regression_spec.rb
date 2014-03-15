@@ -34,4 +34,15 @@ describe "regression fixes" do
     vim.switch
     assert_file_contents "['zero'] + ['one', 'two']"
   end
+
+  specify "verymagic patterns" do
+    set_file_contents "xyz = abc;"
+
+    vim.command <<-EOF
+      let b:switch_definitions = [ {'\\vabc': 'def'} ]
+    EOF
+
+    vim.search("abc").switch
+    assert_file_contents "xyz = def;"
+  end
 end

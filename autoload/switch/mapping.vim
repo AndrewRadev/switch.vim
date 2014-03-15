@@ -163,7 +163,7 @@ function! s:LimitPattern(pattern, start, end)
   endif
 
   if a:end > 1 && a:end < col('$')
-    let pattern = pattern.'\%<'.(a:end + 1).'c'
+    let pattern = pattern.'\m\%<'.(a:end + 1).'c'
   endif
 
   return pattern
