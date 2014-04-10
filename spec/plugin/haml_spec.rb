@@ -50,7 +50,6 @@ describe "haml definitions" do
 
     vim.switch; assert_file_contents '- something'
     vim.switch; assert_file_contents '-# something'
-    vim.switch; assert_file_contents '=raw something'
     vim.switch; assert_file_contents '= something'
   end
 end

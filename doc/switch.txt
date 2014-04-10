@@ -354,7 +354,6 @@ Tag type (g:switch_builtins.eruby_tag_type):
 >
     <% something %>
     <%# something %>
-    <%=raw something %>
     <%= something %>
 <
 
@@ -382,7 +381,6 @@ Tag type (g:switch_builtins.haml_tag_type):
 >
     - something
     -# something
-    =raw something
     = something
 <
 

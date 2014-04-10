@@ -315,7 +315,6 @@ definitions with their patterns and replacements, look at the file
   ``` erb
   <% something %>
   <%# something %>
-  <%=raw something %>
   <%= something %>
   ```
 
@@ -343,7 +342,6 @@ definitions with their patterns and replacements, look at the file
   ``` haml
   - something
   -# something
-  =raw something
   = something
   ```
 

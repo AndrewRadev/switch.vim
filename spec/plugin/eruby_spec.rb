@@ -75,7 +75,6 @@ describe "eruby definitions" do
 
     vim.switch; assert_file_contents '<% something %>'
     vim.switch; assert_file_contents '<%# something %>'
-    vim.switch; assert_file_contents '<%=raw something %>'
     vim.switch; assert_file_contents '<%= something %>'
 
     set_file_contents '<% something -%>'
