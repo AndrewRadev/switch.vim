@@ -253,7 +253,7 @@ definitions with their patterns and replacements, look at the file
   end
   ```
 
-* Rspec should/should_not:
+* Rspec `should`/`should_not`:
   ``` ruby
   1.should eq 1
   1.should_not eq 1
@@ -274,7 +274,7 @@ definitions with their patterns and replacements, look at the file
   (Note that it only works for single-word strings.)
 
 
-* Ruby block shorthands (g:switch_builtins.ruby_short_blocks):
+* Ruby block shorthands:
   ``` ruby
   do_something { |x| x.some_work! }
   do_something(&:some_work!)
@@ -323,6 +323,34 @@ definitions with their patterns and replacements, look at the file
   ``` erb
   <% foo = { :one => 'two' } %>
   <% foo = { one: 'two' } %>
+  ```
+
+### Haml
+
+* If-clauses:
+  ``` haml
+  - if predicate?
+    Hello, World!
+
+  - if true or (predicate?)
+    Hello, World!
+
+  - if false and (predicate?)
+    Hello, World!
+  ```
+
+* Tag type:
+  ``` haml
+  - something
+  -# something
+  =raw something
+  = something
+  ```
+
+* Hash style:
+  ``` haml
+  %a{:href => '/example'}
+  %a{href: '/example'}
   ```
 
 ### C++ pointer dots/arrows:

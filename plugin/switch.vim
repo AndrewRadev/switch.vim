@@ -68,6 +68,12 @@ let g:switch_builtins =
       \     '<%# \(.*\) %>':    '<%=raw \1 %>',
       \     '<%=raw \(.*\) %>': '<%= \1 %>',
       \   },
+      \   'haml_tag_type': {
+      \     '= \(.*\)':    '- \1',
+      \     '- \(.*\)':    '-# \1',
+      \     '-# \(.*\)':   '=raw \1',
+      \     '=raw \(.*\)': '= \1',
+      \   },
       \   'php_echo': {
       \     '<?php echo \(.\{-}\) ?>':        '<?php \1 ?>',
       \     '<?php \%(echo\)\@!\(.\{-}\) ?>': '<?php echo \1 ?>',
@@ -113,6 +119,13 @@ autocmd FileType eruby let b:switch_definitions =
       \   g:switch_builtins.eruby_tag_type,
       \   g:switch_builtins.ruby_hash_style,
       \   g:switch_builtins.ruby_string,
+      \ ]
+
+autocmd FileType haml let b:switch_definitions =
+      \ [
+      \   g:switch_builtins.ruby_if_clause,
+      \   g:switch_builtins.ruby_hash_style,
+      \   g:switch_builtins.haml_tag_type,
       \ ]
 
 autocmd FileType php let b:switch_definitions =
