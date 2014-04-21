@@ -405,6 +405,11 @@ Arrows (g:switch_builtins.coffee_arrow):
     functionCall (foo) ->
     functionCall (foo) =>
 <
+Dictionary shorthand (g:switch_builtins.coffee_dictionary_shorthand):
+>
+    foo = {one, two}
+    foo = {one: one, two}
+<
 
 Clojure ~
 

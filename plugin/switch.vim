@@ -84,6 +84,10 @@ let g:switch_builtins =
       \     '^\(.*\)->': '\1=>',
       \     '^\(.*\)=>': '\1->',
       \   },
+      \   'coffee_dictionary_shorthand': {
+      \     '\([{,]\s*\)\@<=\(\k\+\)\(\s*[},]\)':       '\2: \2\3',
+      \     '\([{,]\s*\)\@<=\(\k\+\): \?\2\(\s*[},]\)': '\2\3',
+      \   },
       \   'clojure_string': {
       \     '"\(\k\+\)"': '''\1',
       \     '''\(\k\+\)': ':\1',
@@ -152,6 +156,7 @@ autocmd FileType cpp let b:switch_definitions =
 autocmd FileType coffee let b:switch_definitions =
       \ [
       \   g:switch_builtins.coffee_arrow,
+      \   g:switch_builtins.coffee_dictionary_shorthand,
       \ ]
 
 autocmd FileType clojure let b:switch_definitions =

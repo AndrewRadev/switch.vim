@@ -13,4 +13,24 @@ describe "coffee" do
     vim.switch
     assert_file_contents 'functionCall (foo) ->'
   end
+
+  specify "dictionary shorthand" do
+    set_file_contents 'foo = {one, two}'
+    vim.set 'filetype', 'coffee'
+
+    vim.search('one')
+    vim.switch
+    assert_file_contents 'foo = {one: one, two}'
+
+    vim.search('two')
+    vim.switch
+    assert_file_contents 'foo = {one: one, two: two}'
+
+    vim.switch
+    assert_file_contents 'foo = {one: one, two}'
+
+    vim.search('one')
+    vim.switch
+    assert_file_contents 'foo = {one, two}'
+  end
 end

@@ -365,6 +365,13 @@ functionCall (foo) ->
 functionCall (foo) =>
 ```
 
+### Coffeescript dictionary shorthands
+
+``` coffeescript
+foo = {one, two}
+foo = {one: one, two}
+```
+
 ### Clojure
 
 * String style:
