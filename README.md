@@ -194,6 +194,9 @@ You could also use a separate mapping for that.
 
 ### Separate mappings
 
+*Note: for more switches by the community, take a look at the
+[wiki](https://github.com/AndrewRadev/switch.vim/wiki)*
+
 While there's a default mapping for `:Switch`, you could actually define
 several mappings with your own custom definitions:
 
