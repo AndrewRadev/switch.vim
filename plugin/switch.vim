@@ -6,6 +6,10 @@ let g:loaded_switch = '0.2.0' " version number
 let s:keepcpo = &cpo
 set cpo&vim
 
+if !exists('g:switch_mapping')
+  let g:switch_mapping = 'gs'
+endif
+
 let g:switch_builtins =
       \ {
       \   'ampersands': ['&&', '||'],
@@ -192,6 +196,10 @@ function! s:Switch()
   call switch#Switch(definitions)
   silent! call repeat#set(":Switch\<cr>")
 endfunction
+
+if g:switch_mapping != ''
+  exe 'nnoremap '.g:switch_mapping.' :Switch<cr>'
+endif
 
 let &cpo = s:keepcpo
 unlet s:keepcpo

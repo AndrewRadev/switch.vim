@@ -43,10 +43,17 @@ the cursor is on the "true" in the following code:
 <
 Then, upon executing |:Switch|, the "true" will turn into "false".
 
-It is highly recommended to map the |:Switch| command to a key. For example,
-to map it to "-", place the following in your .vimrc:
+There's a default mapping to trigger the command, `gs`. Note that this is
+already a Vim built-in (|gs|), but it doesn't seem particularly useful.
+
+If you'd like to change the mapping, change the value of |g:switch_mapping|.
+For example, to map it to "-", place the following in your .vimrc:
 >
-    nnoremap - :Switch<cr>
+    let g:switch_mapping = "-"
+<
+To avoid the default mapping completely, set the variable to an empty string:
+>
+    let g:switch_mapping = ""
 <
 See |switch-customization| below for information on how to create several
 mappings with different definitions.
@@ -451,6 +458,18 @@ String style (g:switch_builtins.scala_string):
 
 ==============================================================================
 SETTINGS                                                       *switch-settings*
+
+                                                              *g:switch_mapping*
+>
+    let g:switch_mapping = '-'
+<
+
+Default value: "gs"
+
+This variable is the default mapping the plugin will use. Set it to "" to
+avoid setting a default mapping. You can then use the |:Switch| command, or
+create a mapping manually.
+
 
                                                           *g:switch_definitions*
 >
