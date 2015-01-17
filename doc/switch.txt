@@ -210,8 +210,8 @@ You could also use a separate mapping for that.
 
 Separate mappings ~
 
-While it was recommended to define a mapping for |:Switch|, you could actually
-define several mappings with your own custom definitions:
+While there's a default mapping for |:Switch|, you could actually define
+several mappings with your own custom definitions:
 >
     let g:variable_style_switch_definitions = [
         \   {

@@ -18,12 +18,22 @@ flag = true
 
 Then, upon executing `:Switch`, the "true" will turn into "false".
 
-It is highly recommended to map the `:Switch` command to a key. For example,
-to map it to "-", place the following in your .vimrc:
+There's a default mapping to trigger the command, `gs`. Note that this is
+already a Vim built-in, but it doesn't seem particularly useful.
+
+If you'd like to change the mapping, change the value of `g:switch_mapping`.
+For example, to map it to "-", place the following in your .vimrc:
 
 ``` vim
-nnoremap - :Switch<cr>
+let g:switch_mapping = "-"
 ```
+
+To avoid the default mapping completely, set the variable to an empty string:
+
+``` vim
+let g:switch_mapping = ""
+```
+
 See the "customization" section below for information on how to create several
 mappings with different definitions.
 
@@ -184,8 +194,8 @@ You could also use a separate mapping for that.
 
 ### Separate mappings
 
-While it was recommended to define a mapping for `:Switch`, you could actually
-define several mappings with your own custom definitions:
+While there's a default mapping for `:Switch`, you could actually define
+several mappings with your own custom definitions:
 
 ``` vim
 let g:variable_style_switch_definitions = [
