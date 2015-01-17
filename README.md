@@ -77,6 +77,9 @@ There are three main principles that the substition follows:
 
 ## Customization
 
+*Note: for more switches by the community, take a look at the
+[wiki](https://github.com/AndrewRadev/switch.vim/wiki)*
+
 There are two variables that hold the global definition list and the
 buffer-local definition list -- `g:switch_definitions` and
 `b:switch_definitions`, respectively. These contain the definitions for the
@@ -193,9 +196,6 @@ take a look at [this gist](https://gist.github.com/othree/5655583).
 You could also use a separate mapping for that.
 
 ### Separate mappings
-
-*Note: for more switches by the community, take a look at the
-[wiki](https://github.com/AndrewRadev/switch.vim/wiki)*
 
 While there's a default mapping for `:Switch`, you could actually define
 several mappings with your own custom definitions:
