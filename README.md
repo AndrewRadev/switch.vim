@@ -298,7 +298,12 @@ definitions with their patterns and replacements, look at the file
   ['one', 'two', 'three']
   %w(one two three)
   ```
-  (In this case, be careful to not have the cursor on one of the strings, or you'll trigger the string switch as seen above.)
+
+  ``` ruby
+  [:one, :two, :three]
+  %i(one two three)
+  ```
+  (In this case, be careful to not have the cursor on one of the strings/symbols, or you'll trigger the string switch as seen above.)
 
 ### PHP "echo" in tags:
 

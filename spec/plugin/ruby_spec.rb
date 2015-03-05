@@ -181,6 +181,14 @@ describe "ruby definitions" do
 
     vim.switch
     assert_file_contents "['one', 'two']"
+
+    set_file_contents "[:one, :two]"
+
+    vim.search('[').switch
+    assert_file_contents "%i(one two)"
+
+    vim.switch
+    assert_file_contents "[:one, :two]"
   end
 
   describe "(overrides)" do
