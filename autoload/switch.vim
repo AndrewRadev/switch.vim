@@ -9,9 +9,16 @@ function! switch#Switch(definitions)
       let mapping = switch#mapping#New(definition)
       let match   = mapping.Match()
 
-      " TODO figure out why IsNull is needed here
-      if !match.IsNull() && match.IsBetter(min_match)
-        let min_match = match
+      if !match.IsNull()
+        if g:switch_find_smallest_match
+          if match.IsBetter(min_match)
+            let min_match = match
+          endif
+        else
+          " no point in continuing
+          let min_match = match
+          break
+        endif
       endif
 
       unlet definition

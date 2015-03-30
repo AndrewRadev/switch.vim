@@ -10,6 +10,10 @@ if !exists('g:switch_mapping')
   let g:switch_mapping = 'gs'
 endif
 
+if !exists('g:switch_find_smallest_match')
+  let g:switch_find_smallest_match = 1
+endif
+
 let g:switch_builtins =
       \ {
       \   'ampersands': ['&&', '||'],

@@ -97,6 +97,11 @@ There are three main principles that the substition follows:
    different way, the definition list should be redefined by the user -- see
    |switch-customization|.
 
+If you don't like the "smallest match" algorithm described on top, and you'd
+rather just attempt all matches in order, set the value of
+|g:switch_find_smallest_match| to 0.
+
+
 ==============================================================================
 CUSTOMIZATION                                             *switch-customization*
 
@@ -535,6 +540,15 @@ If this variable is set, no builtins will be set by the plugin. This might be
 useful to avoid any surprising switch definitions outside of your control. You
 can still set your own definitions, of course, and you can re-use some
 built-ins by taking them from the |g:switch_builtins| dict.
+
+
+                                                  *g:switch_find_smallest_match*
+>
+    let g:switch_find_smallest_match = 0
+<
+This variable controls whether the plugin will attempt to find the smallest
+match for the area under the cursor. If it's set to 0, all the different
+matches will simply be attempted in the order they're defined.
 
 
 ==============================================================================
