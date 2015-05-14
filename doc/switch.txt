@@ -413,6 +413,14 @@ Pointer dots/arrows (g:switch_builtins.cpp_pointer):
     Object* foo = bar->baz;
 <
 
+Javascript ~
+
+Function definitions (g:switch_builtins.javascript_function)
+>
+    function example(one, two) { }
+    var example = function(one, two) { }
+<
+
 Coffeescript ~
 
 Arrows (g:switch_builtins.coffee_arrow):
