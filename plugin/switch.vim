@@ -152,6 +152,13 @@ autocmd FileType haml let b:switch_definitions =
       \   g:switch_builtins.haml_tag_type,
       \ ]
 
+autocmd FileType slim let b:switch_definitions =
+      \ [
+      \   g:switch_builtins.ruby_if_clause,
+      \   g:switch_builtins.ruby_hash_style,
+      \   g:switch_builtins.haml_tag_type,
+      \ ]
+
 autocmd FileType php let b:switch_definitions =
       \ [
       \   g:switch_builtins.php_echo,

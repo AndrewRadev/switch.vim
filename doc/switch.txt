@@ -378,7 +378,7 @@ Hash style (g:switch_builtins.ruby_hash_style):
     <% foo = { one: 'two' } %>
 <
 
-Haml ~
+Haml/Slim ~
 
 If-clauses (g:switch_builtins.ruby_if_clause):
 >
