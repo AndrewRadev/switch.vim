@@ -29,6 +29,10 @@ let g:switch_builtins =
       \     ':\(\k\+\)\s*=>\s*': '\1: ',
       \     '\<\(\k\+\): ':      ':\1 => ',
       \   },
+      \   'ruby_lambda': {
+      \     'lambda { |\([^|]\+\)|': '->(\1) {',
+      \     '->(\([^)]\+\)) {': 'lambda { |\1|'
+      \   },
       \   'ruby_if_clause': {
       \     'if true or (\(.*\))':          'if false and (\1)',
       \     'if false and (\(.*\))':        'if \1',
@@ -167,6 +171,7 @@ autocmd FileType php let b:switch_definitions =
 autocmd FileType ruby let b:switch_definitions =
       \ [
       \   g:switch_builtins.ruby_hash_style,
+      \   g:switch_builtins.ruby_lambda,
       \   g:switch_builtins.ruby_if_clause,
       \   g:switch_builtins.rspec_should,
       \   g:switch_builtins.rspec_expect,

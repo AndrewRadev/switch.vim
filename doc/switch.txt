@@ -290,6 +290,12 @@ Hash style (g:switch_builtins.ruby_hash_style):
     foo = { one: 'two' }
 <
 
+Lambdas (g:switch_builtins.ruby_lambda):
+>
+    lambda { |x, y| whatever(x, y) }
+    ->(x, y) { whatever(x, y) }
+<
+
 If-clauses (g:switch_builtins.ruby_if_clause):
 >
     if predicate?

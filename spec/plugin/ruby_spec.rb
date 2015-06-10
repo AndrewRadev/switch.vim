@@ -72,6 +72,14 @@ describe "ruby definitions" do
     assert_file_contents ':foo => bar'
   end
 
+  specify "lambdas" do
+    set_file_contents 'lambda { |x, y| whatever(x, y) }'
+    vim.switch
+    assert_file_contents '->(x, y) { whatever(x, y) }'
+    vim.switch
+    assert_file_contents 'lambda { |x, y| whatever(x, y) }'
+  end
+
   specify "rspec should/should_not" do
     set_file_contents '1.should eq 1'
 
