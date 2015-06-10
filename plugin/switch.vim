@@ -99,8 +99,8 @@ let g:switch_builtins =
       \     '\(\k\+\)->': '\1.',
       \   },
       \   'javascript_function': {
-      \     'function \(\k\+\)(':       'var \1 = function(',
-      \     'var \(\k\+\) = function(': 'function \1(',
+      \     'function \(\k\+\)(':              'var \1 = function(',
+      \     '\%(var \)\=\(\k\+\) = function(': 'function \1(',
       \   },
       \   'coffee_arrow': {
       \     '^\(.*\)->': '\1=>',
