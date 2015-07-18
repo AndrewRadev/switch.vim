@@ -398,13 +398,6 @@ If-clauses (g:switch_builtins.ruby_if_clause):
       Hello, World!
 <
 
-Tag type (g:switch_builtins.haml_tag_type):
->
-    - something
-    -# something
-    = something
-<
-
 Hash style (g:switch_builtins.ruby_hash_style):
 >
     %a{:href => '/example'}

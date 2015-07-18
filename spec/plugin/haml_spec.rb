@@ -44,12 +44,4 @@ describe "haml definitions" do
         Hello, World!
     EOF
   end
-
-  specify "tag type" do
-    set_file_contents '= something'
-
-    vim.switch; assert_file_contents '- something'
-    vim.switch; assert_file_contents '-# something'
-    vim.switch; assert_file_contents '= something'
-  end
 end
