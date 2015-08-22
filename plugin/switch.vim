@@ -30,8 +30,10 @@ let g:switch_builtins =
       \     '\<\(\k\+\): ':      ':\1 => ',
       \   },
       \   'ruby_lambda': {
-      \     'lambda { |\([^|]\+\)|': '->(\1) {',
-      \     '->(\([^)]\+\)) {': 'lambda { |\1|'
+      \     'lambda\s*{\s*|\([^|]\+\)|': '->(\1) {',
+      \     '->\s*(\([^)]\+\))\s*{': 'lambda { |\1|',
+      \     'lambda\s*{': '-> {',
+      \     '->\s*{': 'lambda {'
       \   },
       \   'ruby_if_clause': {
       \     'if true or (\(.*\))':          'if false and (\1)',
