@@ -207,20 +207,20 @@ command! Switch call s:Switch()
 function! s:Switch()
   let definitions = []
 
-  if !exists('g:switch_no_builtins')
-    let definitions = extend(definitions, g:switch_definitions)
-  endif
-
   if exists('g:switch_custom_definitions')
     call extend(definitions, g:switch_custom_definitions)
   endif
 
-  if exists('b:switch_definitions') && !exists('b:switch_no_builtins')
-    call extend(definitions, b:switch_definitions)
+  if !exists('g:switch_no_builtins')
+    let definitions = extend(definitions, g:switch_definitions)
   endif
 
   if exists('b:switch_custom_definitions')
     call extend(definitions, b:switch_custom_definitions)
+  endif
+
+  if exists('b:switch_definitions') && !exists('b:switch_no_builtins')
+    call extend(definitions, b:switch_definitions)
   endif
 
   call switch#Switch(definitions)
