@@ -90,24 +90,34 @@ describe "ruby definitions" do
     assert_file_contents '1.should eq 1'
   end
 
-  specify "rspec be_true/be_false" do
-    set_file_contents 'value.should be_true'
+  specify "rspec be_truthy/be_falsey" do
+    set_file_contents 'value.should be_truthy'
 
-    vim.search('be_true').switch
-    assert_file_contents 'value.should be_false'
+    vim.search('be_truthy').switch
+    assert_file_contents 'value.should be_falsey'
 
     vim.switch
-    assert_file_contents 'value.should be_true'
+    assert_file_contents 'value.should be_truthy'
 
     vim.search('value').switch
-    assert_file_contents 'value.should be_true'
+    assert_file_contents 'value.should be_truthy'
   end
 
-  specify "rspec expect(...).to/to_not" do
+  specify "rspec .to/to_not" do
+    set_file_contents 'expect { value }.to change(foo).to(bar)'
+
+    vim.search('to').switch
+    assert_file_contents 'expect { value }.not_to change(foo).to(bar)'
+
+    vim.switch
+    assert_file_contents 'expect { value }.to change(foo).to(bar)'
+  end
+
+  specify "rspec expect(...).to/not_to" do
     set_file_contents 'expect(value).to be_present'
 
     vim.search('expect').switch
-    assert_file_contents 'expect(value).to_not be_present'
+    assert_file_contents 'expect(value).not_to be_present'
 
     vim.switch
     assert_file_contents 'expect(value).to be_present'
@@ -142,20 +152,6 @@ describe "ruby definitions" do
         puts 'Hello, World!'
       end
     EOF
-  end
-
-  specify "tap" do
-    set_file_contents 'bar = user.comments.map(&:author).name'
-
-    vim.search('comments').switch
-    assert_file_contents 'bar = user.tap { |o| puts o.inspect }.comments.map(&:author).name'
-
-    vim.switch
-    assert_file_contents 'bar = user.comments.map(&:author).name'
-
-    set_file_contents 'bar = user.tap { |o| puts o.to_sql }.comments.map(&:author).name'
-    vim.search('tap').switch
-    assert_file_contents 'bar = user.comments.map(&:author).name'
   end
 
   specify "string type" do

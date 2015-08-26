@@ -40,10 +40,6 @@ let g:switch_builtins =
       \     'if false and (\(.*\))':        'if \1',
       \     'if \%(true\|false\)\@!\(.*\)': 'if true or (\1)',
       \   },
-      \   'ruby_tap': {
-      \     '\.\%(tap\)\@!\(\k\+\)':   '.tap { |o| puts o.inspect }.\1',
-      \     '\.tap { |o| \%(.\{-}\) }': '',
-      \   },
       \   'ruby_string': {
       \     '"\(\k\+\)"':                '''\1''',
       \     '''\(\k\+\)''':              ':\1',
@@ -77,10 +73,16 @@ let g:switch_builtins =
       \   },
       \   'rspec_should': ['should ', 'should_not '],
       \   'rspec_expect': {
-      \     '\(expect(.*)\.to\) ':     '\1_not ',
-      \     '\(expect(.*)\.to\)_not ': '\1 ',
+      \     '\(expect(.*)\)\.to ':     '\1.not_to ',
+      \     '\(expect(.*)\)\.to_not ': '\1.to ',
+      \     '\(expect(.*)\)\.not_to ': '\1.to ',
       \   },
-      \   'rspec_be_true_false': ['be_true', 'be_false'],
+      \   'rspec_to': {
+      \     '\.to ':     '.not_to ',
+      \     '\.not_to ': '.to ',
+      \     '\.to_not ': '.to ',
+      \   },
+      \   'rspec_be_truthy_falsey': ['be_truthy', 'be_falsey'],
       \   'eruby_if_clause': {
       \     '<% if true or (\(.*\)) %>':          '<% if false and (\1) %>',
       \     '<% if false and (\(.*\)) %>':        '<% if \1 %>',
@@ -170,8 +172,8 @@ autocmd FileType ruby let b:switch_definitions =
       \   g:switch_builtins.ruby_if_clause,
       \   g:switch_builtins.rspec_should,
       \   g:switch_builtins.rspec_expect,
-      \   g:switch_builtins.rspec_be_true_false,
-      \   g:switch_builtins.ruby_tap,
+      \   g:switch_builtins.rspec_to,
+      \   g:switch_builtins.rspec_be_truthy_falsey,
       \   g:switch_builtins.ruby_string,
       \   g:switch_builtins.ruby_short_blocks,
       \   g:switch_builtins.ruby_array_shorthand,
