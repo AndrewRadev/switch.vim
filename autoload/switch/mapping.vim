@@ -4,19 +4,39 @@ let s:type_dict = type({})
 " Constructor:
 " ============
 
-function! switch#mapping#New(definition)
+function! switch#mapping#Process(definition)
   if type(a:definition) == s:type_list
-    return s:NewListMapping(a:definition)
+    return s:ProcessListMapping(a:definition)
   elseif type(a:definition) == s:type_dict
-    return s:NewDictMapping(a:definition)
+    return s:ProcessDictMapping(a:definition)
   endif
 endfunction
 
-function! s:NewListMapping(definition)
-  return s:NewDictMapping(s:MakeDict(a:definition))
+function! s:ProcessListMapping(mapping)
+  let mapping       = a:mapping
+  let index         = 0
+  let len           = len(mapping)
+  let dict_mappings = []
+
+  for string in mapping
+    let next_index = index + 1
+    if next_index >= len
+      let next_index = 0
+    endif
+
+    let dict_mapping          = {}
+    let pattern               = '\V'.string.'\m'
+    let replacement           = mapping[next_index]
+    let dict_mapping[pattern] = replacement
+    let index                 = next_index
+
+    let dict_mappings += s:ProcessDictMapping(dict_mapping)
+  endfor
+
+  return dict_mappings
 endfunction
 
-function! s:NewDictMapping(definition)
+function! s:ProcessDictMapping(definition)
   let mapping = {
         \ 'definitions': a:definition,
         \
@@ -24,7 +44,7 @@ function! s:NewDictMapping(definition)
         \ 'Replace': function('switch#mapping#Replace'),
         \ }
 
-  return mapping
+  return [mapping]
 endfunction
 
 " Methods:
@@ -128,31 +148,6 @@ endfunction
 
 " Private:
 " ========
-
-" Transforms the given list of words to a dictionary mapping. This function
-" may be removed if the word-list logic starts to differ significantly from
-" the pattern-replacement-dict one.
-"
-function! s:MakeDict(mapping)
-  let mapping = a:mapping
-  let index   = 0
-  let len     = len(mapping)
-  let dict    = {}
-
-  for string in mapping
-    let next_index = index + 1
-    if next_index >= len
-      let next_index = 0
-    endif
-
-    let pattern       = '\V'.string.'\m'
-    let replacement   = mapping[next_index]
-    let dict[pattern] = replacement
-    let index         = next_index
-  endfor
-
-  return dict
-endfunction
 
 " Limits the given pattern to only work in the given [start, end) interval by
 " anchoring it to these column positions.

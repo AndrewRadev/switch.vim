@@ -4,10 +4,10 @@ function! switch#Switch(definitions)
   try
     let saved_cursor = getpos('.')
     let min_match    = switch#match#Null()
+    let definitions  = switch#util#FlatMap(a:definitions, 'switch#mapping#Process(v:val)')
 
-    for definition in a:definitions
-      let mapping = switch#mapping#New(definition)
-      let match   = mapping.Match()
+    for mapping in definitions
+      let match = mapping.Match()
 
       if !match.IsNull()
         if g:switch_find_smallest_match
@@ -20,8 +20,6 @@ function! switch#Switch(definitions)
           break
         endif
       endif
-
-      unlet definition
     endfor
 
     if !min_match.IsNull()
