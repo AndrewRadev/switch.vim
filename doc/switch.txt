@@ -270,7 +270,6 @@ Boolean conditions (g:switch_builtins.ampersands):
     foo && bar
     foo || bar
 <
-
 Boolean constants (g:switch_builtins.true_false):
 >
     flag = true
@@ -289,13 +288,11 @@ Hash style (g:switch_builtins.ruby_hash_style):
     foo = { :one => 'two' }
     foo = { one: 'two' }
 <
-
 Lambdas (g:switch_builtins.ruby_lambda):
 >
     lambda { |x, y| whatever(x, y) }
     ->(x, y) { whatever(x, y) }
 <
-
 If-clauses (g:switch_builtins.ruby_if_clause):
 >
     if predicate?
@@ -310,17 +307,25 @@ If-clauses (g:switch_builtins.ruby_if_clause):
       puts 'Hello, World!'
     end
 <
-
-Rspec should/should_not (g:switch_builtins.rspec_should):
+RSpec should/should_not (g:switch_builtins.rspec_should):
 >
     1.should eq 1
     1.should_not eq 1
 <
-
-Ruby tap (g:switch_builtins.ruby_tap):
+RSpec expect (with the cursor on "expect") (g:switch_builtins.rspec_expect):
 >
-    foo = user.comments.map(&:author).first
-    foo = user.comments.tap { |o| puts o.inspect }.map(&:author).first
+    expect(1).to eq 1
+    expect(1).not_to eq 1
+<
+RSpec to_/not_to (with the cursor on "to/not_to") (g:switch_builtins.rspec_to):
+>
+    expect { raise "OK" }.to raise_error
+    expect { raise "OK" }.not_to raise_error
+<
+RSpec be_truthy/be_falsey (g:switch_builtins.rspec_be_truthy_falsey):
+>
+    expect(true).to be_truthy
+    expect(true).to be_falsey
 <
 Ruby string style (g:switch_builtins.ruby_string):
 >
@@ -370,14 +375,12 @@ If-clauses (g:switch_builtins.eruby_if_clause):
       <%= 'Hello, World!' %>
     <% end %>
 >
-
 Tag type (g:switch_builtins.eruby_tag_type):
 >
     <% something %>
     <%# something %>
     <%= something %>
 <
-
 Hash style (g:switch_builtins.ruby_hash_style):
 >
     <% foo = { :one => 'two' } %>
@@ -397,7 +400,6 @@ If-clauses (g:switch_builtins.ruby_if_clause):
     - if false and (predicate?)
       Hello, World!
 <
-
 Hash style (g:switch_builtins.ruby_hash_style):
 >
     %a{:href => '/example'}
