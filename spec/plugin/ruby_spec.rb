@@ -155,16 +155,16 @@ describe "ruby definitions" do
   end
 
   specify "string type" do
-    set_file_contents 'foo = "bar"'
+    set_file_contents 'foo = "bar?"'
 
     vim.search('bar').switch
-    assert_file_contents "foo = 'bar'"
+    assert_file_contents "foo = 'bar?'"
 
     vim.switch
-    assert_file_contents "foo = :bar"
+    assert_file_contents "foo = :bar?"
 
     vim.switch
-    assert_file_contents 'foo = "bar"'
+    assert_file_contents 'foo = "bar?"'
   end
 
   specify "short blocks" do
