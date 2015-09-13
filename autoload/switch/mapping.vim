@@ -147,7 +147,7 @@ function! s:ProcessListMapping(definitions)
 
   for [first, second] in s:LoopedListItems(a:definitions)
     let dict_mapping          = {}
-    let pattern               = '\V'.first.'\m'
+    let pattern               = '\C\V'.first.'\m'
     let replacement           = second
     let dict_mapping[pattern] = replacement
 
