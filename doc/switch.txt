@@ -8,6 +8,7 @@ CONTENTS                                                *switch* *switch-content
     Customization...............................: |switch-customization|
     Builtins....................................: |switch-builtins|
     Settings....................................: |switch-settings|
+    Internals...................................: |switch-internals|
     Similar plugins.............................: |switch-similar-plugins|
     Issues......................................: |switch-issues|
 
@@ -127,8 +128,25 @@ will be changed to "bar". If it sees "bar", it will change it to "baz", and
 "baz" would be turned into "foo". This is the simple case of a definition that
 is implemented (in a slightly different way) by the "toggle.vim" plugin.
 
-The more complicated (and more powerful) way to define a switch pattern is by
-using a Dict.
+You might want this to work for different capitalizations, like with `true`
+and `True` and `TRUE`. While you could use the more complicated dict
+definition, a simple way to tackle this is to use the `switch#NormalizedCase`
+helper:
+>
+    let g:switch_custom_definitions =
+        \ [
+        \   switch#NormalizedCase(['one', 'two'])
+        \ ]
+<
+This would switch between "one" and "two", between "One" and "Two", and
+between "ONE" and "TWO". This is not the default, since you might want to
+change casing in your switches. See |switch-internals| for some information on
+the underlying data format if you'd like to use a different method to
+generate definitions (like, say, loading JSON).
+
+Leaving lists aside, the more complicated (and more powerful) way to define a
+switch pattern is by using a Dict. In fact, a list definition is processed
+into three dict definitions, one for each pair of switches.
 
 Dict definitions ~
 >
@@ -558,6 +576,56 @@ built-ins by taking them from the |g:switch_builtins| dict.
 This variable controls whether the plugin will attempt to find the smallest
 match for the area under the cursor. If it's set to 0, all the different
 matches will simply be attempted in the order they're defined.
+
+==============================================================================
+INTERNALS                                                     *switch-internals*
+
+All List definitions are transformed into Dict definitions. So, for instance,
+if you have this kind of list:
+>
+    let g:switch_custom_definitions =
+        \ [
+        \   ['foo', 'bar', 'baz']
+        \ ]
+<
+This is exactly equivalent to:
+>
+    let g:switch_custom_definitions =
+        \ [
+        \   {'\Vfoo\m': 'bar'},
+        \   {'\Vbar\m': 'baz'},
+        \   {'\Vbaz\m': 'foo'},
+        \ ]
+<
+The `switch#NormalizedCase` helper prepares a different transformation. If we
+have a list like this:
+>
+    let g:switch_custom_definitions =
+        \ [
+        \   switch#NormalizedCase(['one', 'two'])
+        \ ]
+<
+That's first transformed into this format:
+>
+    let g:switch_custom_definitions =
+        \ [
+        \   {
+        \     '_type': 'normalized_case',
+        \     '_definition': ['one', 'two'],
+        \   }
+        \ ]
+<
+Which then the plugin recognizes as a special case and processes like this:
+>
+    let g:switch_custom_definitions =
+        \ [
+        \   {'\Cone': 'two'}, {'\Ctwo': 'one'},
+        \   {'\COne': 'Two'}, {'\CTwo': 'One'},
+        \   {'\CONE': 'TWO'}, {'\CTWO': 'ONE'},
+        \ ]
+<
+The plan is to have multiple different `_type` parameters which determine what
+kind of processing to perform on the matchers.
 
 
 ==============================================================================

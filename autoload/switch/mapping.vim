@@ -8,43 +8,19 @@ function! switch#mapping#Process(definition)
   if type(a:definition) == s:type_list
     return s:ProcessListMapping(a:definition)
   elseif type(a:definition) == s:type_dict
-    return s:ProcessDictMapping(a:definition)
-  endif
-endfunction
-
-function! s:ProcessListMapping(mapping)
-  let mapping       = a:mapping
-  let index         = 0
-  let len           = len(mapping)
-  let dict_mappings = []
-
-  for string in mapping
-    let next_index = index + 1
-    if next_index >= len
-      let next_index = 0
+    if has_key(a:definition, '_type') && has_key(a:definition, '_definition')
+      if a:definition._type == 'default'
+        return s:ProcessDictMapping(a:definition._definition)
+      elseif a:definition._type == 'normalized_case'
+        return s:ProcessNormalizedCaseMapping(a:definition._definition)
+      else
+        echomsg "Unknown definition type: ".a:definition._type
+        return []
+      endif
+    else
+      return s:ProcessDictMapping(a:definition)
     endif
-
-    let dict_mapping          = {}
-    let pattern               = '\V'.string.'\m'
-    let replacement           = mapping[next_index]
-    let dict_mapping[pattern] = replacement
-    let index                 = next_index
-
-    let dict_mappings += s:ProcessDictMapping(dict_mapping)
-  endfor
-
-  return dict_mappings
-endfunction
-
-function! s:ProcessDictMapping(definition)
-  let mapping = {
-        \ 'definitions': a:definition,
-        \
-        \ 'Match':   function('switch#mapping#Match'),
-        \ 'Replace': function('switch#mapping#Replace'),
-        \ }
-
-  return [mapping]
+  endif
 endfunction
 
 " Methods:
@@ -164,4 +140,86 @@ function! s:LimitPattern(pattern, start, end)
   endif
 
   return pattern
+endfunction
+
+function! s:ProcessListMapping(definitions)
+  let dict_mappings = []
+
+  for [first, second] in s:LoopedListItems(a:definitions)
+    let dict_mapping          = {}
+    let pattern               = '\V'.first.'\m'
+    let replacement           = second
+    let dict_mapping[pattern] = replacement
+
+    let dict_mappings += s:ProcessDictMapping(dict_mapping)
+  endfor
+
+  return dict_mappings
+endfunction
+
+function! s:ProcessDictMapping(definition)
+  let mapping = {
+        \ 'definitions': a:definition,
+        \
+        \ 'Match':   function('switch#mapping#Match'),
+        \ 'Replace': function('switch#mapping#Replace'),
+        \ }
+
+  return [mapping]
+endfunction
+
+function! s:ProcessNormalizedCaseMapping(definition)
+  if type(a:definition) != s:type_list
+    echoerr "Normalized case mappings work only for list definitions"
+    return []
+  endif
+
+  let dict_mappings = []
+
+  for [first, second] in s:LoopedListItems(a:definition)
+    let m = {}
+    let m[first] = second
+    call add(dict_mappings, m)
+  endfor
+
+  let mappings = []
+  for entry in dict_mappings
+    for [key, value] in items(entry)
+      let key   = tolower(key)
+      let value = tolower(value)
+
+      let m = {}
+      let m['\C'.key] = value
+      let mappings += s:ProcessDictMapping(m)
+
+      let m = {}
+      let m['\C'.toupper(key)] = toupper(value)
+      let mappings += s:ProcessDictMapping(m)
+
+      let m = {}
+      let m['\C'.switch#util#Capitalize(key)] = switch#util#Capitalize(value)
+      let mappings += s:ProcessDictMapping(m)
+    endfor
+  endfor
+
+  return mappings
+endfunction
+
+function! s:LoopedListItems(list)
+  let index = 0
+  let len   = len(a:list)
+  let items = []
+
+  for entry in a:list
+    let next_index = index + 1
+    if next_index >= len
+      let next_index = 0
+    endif
+
+    call add(items, [entry, a:list[next_index]])
+
+    let index = next_index
+  endfor
+
+  return items
 endfunction

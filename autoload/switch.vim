@@ -32,3 +32,10 @@ function! switch#Switch(definitions)
     call setpos('.', saved_cursor)
   endtry
 endfunction
+
+function! switch#NormalizedCase(definition)
+  return {
+        \ '_type': 'normalized_case',
+        \ '_definition': a:definition,
+        \ }
+endfunction
