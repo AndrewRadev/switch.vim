@@ -4,7 +4,7 @@ function! switch#Switch(definitions)
   try
     let saved_cursor = getpos('.')
     let min_match    = switch#match#Null()
-    let definitions  = switch#util#FlatMap(a:definitions, 'switch#mapping#Process(v:val)')
+    let definitions  = switch#util#FlatMap(copy(a:definitions), 'switch#mapping#Process(v:val)')
 
     for mapping in definitions
       let match = mapping.Match()
