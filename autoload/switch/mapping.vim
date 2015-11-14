@@ -4,9 +4,9 @@ let s:type_dict = type({})
 " Constructor:
 " ============
 
-function! switch#mapping#Process(definition)
+function! switch#mapping#Process(definition, options)
   if type(a:definition) == s:type_list
-    return s:ProcessListMapping(a:definition)
+    return s:ProcessListMapping(a:definition, a:options)
   elseif type(a:definition) == s:type_dict
     if has_key(a:definition, '_type') && has_key(a:definition, '_definition')
       if a:definition._type == 'default'
@@ -142,10 +142,16 @@ function! s:LimitPattern(pattern, start, end)
   return pattern
 endfunction
 
-function! s:ProcessListMapping(definitions)
+function! s:ProcessListMapping(definitions, options)
   let dict_mappings = []
 
-  for [first, second] in s:LoopedListItems(a:definitions)
+  if has_key(a:options, 'reverse') && a:options.reverse
+    let definitions = reverse(copy(a:definitions))
+  else
+    let definitions = a:definitions
+  endif
+
+  for [first, second] in s:LoopedListItems(definitions)
     let dict_mapping          = {}
     let pattern               = '\C\V'.first.'\m'
     let replacement           = second

@@ -17,6 +17,12 @@ Vimrunner::RSpec.configure do |config|
       self
     end
 
+    def vim.switch_reverse
+      command 'SwitchReverse'
+      write
+      self
+    end
+
     vim
   end
 end

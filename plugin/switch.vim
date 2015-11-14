@@ -10,6 +10,10 @@ if !exists('g:switch_mapping')
   let g:switch_mapping = 'gs'
 endif
 
+if !exists('g:switch_reverse_mapping')
+  let g:switch_reverse_mapping = ''
+endif
+
 if !exists('g:switch_find_smallest_match')
   let g:switch_find_smallest_match = 1
 endif
@@ -207,6 +211,19 @@ autocmd FileType scala let b:switch_definitions =
 
 command! Switch call s:Switch()
 function! s:Switch()
+  let definitions = s:GetDefinitions()
+  call switch#Switch(definitions, {})
+  silent! call repeat#set(":Switch\<cr>")
+endfunction
+
+command! SwitchReverse call s:SwitchReverse()
+function! s:SwitchReverse()
+  let definitions = s:GetDefinitions()
+  call switch#Switch(definitions, {'reverse': 1})
+  silent! call repeat#set(":Switch\<cr>")
+endfunction
+
+function! s:GetDefinitions()
   let definitions = []
 
   if exists('g:switch_custom_definitions')
@@ -225,12 +242,15 @@ function! s:Switch()
     call extend(definitions, b:switch_definitions)
   endif
 
-  call switch#Switch(definitions)
-  silent! call repeat#set(":Switch\<cr>")
+  return definitions
 endfunction
 
 if g:switch_mapping != ''
   exe 'nnoremap '.g:switch_mapping.' :Switch<cr>'
+endif
+
+if g:switch_reverse_mapping != ''
+  exe 'nnoremap '.g:switch_reverse_mapping.' :SwitchReverse<cr>'
 endif
 
 let &cpo = s:keepcpo

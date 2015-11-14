@@ -33,7 +33,7 @@ Another way is to simply copy all the essential directories inside the ~/.vim
 directory: plugin, autoload, doc.
 
 ==============================================================================
-USAGE                                                     *switch-usage* *:Switch*
+USAGE                                      *switch-usage* *:Switch* *:SwitchReverse*
 
 The main entry point of the plugin is a single command, |:Switch|. When the
 command is executed, the plugin looks for one of a few specific patterns under
@@ -58,6 +58,20 @@ To avoid the default mapping completely, set the variable to an empty string:
 <
 See |switch-customization| below for information on how to create several
 mappings with different definitions.
+
+The same holds true for the secondary command, |:SwitchReverse|. For
+definitions that are built as lists (for example, ["one", "two", "three"]),
+this command works the same way in the opposite direction. So, with the
+example definition, executing |:Switch| on "two" would result in "three", but
+executing |:SwitchReverse| on "two" would change it to "one.
+
+Again, for dictionary switches, this command will work exactly like |:Switch|.
+
+The mapping that controls the reverse switch is |g:switch_reverse_mapping|,
+and it's unset by default (no mapping is defined).
+>
+    let g:switch_reverse_mapping = '+'
+<
 
 There are three main principles that the substition follows:
 
@@ -505,8 +519,19 @@ This variable is the default mapping the plugin will use. Set it to "" to
 avoid setting a default mapping. You can then use the |:Switch| command, or
 create a mapping manually.
 
+                                                      *g:switch_reverse_mapping*
+>
+    let g:switch_reverse_mapping = '+'
+<
 
-                                                          *g:switch_definitions*
+Default value: ""
+
+This variable is the mapping to switch "in reverse", whenever that makes sense
+(only for list definitions). This is not set by default, so no mapping is
+defined. You can use |:SwitchReverse| even without the mapping.
+
+
+                                                   *g:switch_custom_definitions*
 >
     g:switch_custom_definitions
 <
@@ -525,9 +550,9 @@ Putting the following in .vimrc would make the plugin switch between "on" and
           \ ]
 <
 
-                                                          *b:switch_definitions*
+                                                  *b:switch_custom_definitions*
 >
-    b:switch_definitions
+    b:switch_custom_definitions
 <
 
 This variable contains your custom buffer-local switch definitions.
@@ -537,7 +562,7 @@ Example:
 Putting the following in ftplugin/html.vim would switch between single-line
 <div> and <span> tags, though it probably won't work in complicated cases.
 >
-    let g:switch_custom_definitions =
+    let b:switch_custom_definitions =
           \ [
           \   {
           \     '<div\(.\{-}\)>\(.\{-}\)</div>': '<span\1>\2</span>',
