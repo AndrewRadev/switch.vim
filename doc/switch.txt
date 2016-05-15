@@ -307,7 +307,7 @@ Boolean constants (g:switch_builtins.true_false):
     flag = true
     flag = false
 <
-Capitalized boolean constants (g:switch_builtins.capitalized_true_false):
+Capitalized boolean constants (g:switch_builtins.capital_true_false):
 >
     flag = True
     flag = False
