@@ -7,11 +7,11 @@ let s:keepcpo = &cpo
 set cpo&vim
 
 if !exists('g:switch_mapping')
-  let g:switch_mapping = 'gs'
+  let g:switch_mapping = '<C-A>'
 endif
 
 if !exists('g:switch_reverse_mapping')
-  let g:switch_reverse_mapping = ''
+  let g:switch_reverse_mapping = '<C-X>'
 endif
 
 if !exists('g:switch_find_smallest_match')
@@ -212,14 +212,18 @@ autocmd FileType scala let b:switch_definitions =
 command! Switch call s:Switch()
 function! s:Switch()
   let definitions = s:GetDefinitions()
-  call switch#Switch(definitions, {})
+  if !switch#Switch(definitions, {})
+    exe "normal! \<C-A>"
+  endif
   silent! call repeat#set(":Switch\<cr>")
 endfunction
 
 command! SwitchReverse call s:SwitchReverse()
 function! s:SwitchReverse()
   let definitions = s:GetDefinitions()
-  call switch#Switch(definitions, {'reverse': 1})
+  if !switch#Switch(definitions, {'reverse': 1})
+    exe "normal! \<C-X>"
+  endif
   silent! call repeat#set(":Switch\<cr>")
 endfunction
 
