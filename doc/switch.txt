@@ -453,6 +453,11 @@ Function definitions (g:switch_builtins.javascript_function)
     function example(one, two) { }
     var example = function(one, two) { }
 <
+ES6-style arrow functions (g:switch_builtins.javascript_arrow_function)
+>
+    var example = function(one, two) { }
+    var example = (one, two) => { }
+<
 
 Coffeescript ~
 

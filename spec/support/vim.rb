@@ -10,7 +10,7 @@ module Support
     end
 
     def assert_file_contents(string)
-      file_contents.should eq normalize_string_indent(string)
+      expect(file_contents).to eq normalize_string_indent(string)
     end
   end
 end

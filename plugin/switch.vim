@@ -109,6 +109,12 @@ let g:switch_builtins =
       \     'function \(\k\+\)(':              'var \1 = function(',
       \     '\%(var \)\=\(\k\+\) = function(': 'function \1(',
       \   },
+      \   'javascript_arrow_function': {
+      \     'function(\([^()]\{-}\))\s*{': '(\1) => {',
+      \     'function(\(\k\+\))\s*{':      '\1 => {',
+      \     '(\([^()]\{-}\))\s*=>\s*{':    'function(\1) {',
+      \     '\(\k\+\)\s*=>\s*{':           'function(\1) {',
+      \   },
       \   'coffee_arrow': {
       \     '^\(.*\)->': '\1=>',
       \     '^\(.*\)=>': '\1->',
@@ -191,6 +197,7 @@ autocmd FileType cpp let b:switch_definitions =
 autocmd FileType javascript let b:switch_definitions =
       \ [
       \   g:switch_builtins.javascript_function,
+      \   g:switch_builtins.javascript_arrow_function,
       \ ]
 
 autocmd FileType coffee let b:switch_definitions =

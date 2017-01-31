@@ -375,6 +375,19 @@ definitions with their patterns and replacements, look at the file
 Object* foo = bar.baz;
 Object* foo = bar->baz;
 ```
+### Javascript
+
+* Function definitions:
+  ``` javascript
+  function example(one, two) { }
+  var example = function(one, two) { }
+  ```
+
+* ES6-style arrow functions:
+  ``` javascript
+  var example = function(one, two) { }
+  var example = (one, two) => { }
+  ```
 
 ### Coffeescript arrows
 
