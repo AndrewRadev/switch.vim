@@ -110,10 +110,11 @@ let g:switch_builtins =
       \     '\%(var \)\=\(\k\+\) = function(': 'function \1(',
       \   },
       \   'javascript_arrow_function': {
-      \     'function(\([^()]\{-}\))\s*{': '(\1) => {',
-      \     'function(\(\k\+\))\s*{':      '\1 => {',
-      \     '(\([^()]\{-}\))\s*=>\s*{':    'function(\1) {',
-      \     '\(\k\+\)\s*=>\s*{':           'function(\1) {',
+      \     'function\s*()\s*{':                        '() => {',
+      \     'function\s*(\([^()]\{-},[^()]\{-}\))\s*{': '(\1) => {',
+      \     'function\s*(\(\k\+\))\s*{':                '\1 => {',
+      \     '(\([^()]\{-}\))\s*=>\s*{':                 'function(\1) {',
+      \     '\(\k\+\)\s*=>\s*{':                        'function(\1) {',
       \   },
       \   'coffee_arrow': {
       \     '^\(.*\)->': '\1=>',
