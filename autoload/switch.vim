@@ -1,10 +1,18 @@
-function! switch#Switch(definitions, options)
+function! switch#Switch(...)
+  if a:0 > 0
+    let options = a:1
+  else
+    let options = {}
+  endif
+
+  let definitions = s:GetDefinitions()
+
   silent! normal! zO
 
   try
     let saved_cursor = getpos('.')
     let min_match    = switch#match#Null()
-    let definitions  = switch#util#FlatMap(copy(a:definitions), 'switch#mapping#Process(v:val, '.string(a:options).')')
+    let definitions  = switch#util#FlatMap(definitions, 'switch#mapping#Process(v:val, '.string(options).')')
 
     for mapping in definitions
       let match = mapping.Match()
@@ -38,4 +46,26 @@ function! switch#NormalizedCase(definition)
         \ '_type': 'normalized_case',
         \ '_definition': a:definition,
         \ }
+endfunction
+
+function! s:GetDefinitions()
+  let definitions = []
+
+  if exists('g:switch_custom_definitions')
+    call extend(definitions, g:switch_custom_definitions)
+  endif
+
+  if !exists('g:switch_no_builtins')
+    let definitions = extend(definitions, g:switch_definitions)
+  endif
+
+  if exists('b:switch_custom_definitions')
+    call extend(definitions, b:switch_custom_definitions)
+  endif
+
+  if exists('b:switch_definitions') && !exists('b:switch_no_builtins')
+    call extend(definitions, b:switch_definitions)
+  endif
+
+  return definitions
 endfunction

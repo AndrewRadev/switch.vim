@@ -219,38 +219,14 @@ autocmd FileType scala let b:switch_definitions =
 
 command! Switch call s:Switch()
 function! s:Switch()
-  let definitions = s:GetDefinitions()
-  call switch#Switch(definitions, {})
+  call switch#Switch()
   silent! call repeat#set(":Switch\<cr>")
 endfunction
 
 command! SwitchReverse call s:SwitchReverse()
 function! s:SwitchReverse()
-  let definitions = s:GetDefinitions()
-  call switch#Switch(definitions, {'reverse': 1})
+  call switch#Switch({'reverse': 1})
   silent! call repeat#set(":Switch\<cr>")
-endfunction
-
-function! s:GetDefinitions()
-  let definitions = []
-
-  if exists('g:switch_custom_definitions')
-    call extend(definitions, g:switch_custom_definitions)
-  endif
-
-  if !exists('g:switch_no_builtins')
-    let definitions = extend(definitions, g:switch_definitions)
-  endif
-
-  if exists('b:switch_custom_definitions')
-    call extend(definitions, b:switch_custom_definitions)
-  endif
-
-  if exists('b:switch_definitions') && !exists('b:switch_no_builtins')
-    call extend(definitions, b:switch_definitions)
-  endif
-
-  return definitions
 endfunction
 
 if g:switch_mapping != ''
