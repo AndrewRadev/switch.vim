@@ -5,7 +5,11 @@ function! switch#Switch(...)
     let options = {}
   endif
 
-  let definitions = s:GetDefinitions()
+  if has_key(options, 'definitions')
+    let definitions = options.definitions
+  else
+    let definitions = s:GetDefaultDefinitions()
+  endif
 
   silent! normal! zO
 
@@ -48,7 +52,7 @@ function! switch#NormalizedCase(definition)
         \ }
 endfunction
 
-function! s:GetDefinitions()
+function! s:GetDefaultDefinitions()
   let definitions = []
 
   if exists('g:switch_custom_definitions')

@@ -211,7 +211,7 @@ let g:variable_style_switch_definitions = [
       \     },
       \   }
       \ ]
-nnoremap + :call switch#Switch(g:variable_style_switch_definitions)<cr>
+nnoremap + :call switch#Switch({'definitions': g:variable_style_switch_definitions})<cr>
 nnoremap - :Switch<cr>
 ```
 
@@ -219,6 +219,22 @@ With this, typing `-` would invoke the built-in switch definitions, while
 typing `+` would switch between camelcase and underscored variable styles.
 This may be particularly useful if you have several clashing switches on
 patterns that match similar things.
+
+### More complicated mappings
+
+By using the `switch#Switch()` function, you can also write more complicated
+mappings that check if a switch succeeded, and apply some fallback if it
+didn't. The function returns 1 for success and 0 for failure.
+
+For example, if you want to switch, or fall back to activating the
+[speeddating](https://github.com/tpope/vim-speeddating) plugin, you could map
+`<c-a>` and `<c-x>` like so:
+
+``` vim
+if !switch#Switch()               | speeddating#increment() | endif
+if !switch#Switch({'reverse': 1}) | speeddating#decrement() | endif
+```
+
 
 ## Builtins
 
