@@ -277,8 +277,10 @@ didn't. The function returns 1 for success and 0 for failure.
 For example, if you want to switch, or fall back to activating the
 "speeddating" plugin, you could map <c-a> and <c-x> like so:
 >
-    if !switch#Switch()               | speeddating#increment() | endif
-    if !switch#Switch({'reverse': 1}) | speeddating#decrement() | endif
+    nnoremap <c-a> :if !switch#Switch() <bar>
+          \ call speeddating#increment() <bar> endif<cr>
+    nnoremap <c-x> :if !switch#Switch({'reverse': 1}) <bar>
+          \ call speeddating#decrement() <bar> endif<cr>
 <
 
 Builtins ~

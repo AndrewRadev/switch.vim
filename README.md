@@ -231,8 +231,10 @@ For example, if you want to switch, or fall back to activating the
 `<c-a>` and `<c-x>` like so:
 
 ``` vim
-if !switch#Switch()               | speeddating#increment() | endif
-if !switch#Switch({'reverse': 1}) | speeddating#decrement() | endif
+nnoremap <c-a> :if !switch#Switch() <bar>
+      \ call speeddating#increment() <bar> endif<cr>
+nnoremap <c-x> :if !switch#Switch({'reverse': 1}) <bar>
+      \ call speeddating#decrement() <bar> endif<cr>
 ```
 
 
