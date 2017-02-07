@@ -230,11 +230,11 @@ function! s:SwitchReverse()
 endfunction
 
 if g:switch_mapping != ''
-  exe 'nnoremap '.g:switch_mapping.' :Switch<cr>'
+  exe 'nnoremap <silent> '.g:switch_mapping.' :Switch<cr>'
 endif
 
 if g:switch_reverse_mapping != ''
-  exe 'nnoremap '.g:switch_reverse_mapping.' :SwitchReverse<cr>'
+  exe 'nnoremap <silent> '.g:switch_reverse_mapping.' :SwitchReverse<cr>'
 endif
 
 let &cpo = s:keepcpo
