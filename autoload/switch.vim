@@ -16,7 +16,7 @@ function! switch#Switch(...)
   try
     let saved_cursor = getpos('.')
     let min_match    = switch#match#Null()
-    let definitions  = switch#util#FlatMap(definitions, 'switch#mapping#Process(v:val, '.string(options).')')
+    let definitions  = switch#util#FlatMap(copy(definitions), 'switch#mapping#Process(v:val, '.string(options).')')
 
     for mapping in definitions
       let match = mapping.Match()
