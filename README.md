@@ -75,6 +75,42 @@ There are three main principles that the substition follows:
    sense to prioritize one over the other. If it's needed to prioritize in a
    different way, the definition list should be redefined by the user.
 
+## Advanced usage
+
+Instead of using the `:Switch` and `:SwitchReverse` commands, you can use the
+autoloaded function `switch#Switch`. Calling it without any arguments is the
+same as calling the `:Switch` command:
+
+``` vim
+:call switch#Switch()
+" equivalent to:
+:Switch
+```
+
+However, you can also call the function with a |Dict| of options. Instead of
+`:SwitchReverse`, you can invoke it with the `reverse` option:
+
+``` vim
+:call switch#Switch({'reverse': 1})
+" or,
+:call switch#Switch({'reverse': v:true})
+" equivalent to:
+:SwitchReverse
+```
+
+The other option you can provide is `definitions` to set an explicit list of
+definitions that are different from the built-ins.
+
+``` vim
+:call switch#Switch({'definitions': list_of_definitions})
+```
+
+The `switch#Switch()` function returns 1 if it succeeded, and 0 if it failed.
+You can use the return value to decide if you'd like to apply some other mapping.
+
+See below in "Customization" for more details and examples on how to write
+use this function.
+
 ## Customization
 
 *Note: for more switches by the community, take a look at the

@@ -5,6 +5,7 @@ CONTENTS                                                *switch* *switch-content
 
     Installation................................: |switch-installation|
     Usage.......................................: |switch-usage|
+    Advanced usage..............................: |switch-advanced-usage|
     Customization...............................: |switch-customization|
     Builtins....................................: |switch-builtins|
     Settings....................................: |switch-settings|
@@ -116,6 +117,37 @@ If you don't like the "smallest match" algorithm described on top, and you'd
 rather just attempt all matches in order, set the value of
 |g:switch_find_smallest_match| to 0.
 
+
+==============================================================================
+ADVANCED USAGE                                           *switch-advanced-usage*
+
+Instead of using the `:Switch` and `:SwitchReverse` commands, you can use the
+autoloaded function `switch#Switch`. Calling it without any arguments is the
+same as calling the `:Switch` command:
+>
+    :call switch#Switch()
+    " equivalent to:
+    :Switch
+<
+However, you can also call the function with a |Dict| of options. Instead of
+`:SwitchReverse`, you can invoke it with the `reverse` option:
+>
+    :call switch#Switch({'reverse': 1})
+    " or,
+    :call switch#Switch({'reverse': v:true})
+    " equivalent to:
+    :SwitchReverse
+<
+The other option you can provide is `definitions` to set an explicit list of
+definitions that are different from the built-ins.
+>
+    :call switch#Switch({'definitions': list_of_definitions})
+<
+The `switch#Switch()` function returns 1 if it succeeded, and 0 if it failed.
+You can use the return value to decide if you'd like to apply some other mapping.
+
+See below in |switch-customization| for more details and examples on how to
+write use this function.
 
 ==============================================================================
 CUSTOMIZATION                                             *switch-customization*
