@@ -219,13 +219,13 @@ autocmd FileType scala let b:switch_definitions =
 
 command! Switch call s:Switch()
 function! s:Switch()
-  call switch#Switch()
+  silent call switch#Switch()
   silent! call repeat#set(":Switch\<cr>")
 endfunction
 
 command! SwitchReverse call s:SwitchReverse()
 function! s:SwitchReverse()
-  call switch#Switch({'reverse': 1})
+  silent call switch#Switch({'reverse': 1})
   silent! call repeat#set(":Switch\<cr>")
 endfunction
 
