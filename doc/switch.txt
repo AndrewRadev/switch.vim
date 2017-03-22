@@ -159,6 +159,16 @@ built-ins provided by the plugin. In order to add the switches you want, you
 should override |g:switch_custom_definitions| and
 |b:switch_custom_definitions| instead.
 
+Use the `g:` version of the variable for global definitions, and the `b:`
+version for specific filetypes. For instance, here is how you would define
+switches only for ruby:
+>
+    autocmd FileType ruby let b:switch_custom_definitions =
+        \ [
+        \   ...
+        \ ]
+<
+
 The format of all of these variables is a simple List of items. Each item can
 be either a List or a Dict.
 
@@ -240,7 +250,7 @@ The following expression replaces underscored identifier names with their
 camelcased versions.
 
 >
-    let b:switch_custom_definitions = [
+    let g:switch_custom_definitions = [
         \   {
         \     '\<[a-z0-9]\+_\k\+\>': {
         \       '_\(.\)': '\U\1'
