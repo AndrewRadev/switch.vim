@@ -219,13 +219,13 @@ autocmd FileType scala let b:switch_definitions =
 autocmd FileType gitrebase let b:switch_definitions =
       \ [
       \   [ 'pick', 'fixup', 'reword', 'edit', 'squash', 'exec', 'drop' ],
-      \   [ '\^p ', 'fixup' ],
-      \   [ '\^f ', 'reword ' ],
-      \   [ '\^r ', 'edit' ],
-      \   [ '\^e ', 'squash ' ],
-      \   [ '\^s ', 'exec ' ],
-      \   [ '\^x ', 'drop ' ],
-      \   [ '\^d ', 'pick ' ],
+      \   { '\^p ', 'fixup' },
+      \   { '\^f ', 'reword ' },
+      \   { '\^r ', 'edit' },
+      \   { '\^e ', 'squash ' },
+      \   { '\^s ', 'exec ' },
+      \   { '\^x ', 'drop ' },
+      \   { '\^d ', 'pick ' },
       \ ]
 
 
