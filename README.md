@@ -494,6 +494,26 @@ foo = {one: one, two}
   s"""foo bar"""
   f"""foo bar"""
   ```
+  
+### Git Rebase
+
+* Git Rebase Commands
+  ```
+  pick -> fixup
+  p -> fixup
+  fixup -> reword
+  f -> reword
+  reword -> edit
+  r -> edit
+  edit -> squash
+  e -> squash
+  squash -> exec
+  s -> exec
+  exec -> drop
+  x -> drop
+  drop -> pick
+  d -> pick
+  ```
 
 ## Similar work
 
