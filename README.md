@@ -499,19 +499,13 @@ foo = {one: one, two}
 
 * Git Rebase Commands
   ```
-  pick -> fixup
+  pick -> fixup -> reword -> edit -> squash -> drop -> (loops back to pick)
   p -> fixup
-  fixup -> reword
   f -> reword
-  reword -> edit
   r -> edit
-  edit -> squash
   e -> squash
-  squash -> exec
   s -> exec
-  exec -> drop
   x -> drop
-  drop -> pick
   d -> pick
   ```
 
