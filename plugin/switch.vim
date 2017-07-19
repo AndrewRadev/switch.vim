@@ -116,6 +116,11 @@ let g:switch_builtins =
       \     '(\([^()]\{-}\))\s*=>\s*{':                 'function(\1) {',
       \     '\(\k\+\)\s*=>\s*{':                        'function(\1) {',
       \   },
+      \   'javascript_es6_declarations': {
+      \     '\<var\s\+': 'let ',
+      \     '\<let\s\+': 'const ',
+      \     '\<const\s\+': 'let ',
+      \   },
       \   'coffee_arrow': {
       \     '^\(.*\)->': '\1=>',
       \     '^\(.*\)=>': '\1->',
@@ -199,6 +204,7 @@ autocmd FileType javascript let b:switch_definitions =
       \ [
       \   g:switch_builtins.javascript_function,
       \   g:switch_builtins.javascript_arrow_function,
+      \   g:switch_builtins.javascript_es6_declarations,
       \ ]
 
 autocmd FileType coffee let b:switch_definitions =

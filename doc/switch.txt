@@ -515,6 +515,16 @@ ES6-style arrow functions (g:switch_builtins.javascript_arrow_function)
     var example = function(one, two) { }
     var example = (one, two) => { }
 <
+ES6-style variable declaraions (g:switch_builtins.javascript_es6_declarations)
+>
+    var example
+    let example
+    const example
+    // var -> let
+    // let -> const
+    // const -> let
+<
+Switching to var from const or let is unsupported, since it's assumed to be an unlikely case.
 
 Coffeescript ~
 
