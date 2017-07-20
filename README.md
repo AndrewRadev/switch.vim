@@ -443,6 +443,17 @@ Object* foo = bar->baz;
   var example = (one, two) => { }
   ```
 
+* ES6-style variable declarations:
+  ``` javascript
+  var example
+  let example
+  const example
+  // var -> let
+  // let -> const
+  // const -> let
+  ```
+  Switching to var from const or let is unsupported, since it's assumed to be an unlikely case.
+
 ### Coffeescript arrows
 
 ``` coffeescript
