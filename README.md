@@ -454,6 +454,15 @@ Object* foo = bar->baz;
   ```
   Switching to var from const or let is unsupported, since it's assumed to be an unlikely case.
 
+* Comparison to false vs negation operator
+  ``` javascript
+  if (foo == false) { }
+  if (!foo) {}
+
+  if (foo.has(bar) === false) {}
+  if (!foo.has(bar)) {}
+  ```
+
 ### Coffeescript arrows
 
 ``` coffeescript
