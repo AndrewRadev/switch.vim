@@ -147,6 +147,28 @@ let g:switch_builtins =
       \     's"""\(.\{-}\)"""':                   'f"""\1"""',
       \     'f"""\(.\{-}\)"""':                   '"\1"',
       \   },
+      \   'elixir_list_shorthand': {
+      \     '\[\%(\k\|[''", ]\)\+\]': {
+      \       '\[':                    '\~w(',
+      \       '[''"]\(\k\+\)[''"],\=': '\1',
+      \       ']':                     ')',
+      \     },
+      \     '\~w(\%(\k\|\s\)\+)a': {
+      \       '\~w(':      '[',
+      \       '\(\k\+\) ': ':\1, ',
+      \       '\(\k\+\))a': ':\1]',
+      \     },
+      \     '\~w(\%(\k\|\s\)\+)a\@!': {
+      \       '\~w(':      '[',
+      \       '\(\k\+\) ': '"\1", ',
+      \       '\(\k\+\))': '"\1"]',
+      \     },
+      \     '\[\%(\k\|[:, ]\)\+\]': {
+      \       '\[':           '\~w(',
+      \       ':\(\k\+\),\=': '\1',
+      \       ']':            ')a',
+      \     },
+      \   },
       \ }
 
 let g:switch_definitions =
@@ -232,6 +254,11 @@ autocmd FileType gitrebase let b:switch_definitions =
       \   { '^s ': 'exec ' },
       \   { '^x ': 'drop ' },
       \   { '^d ': 'pick ' },
+      \ ]
+autocmd FileType elixir let b:switch_definitions =
+      \ [
+      \   g:switch_builtins.ruby_string,
+      \   g:switch_builtins.elixir_list_shorthand
       \ ]
 
 
