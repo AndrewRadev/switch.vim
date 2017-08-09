@@ -589,6 +589,29 @@ Git Rebase Commands:
     s -> exec
     x -> drop
     d -> pick
+
+Elixir ~
+
+Charlist -> Binary -> Atom (g:switch_builtins.ruby_string)
+>
+    foo = 'bar'
+    foo = "bar"
+    foo = :bar
+<
+Elixir list shorthands (g:switch_builtins.elixir_list_shorthand)
+>
+    ["one", "two", "three"]
+    ~w(one two three)
+
+    [:one, :two, :three]
+    ~w(one two three)a
+<
+Capitalized boolean constants (g:switch_builtins.capital_true_false):
+>
+    flag = True
+    flag = False
+<
+
 <
 
 ==============================================================================
