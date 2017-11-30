@@ -195,6 +195,16 @@ describe "ruby definitions" do
     assert_file_contents "[:one, :two]"
   end
 
+  specify "fetch array access" do
+    set_file_contents "foo['one']"
+
+    vim.search('foo').switch
+    assert_file_contents "foo.fetch('one')"
+
+    vim.switch
+    assert_file_contents "foo['one']"
+  end
+
   describe "(overrides)" do
     specify "true/false overrides hash style" do
       set_file_contents <<-EOF

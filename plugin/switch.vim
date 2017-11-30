@@ -75,6 +75,10 @@ let g:switch_builtins =
       \       '\(\k\+\))': ':\1]',
       \     },
       \   },
+      \   'ruby_fetch': {
+      \     '\(\k\+\)\[\(.\{-}\)\]': '\1.fetch(\2)',
+      \     '\(\k\+\)\.fetch(\(.\{-}\))': '\1[\2]',
+      \   },
       \   'rspec_should': ['should ', 'should_not '],
       \   'rspec_expect': {
       \     '\(expect(.*)\)\.to ':     '\1.not_to ',
@@ -215,6 +219,7 @@ autocmd FileType ruby let b:switch_definitions =
       \   g:switch_builtins.ruby_string,
       \   g:switch_builtins.ruby_short_blocks,
       \   g:switch_builtins.ruby_array_shorthand,
+      \   g:switch_builtins.ruby_fetch,
       \ ]
 
 autocmd FileType cpp let b:switch_definitions =
