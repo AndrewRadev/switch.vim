@@ -173,6 +173,10 @@ let g:switch_builtins =
       \       ']':            ')a',
       \     },
       \   },
+      \   'rust_void_typecheck': {
+      \     '\(let\s*\%(mut\s*\)\=\k\+\) = ': '\1: () = ',
+      \     '\(let\s*\%(mut\s*\)\=\k\+\): () = ': '\1 = ',
+      \   },
       \ }
 
 let g:switch_definitions =
@@ -265,7 +269,10 @@ autocmd FileType elixir let b:switch_definitions =
       \   g:switch_builtins.ruby_string,
       \   g:switch_builtins.elixir_list_shorthand
       \ ]
-
+autocmd FileType rust let b:switch_definitions =
+      \ [
+      \   g:switch_builtins.rust_void_typecheck,
+      \ ]
 
 command! Switch call s:Switch()
 function! s:Switch()

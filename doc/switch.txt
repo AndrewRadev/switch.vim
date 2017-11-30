@@ -618,6 +618,12 @@ Capitalized boolean constants (g:switch_builtins.capital_true_false):
     flag = False
 <
 
+Rust ~
+
+Void typecheck (g:switch_builtins.rust_void_typecheck)
+>
+    let value = complicated_expression();
+    let value: () = complicated_expression();
 <
 
 ==============================================================================
