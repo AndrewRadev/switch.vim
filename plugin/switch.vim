@@ -125,6 +125,10 @@ let g:switch_builtins =
       \     '\<let\s\+': 'const ',
       \     '\<const\s\+': 'let ',
       \   },
+      \   'javascript_not_expression': {
+      \      '\<\([a-zA-z.()]\+\) === false': '!\1',
+      \      '!\<\([a-zA-z.()]\+\)':          '\1 === false',
+      \   },
       \   'coffee_arrow': {
       \     '^\(.*\)->': '\1=>',
       \     '^\(.*\)=>': '\1->',
@@ -236,6 +240,7 @@ autocmd FileType javascript let b:switch_definitions =
       \   g:switch_builtins.javascript_function,
       \   g:switch_builtins.javascript_arrow_function,
       \   g:switch_builtins.javascript_es6_declarations,
+      \   g:switch_builtins.javascript_not_expression,
       \ ]
 
 autocmd FileType coffee let b:switch_definitions =
