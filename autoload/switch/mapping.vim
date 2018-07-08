@@ -109,6 +109,9 @@ function! switch#mapping#Replace(match) dict
 
       silent! foldopen!
       exe 's/'.pattern.'/'.sub_replacement.'/ge'
+      " remove pattern from history
+      call histdel('search', -1)
+      let @/ = histget('search', -1)
 
       " length of the line may have changed, adjust
       let delta += col('$') - last_column
@@ -119,6 +122,9 @@ function! switch#mapping#Replace(match) dict
     let replacement = escape(replacement, '/&')
 
     exe 's/'.pattern.'/'.replacement.'/'
+    " remove pattern from history
+    call histdel('search', -1)
+    let @/ = histget('search', -1)
   endif
 endfunction
 
