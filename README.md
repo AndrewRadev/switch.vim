@@ -429,7 +429,7 @@ definitions with their patterns and replacements, look at the file
 Object* foo = bar.baz;
 Object* foo = bar->baz;
 ```
-### Javascript
+### JavaScript
 
 * Function definitions:
   ``` javascript
@@ -454,14 +454,14 @@ Object* foo = bar->baz;
   ```
   Switching to var from const or let is unsupported, since it's assumed to be an unlikely case.
 
-### Coffeescript arrows
+### CoffeeScript arrows
 
 ``` coffeescript
 functionCall (foo) ->
 functionCall (foo) =>
 ```
 
-### Coffeescript dictionary shorthands
+### CoffeeScript dictionary shorthands
 
 ``` coffeescript
 foo = {one, two}
