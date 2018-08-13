@@ -96,6 +96,7 @@ endfunction
 function! switch#mapping#Replace(match) dict
   let pattern     = a:match.pattern
   let replacement = self.definitions[pattern]
+  let oldsearch   = @/
 
   if type(replacement) == s:type_dict
     " maintain change delta for adjusting match limits
@@ -111,7 +112,6 @@ function! switch#mapping#Replace(match) dict
       exe 's/'.pattern.'/'.sub_replacement.'/ge'
       " remove pattern from history
       call histdel('search', -1)
-      let @/ = histget('search', -1)
 
       " length of the line may have changed, adjust
       let delta += col('$') - last_column
@@ -124,8 +124,9 @@ function! switch#mapping#Replace(match) dict
     exe 's/'.pattern.'/'.replacement.'/'
     " remove pattern from history
     call histdel('search', -1)
-    let @/ = histget('search', -1)
   endif
+
+  let @/ = oldsearch
 endfunction
 
 " Private:
