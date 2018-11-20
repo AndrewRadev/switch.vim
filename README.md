@@ -9,7 +9,7 @@ This plugin is easier to demonstrate than explain. You can find a screencast
 
 The main entry point of the plugin is a single command, `:Switch`. When the
 command is executed, the plugin looks for one of a few specific patterns under
-the cursor and performs a substition depending on the pattern. For example, if
+the cursor and performs a substitution depending on the pattern. For example, if
 the cursor is on the "true" in the following code:
 
 ``` ruby
