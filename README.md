@@ -37,10 +37,10 @@ let g:switch_mapping = ""
 See the "customization" section below for information on how to create several
 mappings with different definitions.
 
-There are three main principles that the substition follows:
+There are three main principles that the substitution follows:
 
 1. The cursor needs to be on the match. Regardless of the pattern, the plugin
-   only performs the substition if the cursor is positioned in the matched
+   only performs the substitution if the cursor is positioned in the matched
    text.
 
 2. When several patterns match, the shortest match is performed. For example,
@@ -53,8 +53,8 @@ There are three main principles that the substition follows:
    ```
 
    This works if the cursor is positioned somewhere on the ":foo =>" part, but
-   if it's on top of "true", the abovementioned true -> false substition will
-   be performed instead. If you want to perform a "larger" substition instead,
+   if it's on top of "true", the abovementioned true -> false substitution will
+   be performed instead. If you want to perform a "larger" substitution instead,
    you could move your cursor away from the "smaller" match. In this case,
    move the cursor away from the "true" keyword.
 
@@ -186,7 +186,7 @@ pattern asserts that, in this place of the text, there is no "echo".
 Otherwise, the second pattern would match as well. Using the `\@!` pattern in
 strategic places is important in many cases.
 
-For even more complicated substitions, you can use the nested form.
+For even more complicated substitutions, you can use the nested form.
 
 ### Nested dict definitions
 
