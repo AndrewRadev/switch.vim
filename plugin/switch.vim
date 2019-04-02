@@ -272,6 +272,7 @@ autocmd FileType elixir let b:switch_definitions =
 autocmd FileType rust let b:switch_definitions =
       \ [
       \   g:switch_builtins.rust_void_typecheck,
+      \   g:switch_builtins.coffee_dictionary_shorthand,
       \ ]
 
 command! Switch call s:Switch()

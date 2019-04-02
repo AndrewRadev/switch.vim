@@ -13,4 +13,17 @@ describe "rust definitions" do
     vim.switch
     assert_file_contents 'let value = complicated_expression()'
   end
+
+  specify "struct shorthand" do
+    set_file_contents 'let processor = Processor { input: input, output };'
+    vim.set 'filetype', 'rust'
+
+    vim.search('input')
+    vim.switch
+    assert_file_contents 'let processor = Processor { input, output };'
+
+    vim.search('output')
+    vim.switch
+    assert_file_contents 'let processor = Processor { input, output: output };'
+  end
 end
