@@ -33,4 +33,33 @@ describe "coffee" do
     vim.switch
     assert_file_contents 'foo = {one, two}'
   end
+
+  specify "dictionary shorthand (multiline)" do
+    set_file_contents <<~EOF
+      foo = {
+        one,
+        two
+      }
+    EOF
+    vim.set 'filetype', 'coffee'
+
+    vim.search('one')
+    vim.switch
+    assert_file_contents <<~EOF
+      foo = {
+        one: one,
+        two
+      }
+    EOF
+
+    vim.search('one')
+    vim.switch
+
+    assert_file_contents <<~EOF
+      foo = {
+        one,
+        two
+      }
+    EOF
+  end
 end
