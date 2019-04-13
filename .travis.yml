@@ -1,7 +1,16 @@
 language: ruby
+dist: trusty
+sudo: false
+cache: bundler
 rvm:
-  - 1.9.3
-before_install: sudo apt-get install vim-gtk
+  - 2.6.2
+addons:
+  apt:
+    packages:
+      - vim-gtk
+env:
+  - TRAVIS_CI=1
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
+  - "vim --version"
