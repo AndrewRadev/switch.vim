@@ -110,8 +110,12 @@ let g:switch_builtins =
       \     '\(\k\+\)->': '\1.',
       \   },
       \   'javascript_function': {
-      \     'function \(\k\+\)(':              'var \1 = function(',
-      \     '\%(var \)\=\(\k\+\) = function(': 'function \1(',
+      \     '\(async \)\?function\s*\(\k\+\)\s*()\s*{':                                    'const \2 = \1() => {',
+      \     '\(async \)\?function\s*\(\k\+\)\s*(\([^()]\{-},[^()]\{-}\))\s*{':             'const \2 = \1(\3) => {',
+      \     '\(async \)\?function\s*\(\k\+\)\s*(\(\k\+\))\s*{':                            'const \2 = \1\3 => {',
+      \     '\%(var \|let \|const \)\?\(\k\+\)\s*=\s*\(async \)\?function\s*(':             '\2function \1(',
+      \     '\%(var \|let \|const \)\?\(\k\+\)\s*=\s*\(async \)\?(\([^()]\{-}\))\s*=>\s*{': '\2function \1(\3) {',
+      \     '\%(var \|let \|const \)\?\(\k\+\)\s*=\s*\(async \)\?\(\k\+\)\s*=>\s*{':        '\2function \1(\3) {',
       \   },
       \   'javascript_arrow_function': {
       \     'function\s*()\s*{':                        '() => {',
