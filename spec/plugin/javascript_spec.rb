@@ -21,6 +21,36 @@ describe "javascript definitions" do
     EOF
   end
 
+  specify "async function definition" do
+    set_file_contents <<-EOF
+      async function example(one, two) { }
+    EOF
+
+    vim.search('example').switch
+
+    assert_file_contents <<-EOF
+      const example = async (one, two) => { }
+    EOF
+
+    vim.search('example').switch
+
+    assert_file_contents <<-EOF
+      async function example(one, two) { }
+    EOF
+  end
+
+  specify "var function definition" do
+    set_file_contents <<-EOF
+      var example = function(one, two) { }
+    EOF
+
+    vim.search('example').switch
+
+    assert_file_contents <<-EOF
+      function example(one, two) { }
+    EOF
+  end
+
   specify "arrow functions (with no arguments)" do
     set_file_contents <<-EOF
       something.forEach(function() { });
