@@ -11,7 +11,7 @@ describe "javascript definitions" do
     vim.search('example').switch
 
     assert_file_contents <<-EOF
-      var example = function(one, two) { }
+      const example = (one, two) => { }
     EOF
 
     vim.search('example').switch
