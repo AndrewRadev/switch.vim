@@ -1,0 +1,5 @@
+let b:switch_definitions =
+      \ [
+      \   g:switch_builtins.rust_void_typecheck,
+      \   g:switch_builtins.coffee_dictionary_shorthand,
+      \ ]
