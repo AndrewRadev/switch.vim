@@ -505,7 +505,7 @@ foo = {one: one, two}
   s"""foo bar"""
   f"""foo bar"""
   ```
-  
+
 ### Git Rebase
 
 * Git Rebase Commands
@@ -519,6 +519,51 @@ foo = {one: one, two}
   x -> drop
   d -> pick
   ```
+
+### Elixir
+
+Charlist -> Binary -> Atom
+
+``` elixir
+foo = 'bar'
+foo = "bar"
+foo = :bar
+```
+
+Elixir list shorthands
+
+``` elixir
+["one", "two", "three"]
+~w(one two three)
+
+[:one, :two, :three]
+~w(one two three)a
+```
+
+Capitalized boolean constants :
+
+``` elixir
+flag = True
+flag = False
+```
+
+### Rust
+
+Void typecheck
+
+``` rust
+let value = complicated_expression();
+let value: () = complicated_expression();
+```
+
+### TOML
+
+Particularly for files named `Cargo.toml` with the `toml` filetype (not built-in, but there are plugins for it):
+
+``` toml
+structopt = "0.3.5"
+structopt = { version = "0.3.5" }
+```
 
 ## Similar work
 

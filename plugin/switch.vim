@@ -181,6 +181,10 @@ let g:switch_builtins =
       \     '\(let\s*\%(mut\s*\)\=\k\+\) = ': '\1: () = ',
       \     '\(let\s*\%(mut\s*\)\=\k\+\): () = ': '\1 = ',
       \   },
+      \   'cargo_dependency_version': {
+      \     '^\s*\([[:keyword:]-]\+\)\s*=\s*\(["''].\{-}["'']\)': '\1 = { version = \2 }',
+      \     '^\s*\([[:keyword:]-]\+\)\s*=\s*{\s*version\s*=\s*\(["''].\{-}["'']\)\s*}': '\1 = \2',
+      \   }
       \ }
 
 let g:switch_definitions =

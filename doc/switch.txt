@@ -617,13 +617,20 @@ Capitalized boolean constants (g:switch_builtins.capital_true_false):
     flag = True
     flag = False
 <
-
 Rust ~
 
 Void typecheck (g:switch_builtins.rust_void_typecheck)
 >
     let value = complicated_expression();
     let value: () = complicated_expression();
+<
+TOML ~
+
+Particularly for files named `Cargo.toml` with the `toml` filetype (not
+built-in, but there are plugins for it):
+>
+    structopt = "0.3.5"
+    structopt = { version = "0.3.5" }
 <
 
 ==============================================================================
