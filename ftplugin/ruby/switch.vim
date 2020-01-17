@@ -1,3 +1,8 @@
+if &ft == 'eruby'
+  " could happen, depending on load order
+  finish
+endif
+
 let b:switch_definitions =
       \ [
       \   g:switch_builtins.ruby_hash_style,
