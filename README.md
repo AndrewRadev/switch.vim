@@ -1,3 +1,4 @@
+[![GitHub version](https://badge.fury.io/gh/andrewradev%2Fswitch.vim.svg)](https://badge.fury.io/gh/andrewradev%2Fswitch.vim)
 [![Build Status](https://secure.travis-ci.org/AndrewRadev/switch.vim.png?branch=master)](http://travis-ci.org/AndrewRadev/switch.vim)
 
 ## Screencast!
