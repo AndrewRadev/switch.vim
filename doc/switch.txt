@@ -445,6 +445,11 @@ Ruby fetch invocation (g:switch_builtins.ruby_fetch):
     foo['bar']
     foo.fetch('bar')
 <
+Ruby assert checks on nil (g:switch_builtins.ruby_assert_nil):
+>
+    assert_nil some_value
+    assert_equal nil, some_value
+<
 
 PHP ~
 

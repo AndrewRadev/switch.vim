@@ -16,4 +16,5 @@ let b:switch_definitions =
       \   g:switch_builtins.ruby_short_blocks,
       \   g:switch_builtins.ruby_array_shorthand,
       \   g:switch_builtins.ruby_fetch,
+      \   g:switch_builtins.ruby_assert_nil
       \ ]

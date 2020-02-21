@@ -79,6 +79,10 @@ let g:switch_builtins =
       \     '\(\k\+\)\[\(.\{-}\)\]': '\1.fetch(\2)',
       \     '\(\k\+\)\.fetch(\(.\{-}\))': '\1[\2]',
       \   },
+      \   'ruby_assert_nil': {
+      \     'assert_equal nil,': 'assert_nil',
+      \     'assert_nil':        'assert_equal nil,',
+      \   },
       \   'rspec_should': ['should ', 'should_not '],
       \   'rspec_expect': {
       \     '\(expect(.*)\)\.to ':     '\1.not_to ',

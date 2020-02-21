@@ -205,6 +205,16 @@ describe "ruby definitions" do
     assert_file_contents "foo['one']"
   end
 
+  specify "assert_nil" do
+    set_file_contents "assert_nil SomeClass.some_method"
+
+    vim.search('assert_nil').switch
+    assert_file_contents "assert_equal nil, SomeClass.some_method"
+
+    vim.switch
+    assert_file_contents "assert_nil SomeClass.some_method"
+  end
+
   describe "(overrides)" do
     specify "true/false overrides hash style" do
       set_file_contents <<-EOF
