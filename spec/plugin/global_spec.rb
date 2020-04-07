@@ -24,4 +24,12 @@ describe "global definitions" do
     vim.switch
     assert_file_contents 'flag = true'
   end
+
+  specify "falsey" do
+    set_file_contents 'flag = "falsey"'
+    vim.search 'false'
+
+    vim.switch
+    assert_file_contents 'flag = "falsey"'
+  end
 end

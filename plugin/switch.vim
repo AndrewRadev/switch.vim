@@ -22,12 +22,12 @@ let g:switch_builtins =
       \ {
       \   'ampersands': ['&&', '||'],
       \   'capital_true_false': {
-      \     '\CTrue':  'False',
-      \     '\CFalse': 'True',
+      \     '\C\<True\>':  'False',
+      \     '\C\<False\>': 'True',
       \   },
       \   'true_false': {
-      \     '\Ctrue':  'false',
-      \     '\Cfalse': 'true',
+      \     '\C\<true\>':  'false',
+      \     '\C\<false\>': 'true',
       \   },
       \   'ruby_hash_style': {
       \     ':\(\k\+\)\s*=>\s*': '\1: ',
