@@ -269,9 +269,9 @@ For example, if you want to switch, or fall back to activating the
 
 ``` vim
 nnoremap <c-a> :if !switch#Switch() <bar>
-      \ call speeddating#increment() <bar> endif<cr>
+      \ call speeddating#increment(v:count1) <bar> endif<cr>
 nnoremap <c-x> :if !switch#Switch({'reverse': 1}) <bar>
-      \ call speeddating#decrement() <bar> endif<cr>
+      \ call speeddating#increment(-v:count1) <bar> endif<cr>
 ```
 
 
