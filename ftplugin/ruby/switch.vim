@@ -6,6 +6,7 @@ endif
 let b:switch_definitions =
       \ [
       \   g:switch_builtins.ruby_hash_style,
+      \   g:switch_builtins.ruby_oneline_hash,
       \   g:switch_builtins.ruby_lambda,
       \   g:switch_builtins.ruby_if_clause,
       \   g:switch_builtins.rspec_should,

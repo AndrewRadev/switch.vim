@@ -5,16 +5,26 @@ describe "haml definitions" do
 
   specify "hash style" do
     set_file_contents <<-EOF
-      %a{:href => '/example'}
+      %a{:href => '/example', :title => 'this is a link'}
     EOF
     vim.search('href').switch
     assert_file_contents <<-EOF
-      %a{href: '/example'}
+      %a{href: '/example', :title => 'this is a link'}
     EOF
 
     vim.search('href').switch
     assert_file_contents <<-EOF
-      %a{:href => '/example'}
+      %a{:href => '/example', :title => 'this is a link'}
+    EOF
+
+    vim.search('{').switch
+    assert_file_contents <<-EOF
+      %a{href: '/example', title: 'this is a link'}
+    EOF
+
+    vim.search(',').switch
+    assert_file_contents <<-EOF
+      %a{:href => '/example', :title => 'this is a link'}
     EOF
   end
 
