@@ -56,6 +56,16 @@ describe "ruby definitions" do
     assert_file_contents <<-EOF
       foo = { :one => 'two', :three => 4 }
     EOF
+
+    vim.search('{').switch
+    assert_file_contents <<-EOF
+      foo = { one: 'two', three: 4 }
+    EOF
+
+    vim.search(',').switch
+    assert_file_contents <<-EOF
+      foo = { :one => 'two', :three => 4 }
+    EOF
   end
 
   specify "hash style (whitespace)" do
