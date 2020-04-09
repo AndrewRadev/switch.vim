@@ -187,22 +187,46 @@ describe "ruby definitions" do
     assert_file_contents 'do_something { |x| x.some_work! }'
   end
 
-  specify "array shorthands" do
-    set_file_contents "['one', 'two']"
+  specify "array shorthands (strings)" do
+    set_file_contents "['e-mail', '3.14', '@var', 'snake_case']"
 
     vim.search('[').switch
-    assert_file_contents "%w(one two)"
+    assert_file_contents "%w(e-mail 3.14 @var snake_case)"
 
     vim.switch
-    assert_file_contents "['one', 'two']"
+    assert_file_contents "['e-mail', '3.14', '@var', 'snake_case']"
+  end
 
-    set_file_contents "[:one, :two]"
+  specify "array shorthands (symbols)" do
+    set_file_contents "[:pi, :@var, :snake_case]"
 
     vim.search('[').switch
-    assert_file_contents "%i(one two)"
+    assert_file_contents "%i(pi @var snake_case)"
 
     vim.switch
-    assert_file_contents "[:one, :two]"
+    assert_file_contents "[:pi, :@var, :snake_case]"
+  end
+
+  specify "array shorthands (whitespace)" do
+    set_file_contents "[ :pi, :@var,  :snake_case  ]"
+
+    vim.search('[').switch
+    assert_file_contents "%i(pi @var snake_case)"
+
+    set_file_contents "%i( pi @var  snake_case  )"
+
+    vim.switch
+    assert_file_contents "[:pi, :@var, :snake_case]"
+
+    set_file_contents "[  'e-mail', '3.14', '@var',  'snake_case' ]"
+
+    vim.search('[').switch
+    assert_file_contents "%w(e-mail 3.14 @var snake_case)"
+
+    set_file_contents "%w(  e-mail 3.14 @var  snake_case )"
+
+    vim.switch
+    assert_file_contents "['e-mail', '3.14', '@var', 'snake_case']"
   end
 
   specify "fetch array access" do
