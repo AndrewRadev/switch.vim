@@ -377,11 +377,15 @@ Hash style (g:switch_builtins.ruby_hash_style):
     foo = { :one => 'two', :three => 'four'  }
     foo = { one: 'two', :three => 'four'  }
 <
+Cursor: in the hash, on a single hash element.
+
 Oneline Hash (g:switch_builtins.ruby_oneline_hash):
 >
     foo = { :one => 'two', :three => 'four' }
     foo = { one: 'two', three: 'four' }
 <
+Cursor: in the hash, not on any one element -- opening `{` would work.
+
 Lambdas (g:switch_builtins.ruby_lambda):
 >
     lambda { |x, y| whatever(x, y) }
@@ -491,11 +495,14 @@ Hash style (g:switch_builtins.ruby_hash_style):
     <% foo = { :one => 'two', :three => 'four'  } %>
     <% foo = { one: 'two', :three => 'four'  } %>
 <
+Cursor: in the hash, on a single hash element.
+
 Oneline Hash (g:switch_builtins.ruby_oneline_hash):
 >
     <% foo = { :one => 'two', :three => 'four' } %>
     <% foo = { one: 'two', three: 'four' } %>
 <
+Cursor: in the hash, not on any one element -- opening `{` would work.
 
 Haml/Slim ~
 
@@ -515,10 +522,14 @@ Hash style (g:switch_builtins.ruby_hash_style):
     %a{:href => '/example', :title => 'this is a link'}
     %a{href: '/example', :title => 'this is a link'}
 <
+Cursor: in the hash, on a single hash element.
+
 Oneline Hash (g:switch_builtins.ruby_oneline_hash):
 >
     %a{:href => '/example', :title => 'this is a link'}
     %a{href: '/example', title: 'this is a link'}
+<
+Cursor: in the hash, not on any one element -- opening `{` would work.
 
 C++ ~
 
