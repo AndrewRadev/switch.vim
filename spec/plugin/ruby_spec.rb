@@ -213,6 +213,11 @@ describe "ruby definitions" do
 
     vim.switch
     assert_file_contents "foo['one']"
+
+    set_file_contents "%w[one]"
+
+    vim.search('w').switch
+    assert_file_contents "%w[one]"
   end
 
   specify "assert_nil" do
