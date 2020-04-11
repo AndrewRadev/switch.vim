@@ -84,8 +84,8 @@ let g:switch_builtins =
       \     },
       \   },
       \   'ruby_fetch': {
-      \     '\(\k\+\)\[\(.\{-}\)\]': '\1.fetch(\2)',
-      \     '\(\k\+\)\.fetch(\(.\{-}\))': '\1[\2]',
+      \     '\v(%(\%@<!\k)+)\[(.{-})\]': '\1.fetch(\2)',
+      \     '\v(\k+)\.fetch\((.{-})\)': '\1[\2]',
       \   },
       \   'ruby_assert_nil': {
       \     'assert_equal nil,': 'assert_nil',
