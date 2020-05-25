@@ -1,5 +1,6 @@
 let s:type_list = type([])
 let s:type_dict = type({})
+let s:type_func = type(function('function'))
 
 " Constructor:
 " ============
@@ -41,7 +42,7 @@ function! switch#mapping#Match() dict
   let match_end    = -1
   let match_length = -1
 
-  for [pattern, replacement] in items(self.definitions)
+  for [pattern, Replacement] in items(self.definitions)
     try
       let saved_cursor = getpos('.')
       let [_buf, lnum, col, _off] = saved_cursor
@@ -94,15 +95,24 @@ endfunction
 " both simple replacements and nested ones.
 "
 function! switch#mapping#Replace(match) dict
-  let pattern     = a:match.pattern
-  let replacement = self.definitions[pattern]
-  let oldsearch   = @/
+  let pattern   = a:match.pattern
+  let oldsearch = @/
 
-  if type(replacement) == s:type_dict
+  " Capital letter, since it might be a function callback:
+  let Replacement = self.definitions[pattern]
+  if type(Replacement) == s:type_func
+    call Replacement(a:match)
+    return
+  endif
+
+  " Not a function, carry on
+  let replacement = Replacement
+
+  if type(Replacement) == s:type_dict
     " maintain change delta for adjusting match limits
     let delta = 0
 
-    for [pattern, sub_replacement] in items(replacement)
+    for [pattern, sub_replacement] in items(Replacement)
       let last_column     = col('$')
       let pattern         = s:LimitPattern(pattern, a:match.start, a:match.end + delta)
       let pattern         = escape(pattern, '/')
@@ -119,9 +129,9 @@ function! switch#mapping#Replace(match) dict
   else
     let pattern     = s:LimitPattern(pattern, a:match.start, a:match.end)
     let pattern     = escape(pattern, '/')
-    let replacement = escape(replacement, '/&')
+    let Replacement = escape(Replacement, '/&')
 
-    exe 's/'.pattern.'/'.replacement.'/'
+    exe 's/'.pattern.'/'.Replacement.'/'
     " remove pattern from history
     call histdel('search', -1)
   endif

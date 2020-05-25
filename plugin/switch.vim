@@ -190,8 +190,8 @@ let g:switch_builtins =
       \     },
       \   },
       \   'rust_void_typecheck': {
-      \     '\(let\s*\%(mut\s*\)\=\k\+\) = ': '\1: () = ',
-      \     '\(let\s*\%(mut\s*\)\=\k\+\): () = ': '\1 = ',
+      \     '\(let\s*\%(mut\s*\)\=\k\+\) = ': function('switch#callbacks#RustVarType'),
+      \     '\(let\s*\%(mut\s*\)\=\k\+\): [[:keyword:]<>,()]\+ = ': '\1 = ',
       \   },
       \   'cargo_dependency_version': {
       \     '^\s*\([[:keyword:]-]\+\)\s*=\s*\(["''].\{-}["'']\)': '\1 = { version = \2 }',
