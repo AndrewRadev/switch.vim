@@ -268,6 +268,9 @@ For example, if you want to switch, or fall back to activating the
 `<c-a>` and `<c-x>` like so:
 
 ``` vim
+let g:speeddating_no_mappings=1
+nnoremap <Plug>SpeedDatingFallbackUp <C-A>
+nnoremap <Plug>SpeedDatingFallbackDown <C-X>
 nnoremap <c-a> :if !switch#Switch() <bar>
       \ call speeddating#increment(v:count1) <bar> endif<cr>
 nnoremap <c-x> :if !switch#Switch({'reverse': 1}) <bar>
