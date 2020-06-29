@@ -519,14 +519,19 @@ foo = {one: one, two}
 
 * Git Rebase Commands
   ```
-  pick -> fixup -> reword -> edit -> squash -> drop -> (loops back to pick)
-  p -> fixup
-  f -> reword
-  r -> edit
-  e -> squash
-  s -> exec
-  x -> drop
-  d -> pick
+    pick -> fixup -> reword -> edit -> squash -> exec -> break -> drop -> label -> reset -> merge -> (loops back to pick)
+
+    p -> fixup
+    f -> reword
+    r -> edit
+    e -> squash
+    s -> exec
+    x -> break
+    b -> drop
+    d -> label
+    l -> reset
+    t -> merge
+    m -> pick
   ```
 
 ### Elixir
