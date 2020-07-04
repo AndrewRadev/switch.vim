@@ -193,6 +193,10 @@ let g:switch_builtins =
       \     '\(let\s*\%(mut\s*\)\=\k\+\) = ': '\1: () = ',
       \     '\(let\s*\%(mut\s*\)\=\k\+\): () = ': '\1 = ',
       \   },
+      \   'rust_turbofish': {
+      \     '\(\k\+\)(': '\1::<Todo>(',
+      \     '\(\k\+\)::<[[:keyword:][:space:]<>,]\+>(': '\1(',
+      \   },
       \   'cargo_dependency_version': {
       \     '^\s*\([[:keyword:]-]\+\)\s*=\s*\(["''].\{-}["'']\)': '\1 = { version = \2 }',
       \     '^\s*\([[:keyword:]-]\+\)\s*=\s*{\s*version\s*=\s*\(["''].\{-}["'']\)\s*}': '\1 = \2',

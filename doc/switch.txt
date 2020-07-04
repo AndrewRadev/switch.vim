@@ -660,6 +660,14 @@ Void typecheck (g:switch_builtins.rust_void_typecheck)
     let value = complicated_expression();
     let value: () = complicated_expression();
 <
+Turbofish (g:switch_builtins.rust_turbofish)
+>
+    let value = iterator.collect();
+    let value = iterator.collect::<Todo>();
+<
+The type inserted is a placeholder, but it should be relatively easy to jump
+to it and edit it with a `cw`. In the future, this might be improved.
+
 TOML ~
 
 Particularly for files named `Cargo.toml` with the `toml` filetype (not
