@@ -195,7 +195,7 @@ let g:switch_builtins =
       \   },
       \   'rust_turbofish': {
       \     '\(\k\+\)(': '\1::<Todo>(',
-      \     '\(\k\+\)::<[[:keyword:][:space:]<>,]\+>(': '\1(',
+      \     '\(\k\+\)::<\%(\k\|\s\|[<>,]\)\+>(': '\1(',
       \   },
       \   'cargo_dependency_version': {
       \     '^\s*\([[:keyword:]-]\+\)\s*=\s*\(["''].\{-}["'']\)': '\1 = { version = \2 }',
