@@ -5,7 +5,6 @@ describe "rust definitions" do
 
   specify "void typecheck" do
     set_file_contents 'let value = complicated_expression()'
-    vim.set 'filetype', 'rust'
 
     vim.search('value').switch
     assert_file_contents 'let value: () = complicated_expression()'
@@ -16,7 +15,6 @@ describe "rust definitions" do
 
   specify "turbofish" do
     set_file_contents 'let value = iterator.collect();'
-    vim.set 'filetype', 'rust'
 
     vim.search('collect').switch
     assert_file_contents 'let value = iterator.collect::<Todo>();'
@@ -27,7 +25,6 @@ describe "rust definitions" do
 
   specify "struct shorthand" do
     set_file_contents 'let processor = Processor { input: input, output };'
-    vim.set 'filetype', 'rust'
 
     vim.search('input')
     vim.switch

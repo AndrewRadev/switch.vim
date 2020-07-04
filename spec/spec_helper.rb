@@ -5,11 +5,17 @@ require_relative 'support/vim'
 Vimrunner::RSpec.configure do |config|
   config.reuse_server = true
 
-  plugin_path = File.expand_path('.')
+  plugin_path = Pathname.new(File.expand_path('.'))
 
   config.start_vim do
     vim = Vimrunner.start_gvim
     vim.add_plugin(plugin_path, 'plugin/switch.vim')
+
+    # Up-to-date filetype support:
+    vim.prepend_runtimepath(plugin_path.join('spec/support/rust.vim'))
+
+    # bootstrap filetypes
+    vim.command 'autocmd BufNewFile,BufRead *.rs set filetype=rust'
 
     def vim.switch
       command 'Switch'
