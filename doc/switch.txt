@@ -668,6 +668,12 @@ Turbofish (g:switch_builtins.rust_turbofish)
 The type inserted is a placeholder, but it should be relatively easy to jump
 to it and edit it with a `cw`. In the future, this might be improved.
 
+String type (g:switch_builtins.rust_string)
+>
+    let hello = "Hello, World";
+    let hello = r"Hello, World";
+    let hello = r#"Hello, World"#;
+<
 TOML ~
 
 Particularly for files named `Cargo.toml` with the `toml` filetype (not

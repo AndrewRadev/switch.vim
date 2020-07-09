@@ -34,4 +34,18 @@ describe "rust definitions" do
     vim.switch
     assert_file_contents 'let processor = Processor { input, output: output };'
   end
+
+  specify "raw strings" do
+    set_file_contents 'let hello = "Hello, World!";'
+    vim.search('Hello')
+
+    vim.switch
+    assert_file_contents 'let hello = r"Hello, World!";'
+
+    vim.switch
+    assert_file_contents 'let hello = r#"Hello, World!"#;'
+
+    vim.switch
+    assert_file_contents 'let hello = "Hello, World!";'
+  end
 end
