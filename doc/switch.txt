@@ -116,7 +116,21 @@ There are three main principles that the substition follows:
 If you don't like the "smallest match" algorithm described on top, and you'd
 rather just attempt all matches in order, set the value of
 |g:switch_find_smallest_match| to 0.
+                                                               *:SwitchExtend*
 
+This command provides an easy way to extend your current buffer's custom
+definitions (|b:switch_custom_definitions|). If this variable doesn't exist
+yet, it will be created as a copy of the global custom definitions
+(|g:switch_custom_definitions|), and then extended.
+
+Called without arguments, it prints the current value of this buffer variable,
+that is your custom definitions for the current buffer.
+
+If called with a list or a dictionary as argument, it will extend the custom
+definitions for the current buffer:
+>
+    SwitchExtend ['on', 'off']
+<
 
 ==============================================================================
 ADVANCED USAGE                                           *switch-advanced-usage*

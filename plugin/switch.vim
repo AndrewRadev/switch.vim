@@ -227,6 +227,20 @@ function! s:SwitchReverse()
   silent! call repeat#set(":Switch\<cr>")
 endfunction
 
+command! -nargs=? SwitchExtend call s:SwitchExtend(<args>)
+fun! s:SwitchExtend(...) abort
+  let b:switch_custom_definitions = get(b:, 'switch_custom_definitions',
+      \                                 copy(get(g:, 'switch_custom_definitions', [])))
+  if a:0 == 0
+    echo b:switch_custom_definitions
+  elseif type(a:1) != type({}) && type(a:1) != type([])
+    echo '[switch.vim] argument must be a list or a dictionary'
+  elseif index(b:switch_custom_definitions, a:1) < 0
+    call extend(b:switch_custom_definitions, [a:1])
+  endif
+endfun
+
+
 if g:switch_mapping != ''
   exe 'nnoremap <silent> '.g:switch_mapping.' :Switch<cr>'
 endif
