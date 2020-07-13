@@ -127,9 +127,9 @@ Called without arguments, it prints the current value of this buffer variable,
 that is your custom definitions for the current buffer.
 
 If called with a list or a dictionary as argument, it will extend the custom
-definitions for the current buffer:
+definitions for the current buffer. Multiple definitions are accepted:
 >
-    SwitchExtend ['on', 'off']
+    SwitchExtend ['on', 'off'], {'\Cif': 'elseif', '\Celseif': 'if'}
 <
 
 ==============================================================================
