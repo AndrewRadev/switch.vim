@@ -228,18 +228,25 @@ function! s:SwitchReverse()
 endfunction
 
 command! -nargs=* SwitchExtend call s:SwitchExtend(<args>)
-fun! s:SwitchExtend(...) abort
+fun! s:SwitchExtend(...)
   let b:switch_custom_definitions = get(b:, 'switch_custom_definitions',
-      \                                 copy(get(g:, 'switch_custom_definitions', [])))
+        \                               copy(get(g:, 'switch_custom_definitions', [])))
   if a:0 == 0
     echo b:switch_custom_definitions
   else
+    echohl ErrorMsg
     for def in a:000
-      if (type(def) == type({}) || type(def) == type([])) &&
-            \ index(b:switch_custom_definitions, def) < 0
-        call extend(b:switch_custom_definitions, [def])
+      if (type(def) == type({}) || type(def) == type([]))
+        if index(b:switch_custom_definitions, def) < 0
+          call extend(b:switch_custom_definitions, [def])
+        else
+          echomsg 'SwitchExtend: skipping duplicate definition:' string(def)
+        endif
+      else
+        echomsg 'SwitchExtend: args must be lists or dictionaries, skipping:' string(def)
       endif
     endfor
+    echohl None
   endif
 endfun
 
