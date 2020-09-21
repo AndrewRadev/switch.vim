@@ -32,4 +32,16 @@ describe "global definitions" do
     vim.switch
     assert_file_contents 'flag = "falsey"'
   end
+
+  specify "repeatability with vim-repeat" do
+    set_file_contents 'flag = true'
+    vim.search 'true'
+
+    vim.switch
+    assert_file_contents 'flag = false'
+
+    vim.feedkeys('.')
+    vim.write
+    assert_file_contents 'flag = true'
+  end
 end

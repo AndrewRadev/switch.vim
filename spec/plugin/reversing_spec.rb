@@ -24,4 +24,16 @@ describe "Reversed definitions" do
     vim.switch_reverse
     assert_file_contents 'three'
   end
+
+  specify "repeatability with vim-repeat" do
+    set_file_contents 'three'
+    vim.command("let b:switch_custom_definitions = [['one', 'two', 'three']]")
+
+    vim.switch_reverse
+    assert_file_contents 'two'
+
+    vim.feedkeys('.')
+    vim.write
+    assert_file_contents 'one'
+  end
 end

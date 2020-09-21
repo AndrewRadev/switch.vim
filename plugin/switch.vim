@@ -224,7 +224,7 @@ endfunction
 command! SwitchReverse call s:SwitchReverse()
 function! s:SwitchReverse()
   silent call switch#Switch({'reverse': 1})
-  silent! call repeat#set(":Switch\<cr>")
+  silent! call repeat#set(":SwitchReverse\<cr>")
 endfunction
 
 command! -nargs=* SwitchExtend call s:SwitchExtend(<args>)

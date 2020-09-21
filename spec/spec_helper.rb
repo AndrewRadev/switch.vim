@@ -14,6 +14,9 @@ Vimrunner::RSpec.configure do |config|
     # Up-to-date filetype support:
     vim.prepend_runtimepath(plugin_path.join('spec/support/rust.vim'))
 
+    # vim-repeat for testing dot-repetition:
+    vim.prepend_runtimepath(plugin_path.join('spec/support/vim-repeat'))
+
     # bootstrap filetypes
     vim.command 'autocmd BufNewFile,BufRead *.rs set filetype=rust'
 
