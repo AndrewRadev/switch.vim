@@ -9,11 +9,18 @@ If you'd like to contribute to the project, you can use the usual github pull-re
 
 ## Testing
 
-This project uses [rspec](http://rspec.info/) and [vimrunner](https://github.com/AndrewRadev/vimrunner) to test its behaviour. Testing vimscript this way is still fairly experimental, but does a great job of catching regressions. Tests are written in the ruby programming language, so if you're familiar with it, you should (I hope) find the tests fairly understandable and easy to get into.
+This project uses [rspec](http://rspec.info/) and [vimrunner](https://github.com/AndrewRadev/vimrunner) to test its behaviour. Testing vimscript this way does a great job of catching regressions, since it launches a real Vim instance and drives it (almost) as if it's a real user. Tests are written in the ruby programming language, so if you're familiar with it, you should (I hope) find the tests fairly understandable and easy to get into.
 
-If you're not familiar with ruby, please don't worry about it :). I'd definitely appreciate it if you could take a look at the tests and attempt to write something that describes your change. Even if you don't, Travis-bot should run the tests upon issuing a pull request, so we'll know right away if there's a regression. In that case, I'll work on the tests myself and see what I can do.
+If you're not familiar with ruby, it's okay to skip them. I'd definitely appreciate it if you could take a look at the tests and attempt to write something that describes your change. Even if you don't, TravisCI should run the tests on every pull request, so we'll know right away if there's a regression. In that case, I'll work on the tests myself and see what I can do.
 
-To run the test suite, provided you have ruby installed, first you need bundler:
+To run the test suite, you need to first make sure you've got git submodules checked out:
+
+```
+$ git submodule init
+$ git submodule update
+```
+
+Then, provided you have ruby installed, you need bundler:
 
 ```
 $ gem install bundler
