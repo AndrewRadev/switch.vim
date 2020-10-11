@@ -1,3 +1,7 @@
+if !exists("g:loaded_switch")
+  finish
+endif
+
 if &ft == 'eruby'
   " could happen, depending on load order
   finish

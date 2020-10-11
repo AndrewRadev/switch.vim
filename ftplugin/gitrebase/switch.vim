@@ -1,3 +1,7 @@
+if !exists("g:loaded_switch")
+  finish
+endif
+
 let b:switch_definitions =
       \ [
       \   [ 'pick', 'fixup', 'reword', 'edit', 'squash', 'exec', 'break', 'drop', 'label', 'reset', 'merge' ],
