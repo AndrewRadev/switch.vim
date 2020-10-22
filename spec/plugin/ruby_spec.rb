@@ -178,13 +178,13 @@ describe "ruby definitions" do
   end
 
   specify "short blocks" do
-    set_file_contents 'do_something { |x| x.some_work! }'
+    set_file_contents 'do_something { |x| x.some_work! }.foo()'
 
     vim.switch
-    assert_file_contents 'do_something(&:some_work!)'
+    assert_file_contents 'do_something(&:some_work!).foo()'
 
     vim.switch
-    assert_file_contents 'do_something { |x| x.some_work! }'
+    assert_file_contents 'do_something { |x| x.some_work! }.foo()'
   end
 
   specify "array shorthands (strings)" do
