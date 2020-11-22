@@ -210,6 +210,9 @@ let g:switch_builtins =
 
 let g:switch_definitions =
       \ [
+      \   { '\C\<and\>': 'or', '\C\<or\>': 'and' },
+      \   { '\C\<And\>': 'Or', '\C\<Or\>': 'And' },
+      \   { '\C\<AND\>': 'OR', '\C\<OR\>': 'AND' },
       \   g:switch_builtins.ampersands,
       \   g:switch_builtins.capital_true_false,
       \   g:switch_builtins.true_false,

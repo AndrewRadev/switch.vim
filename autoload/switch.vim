@@ -52,6 +52,20 @@ function! switch#NormalizedCase(definition)
         \ }
 endfunction
 
+function! switch#Words(definition)
+  return {
+        \ '_type': 'words',
+        \ '_definition': a:definition,
+        \ }
+endfunction
+
+function! switch#NormalizedCaseWords(definition)
+  return {
+        \ '_type': 'normalized_case_words',
+        \ '_definition': a:definition,
+        \ }
+endfunction
+
 function! s:GetDefaultDefinitions()
   let definitions = []
 

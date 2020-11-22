@@ -88,7 +88,7 @@ same as calling the `:Switch` command:
 :Switch
 ```
 
-However, you can also call the function with a |Dict| of options. Instead of
+However, you can also call the function with a dict of options. Instead of
 `:SwitchReverse`, you can invoke it with the `reverse` option:
 
 ``` vim
@@ -142,8 +142,41 @@ will be changed to "bar". If it sees "bar", it will change it to "baz", and
 "baz" would be turned into "foo". This is the simple case of a definition that
 is implemented (in a slightly different way) by the "toggle.vim" plugin.
 
-The more complicated (and more powerful) way to define a switch pattern is by
-using a Dict.
+You might want this to work for different capitalizations, like with `true`
+and `True` and `TRUE`. You might also want to also affect only word
+boundaries. While you could use the more complicated dict definition, a simple
+way to tackle these scenarios is with modifier functions:
+
+- `switch#NormalizedCase`
+- `switch#Words`
+- `switch#NormalizedCaseWords`
+
+Here's how you might use these:
+
+``` vim
+let g:switch_custom_definitions =
+    \ [
+    \   switch#NormalizedCase(['one', 'two']),
+    \   switch#Words(['three', 'four']),
+    \   switch#NormalizedCaseWords(['five', 'six']),
+    \ ]
+```
+
+The result of this is that:
+- The first definition would switch between "one" and "two", between "One" and
+  "Two", and between "ONE" and "TWO".
+- The second definition would switch between "three" and "four" only at word
+  boundaries, as if the patterns have `\<` and `\>` modifiers added to them.
+- The third would switch between "five"/"six", "Five"/"Six", "FIVE"/"SIX" only
+  at word boundaries with a combination of the above.
+
+See `:help switch-internals` for some information on the underlying data
+format if you'd like to use a different method to generate definitions (like,
+say, loading JSON).
+
+Leaving lists aside, the more complicated (and more powerful) way to define a
+switch pattern is by using a Dict. In fact, a list definition is processed
+into three dict definitions, one for each pair of switches.
 
 ### Dict definitions
 

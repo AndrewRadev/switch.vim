@@ -12,7 +12,11 @@ function! switch#mapping#Process(definition, options)
       if a:definition._type == 'default'
         return s:ProcessDictMapping(a:definition._definition)
       elseif a:definition._type == 'normalized_case'
-        return s:ProcessNormalizedCaseMapping(a:definition._definition)
+        return s:ProcessModifierListMapping(a:definition._definition, {'case': 1, 'words': 0})
+      elseif a:definition._type == 'words'
+        return s:ProcessModifierListMapping(a:definition._definition, {'case': 0, 'words': 1})
+      elseif a:definition._type == 'normalized_case_words'
+        return s:ProcessModifierListMapping(a:definition._definition, {'case': 1, 'words': 1})
       else
         echomsg "Unknown definition type: ".a:definition._type
         return []
@@ -181,13 +185,15 @@ function! s:ProcessDictMapping(definition)
   return [mapping]
 endfunction
 
-function! s:ProcessNormalizedCaseMapping(definition)
+function! s:ProcessModifierListMapping(definition, options)
   if type(a:definition) != s:type_list
-    echoerr "Normalized case mappings work only for list definitions"
+    echoerr "Modifier mappings (case normalization, word boundaries) work only for list definitions"
     return []
   endif
 
   let dict_mappings = []
+  let normalized_case = a:options.case
+  let word_boundaries = a:options.words
 
   for [first, second] in s:LoopedListItems(a:definition)
     let m = {}
@@ -198,20 +204,30 @@ function! s:ProcessNormalizedCaseMapping(definition)
   let mappings = []
   for entry in dict_mappings
     for [key, value] in items(entry)
-      let key   = tolower(key)
-      let value = tolower(value)
+      if word_boundaries
+        let key = '\<'.key.'\>'
+      endif
 
-      let m = {}
-      let m['\C'.key] = value
-      let mappings += s:ProcessDictMapping(m)
+      if normalized_case
+        let key   = tolower(key)
+        let value = tolower(value)
 
-      let m = {}
-      let m['\C'.toupper(key)] = toupper(value)
-      let mappings += s:ProcessDictMapping(m)
+        let m = {}
+        let m['\C'.key] = value
+        let mappings += s:ProcessDictMapping(m)
 
-      let m = {}
-      let m['\C'.switch#util#Capitalize(key)] = switch#util#Capitalize(value)
-      let mappings += s:ProcessDictMapping(m)
+        let m = {}
+        let m['\C'.toupper(key)] = toupper(value)
+        let mappings += s:ProcessDictMapping(m)
+
+        let m = {}
+        let m['\C'.switch#util#Capitalize(key)] = switch#util#Capitalize(value)
+        let mappings += s:ProcessDictMapping(m)
+      else
+        let m = {}
+        let m[key] = value
+        let mappings += s:ProcessDictMapping(m)
+      endif
     endfor
   endfor
 
