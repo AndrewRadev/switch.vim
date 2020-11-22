@@ -63,19 +63,17 @@ describe "clojure definitions" do
     assert_file_contents '(def foo "bar")'
   end
 
-  pending "see #10; &iskeyword depends on your Vim's clojure support" do
-    specify "string type" do
-      set_file_contents '(def foo "ba-r!")'
-      vim.set 'filetype', 'clojure'
+  specify "string type" do
+    set_file_contents '(def foo "ba-r!")'
+    vim.set 'filetype', 'clojure'
 
-      vim.search('ba-r').switch
-      assert_file_contents "(def foo 'ba-r!)"
+    vim.search('ba-r').switch
+    assert_file_contents "(def foo 'ba-r!)"
 
-      vim.switch
-      assert_file_contents "(def foo :ba-r!)"
+    vim.switch
+    assert_file_contents "(def foo :ba-r!)"
 
-      vim.switch
-      assert_file_contents '(def foo "ba-r!")'
-    end
+    vim.switch
+    assert_file_contents '(def foo "ba-r!")'
   end
 end
