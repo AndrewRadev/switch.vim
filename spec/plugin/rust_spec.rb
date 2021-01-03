@@ -48,4 +48,26 @@ describe "rust definitions" do
     vim.switch
     assert_file_contents 'let hello = "Hello, World!";'
   end
+
+  specify "is_some/is_none" do
+    set_file_contents 'if list.get(1).is_some() {'
+    vim.search('is_some')
+
+    vim.switch
+    assert_file_contents 'if list.get(1).is_none() {'
+
+    vim.switch
+    assert_file_contents 'if list.get(1).is_some() {'
+  end
+
+  specify "assert_eq/assert_ne" do
+    set_file_contents 'assert_eq!(foo, bar);'
+    vim.search('assert_eq')
+
+    vim.switch
+    assert_file_contents 'assert_ne!(foo, bar);'
+
+    vim.switch
+    assert_file_contents 'assert_eq!(foo, bar);'
+  end
 end

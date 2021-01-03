@@ -702,6 +702,16 @@ String type (g:switch_builtins.rust_string)
     let hello = r"Hello, World";
     let hello = r#"Hello, World"#;
 <
+Option is_some/is_none (g:switch_builtins.rust_is_some)
+>
+    list.get(1).is_some()
+    list.get(1).is_none()
+<
+Equality assertion (g:switch_builtins.rust_assert_eq)
+>
+    assert_eq!(foo, bar);
+    assert_ne!(foo, bar);
+<
 TOML ~
 
 Particularly for files named `Cargo.toml` with the `toml` filetype (not

@@ -202,6 +202,14 @@ let g:switch_builtins =
       \     'r"\([^"]*\)"':  'r#"\1"#',
       \     'r#"\([^"]*\)"#': '"\1"',
       \   },
+      \   'rust_is_some': {
+      \     '\<is_some\>': 'is_none',
+      \     '\<is_none\>': 'is_some',
+      \   },
+      \   'rust_assert': {
+      \     '\<assert_eq!': 'assert_ne!',
+      \     '\<assert_ne!': 'assert_eq!',
+      \   },
       \   'cargo_dependency_version': {
       \     '^\s*\([[:keyword:]-]\+\)\s*=\s*\(["''].\{-}["'']\)': '\1 = { version = \2 }',
       \     '^\s*\([[:keyword:]-]\+\)\s*=\s*{\s*version\s*=\s*\(["''].\{-}["'']\)\s*}': '\1 = \2',
