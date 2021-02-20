@@ -213,6 +213,10 @@ let g:switch_builtins =
       \   'cargo_dependency_version': {
       \     '^\s*\([[:keyword:]-]\+\)\s*=\s*\(["''].\{-}["'']\)': '\1 = { version = \2 }',
       \     '^\s*\([[:keyword:]-]\+\)\s*=\s*{\s*version\s*=\s*\(["''].\{-}["'']\)\s*}': '\1 = \2',
+      \   },
+      \   'vim_script_local_function': {
+      \     '\<s:\(\h\w\+\)(':  '<SID>\1(',
+      \     '<SID>\(\h\w\+\)(': 's:\1(',
       \   }
       \ }
 
