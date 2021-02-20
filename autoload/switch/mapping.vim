@@ -143,11 +143,15 @@ function! s:LimitPattern(pattern, start, end)
   let pattern = a:pattern
 
   if a:start > 1
-    let pattern = '\%>'.(a:start - 1).'c'.pattern
+    let pattern = a:pattern =~# '\\zs'
+          \ ? substitute(pattern, '\\zs', '\\zs\\%>'.(a:start - 1).'c', '')
+          \ : '\%>'.(a:start - 1).'c'.pattern
   endif
 
   if a:end > 1 && a:end < col('$')
-    let pattern = pattern.'\m\%<'.(a:end + 1).'c'
+    let pattern = a:pattern =~# '\\ze'
+          \ ? substitute(pattern, '\\ze', '\\ze\\%<'.(a:end + 1).'c', '')
+          \ : pattern.'\m\%<'.(a:end + 1).'c'
   endif
 
   return pattern
