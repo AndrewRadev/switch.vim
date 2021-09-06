@@ -87,3 +87,8 @@ function! s:GetDefaultDefinitions()
 
   return definitions
 endfunction
+
+function! switch#opfunc(type)
+    Switch
+    return ''
+endfunction
