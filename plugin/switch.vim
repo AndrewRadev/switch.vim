@@ -265,7 +265,7 @@ fun! s:SwitchExtend(...)
   endif
 endfun
 
-nnoremap <silent> <Plug>(Switch) m`:set opfunc=switch#opfunc<cr>g@``
+nnoremap <silent> <Plug>(Switch) :set opfunc=switch#opfunc<cr>g@l
 
 if g:switch_mapping != '' && !hasmapto('<Plug>(Switch)')
   exe 'nmap '.g:switch_mapping.' <Plug>(Switch)'
