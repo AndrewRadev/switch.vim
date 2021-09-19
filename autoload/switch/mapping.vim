@@ -1,5 +1,6 @@
 let s:type_list = type([])
 let s:type_dict = type({})
+let s:type_func = type(function('tr'))
 
 " Constructor:
 " ============
@@ -45,7 +46,7 @@ function! switch#mapping#Match() dict
   let match_end    = -1
   let match_length = -1
 
-  for [pattern, replacement] in items(self.definitions)
+  for [pattern, Replacement] in items(self.definitions)
     try
       let saved_cursor = getpos('.')
       let [_buf, lnum, col, _off] = saved_cursor
@@ -94,19 +95,19 @@ function! switch#mapping#Match() dict
   return switch#match#Null()
 endfunction
 
-" Replaces the pattern from the match data with its replacement. Takes care of
+" Replaces the pattern from the match data with its Replacement. Takes care of
 " both simple replacements and nested ones.
 "
 function! switch#mapping#Replace(match) dict
   let pattern     = a:match.pattern
-  let replacement = self.definitions[pattern]
+  let Replacement = self.definitions[pattern]
   let oldsearch   = @/
 
-  if type(replacement) == s:type_dict
+  if type(Replacement) == s:type_dict
     " maintain change delta for adjusting match limits
     let delta = 0
 
-    for [pattern, sub_replacement] in items(replacement)
+    for [pattern, sub_replacement] in items(Replacement)
       let last_column     = col('$')
       let pattern         = s:LimitPattern(pattern, a:match.start, a:match.end + delta)
       let pattern         = escape(pattern, '/')
@@ -120,12 +121,26 @@ function! switch#mapping#Replace(match) dict
       " length of the line may have changed, adjust
       let delta += col('$') - last_column
     endfor
+  elseif type(Replacement) == s:type_func
+    let pattern = s:LimitPattern(pattern, a:match.start, a:match.end)
+    let pattern = escape(pattern, '/')
+
+    let g:Switch_replacer = Replacement
+
+    let Replacement = '\=call(g:Switch_replacer, [submatch(0)])'
+    echomsg 's/'.pattern.'/'.Replacement.'/'
+    exe 's/'.pattern.'/'.Replacement.'/'
+
+    unlet g:Switch_replacer
+
+    " remove pattern from history
+    call histdel('search', -1)
   else
     let pattern     = s:LimitPattern(pattern, a:match.start, a:match.end)
     let pattern     = escape(pattern, '/')
-    let replacement = escape(replacement, '/&')
+    let Replacement = escape(Replacement, '/&')
 
-    exe 's/'.pattern.'/'.replacement.'/'
+    exe 's/'.pattern.'/'.Replacement.'/'
     " remove pattern from history
     call histdel('search', -1)
   endif
@@ -169,8 +184,8 @@ function! s:ProcessListMapping(definitions, options)
   for [first, second] in s:LoopedListItems(definitions)
     let dict_mapping          = {}
     let pattern               = '\C\V'.first.'\m'
-    let replacement           = second
-    let dict_mapping[pattern] = replacement
+    let Replacement           = second
+    let dict_mapping[pattern] = Replacement
 
     let dict_mappings += s:ProcessDictMapping(dict_mapping)
   endfor
