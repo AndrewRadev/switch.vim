@@ -126,9 +126,9 @@ function! switch#mapping#Replace(match) dict
     let pattern = escape(pattern, '/')
 
     let g:Switch_replacer = Replacement
+    let submatch_expression = join(map(range(0, 9), '"submatch(".v:val.")"'), ',')
 
-    let Replacement = '\=call(g:Switch_replacer, [submatch(0)])'
-    echomsg 's/'.pattern.'/'.Replacement.'/'
+    let Replacement = '\=call(g:Switch_replacer, [['.submatch_expression.']])'
     exe 's/'.pattern.'/'.Replacement.'/'
 
     unlet g:Switch_replacer
