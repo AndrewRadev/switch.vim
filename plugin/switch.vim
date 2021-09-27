@@ -265,7 +265,6 @@ fun! s:SwitchExtend(...)
   endif
 endfun
 
-
 if g:switch_mapping != ''
   exe 'nnoremap <silent> '.g:switch_mapping.' :Switch<cr>'
 endif
