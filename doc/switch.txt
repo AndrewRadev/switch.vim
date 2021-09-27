@@ -275,13 +275,51 @@ pattern asserts that, in this place of the text, there is no "echo".
 Otherwise, the second pattern would match as well. Using the |\@!| pattern in
 strategic places is important in many cases.
 
-For even more complicated substitions, you can use the nested form.
+There's other ways to define how to replace the matched string.
+
+Function call replacements ~
+
+The value of the dict keys can be a |Funcref|. For example, a lambda:
+>
+    let g:switch_custom_definitions =
+        \ [
+        \   {
+        \     '\d{10} ': {m -> trim(system("date +%Y%m%d_%H%M%S -d@".m[0])).' '}
+        \   }
+        \ ]
+<
+This would match a 10-digit number and pass it along to the external `date`
+command, replacing it with the result. The lambda takes one argument, which a
+list of the full match, and each individual subgroup. So, `m[0]` would be the
+entire match, while `m[2]` would be the second group, the equivalent of `\2`
+in a |subsitute()| call.
+
+Instead of a lambda, it could also be a named function, giving you more space
+to add more complicated logic:
+>
+    function! SwitchTimestamp(match)
+      let result = trim(system('...', a:match[0]))
+
+      if v:shell_error
+        echoerr result
+        return a:match[0]
+      endif
+
+      return result
+    endfunction
+
+    let g:switch_custom_definitions =
+        \ [
+        \   {
+        \     '\d{10} ': function('SwitchTimestamp')
+        \   }
+        \ ]
+<
 
 Nested dict definitions ~
 
 The following expression replaces underscored identifier names with their
-camelcased versions.
-
+camelcased versions:
 >
     let g:switch_custom_definitions = [
         \   {
