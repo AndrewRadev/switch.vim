@@ -77,7 +77,7 @@ and it's unset by default (no mapping is defined).
 You can also map the <Plug>s directly, for example:
 >
     nmap - <Plug>(Switch)
-    nmap + <Plug>(Switch)
+    nmap + <Plug>(SwitchReverse)
 <
 Using mappings brings the benefit that the commands become repeatable with `.`
 
