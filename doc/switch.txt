@@ -57,11 +57,6 @@ To avoid the default mapping completely, set the variable to an empty string:
 >
     let g:switch_mapping = ""
 <
-								  *switch-plug*
-You can also map the <Plug> for a similar effect:
->
-    nmap gs <Plug>(Switch)
-<
 See |switch-customization| below for information on how to create several
 mappings with different definitions.
 
@@ -78,6 +73,13 @@ and it's unset by default (no mapping is defined).
 >
     let g:switch_reverse_mapping = '+'
 <
+								*switch-plugs*
+You can also map the <Plug>s directly, for example:
+>
+    nmap - <Plug>(Switch)
+    nmap + <Plug>(Switch)
+<
+Using mappings brings the benefit that the commands become repeatable with `.`
 
 There are three main principles that the substition follows:
 
