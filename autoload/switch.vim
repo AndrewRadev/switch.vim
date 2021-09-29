@@ -87,3 +87,13 @@ function! s:GetDefaultDefinitions()
 
   return definitions
 endfunction
+
+function! switch#opfunc1(type)
+    Switch
+    return ''
+endfunction
+
+function! switch#opfunc2(type)
+    SwitchReverse
+    return ''
+endfunction

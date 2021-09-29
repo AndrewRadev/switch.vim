@@ -73,6 +73,13 @@ and it's unset by default (no mapping is defined).
 >
     let g:switch_reverse_mapping = '+'
 <
+								*switch-plugs*
+You can also map the <Plug>s directly, for example:
+>
+    nmap - <Plug>(Switch)
+    nmap + <Plug>(SwitchReverse)
+<
+Using mappings brings the benefit that the commands become repeatable with `.`
 
 There are three main principles that the substition follows:
 
