@@ -45,6 +45,16 @@ function! switch#Switch(...)
   endtry
 endfunction
 
+function! switch#OpfuncForward(type)
+  silent call switch#Switch()
+  return ''
+endfunction
+
+function! switch#OpfuncReverse(type)
+  silent call switch#Switch({'reverse': 1})
+  return ''
+endfunction
+
 function! switch#NormalizedCase(definition)
   return {
         \ '_type': 'normalized_case',
@@ -86,14 +96,4 @@ function! s:GetDefaultDefinitions()
   endif
 
   return definitions
-endfunction
-
-function! switch#opfunc1(type)
-    Switch
-    return ''
-endfunction
-
-function! switch#opfunc2(type)
-    SwitchReverse
-    return ''
 endfunction

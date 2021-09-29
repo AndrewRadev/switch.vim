@@ -242,6 +242,9 @@ function! s:SwitchReverse()
   silent! call repeat#set(":SwitchReverse\<cr>")
 endfunction
 
+nnoremap <silent> <Plug>(Switch)        :set opfunc=switch#OpfuncForward<cr>g@l
+nnoremap <silent> <Plug>(SwitchReverse) :set opfunc=switch#OpfuncReverse<cr>g@l
+
 command! -nargs=* SwitchExtend call s:SwitchExtend(<args>)
 fun! s:SwitchExtend(...)
   let b:switch_custom_definitions = get(b:, 'switch_custom_definitions',
@@ -264,9 +267,6 @@ fun! s:SwitchExtend(...)
     echohl None
   endif
 endfun
-
-nnoremap <silent> <Plug>(Switch)        :set opfunc=switch#opfunc1<cr>g@l
-nnoremap <silent> <Plug>(SwitchReverse) :set opfunc=switch#opfunc2<cr>g@l
 
 if g:switch_mapping != '' && !hasmapto('<Plug>(Switch)')
   exe 'nmap '.g:switch_mapping.' <Plug>(Switch)'
