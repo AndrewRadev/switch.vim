@@ -32,7 +32,7 @@ describe "Modifiers" do
     assert_file_contents "two\nPhonetics"
   end
 
-  specify "normalized case with word boundaries" do
+  specify "normalized case with word boundaries for uppercase" do
     set_file_contents "ONE\nPHONETICS"
     vim.command("let b:switch_custom_definitions = [switch#NormalizedCaseWords(['one', 'two'])]")
 
@@ -43,5 +43,19 @@ describe "Modifiers" do
     vim.search 'PH\zsONETICS'
     vim.switch
     assert_file_contents "TWO\nPHONETICS"
+  end
+
+  specify "normalized case with word boundaries for titlecase" do
+    # Bug report: https://github.com/AndrewRadev/switch.vim/issues/85
+    set_file_contents "One\nPhOnetics"
+    vim.command("let b:switch_custom_definitions = [switch#NormalizedCaseWords(['one', 'two'])]")
+
+    vim.search '\<One\>'
+    vim.switch
+    assert_file_contents "Two\nPhOnetics"
+
+    vim.search 'Ph\zsOnetics'
+    vim.switch
+    assert_file_contents "Two\nPhOnetics"
   end
 end

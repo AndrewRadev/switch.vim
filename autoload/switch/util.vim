@@ -11,8 +11,10 @@ function! switch#util#FlatMap(list, expr)
   return result
 endfunction
 
-" Capitalize first letter of argument:
-" foo -> Foo
+" Capitalize first alphabetical character of argument:
+"   foo   ->   Foo
+" \<foo\> -> \<Foo\>
+"
 function! switch#util#Capitalize(word)
-  return substitute(a:word, '^\w', '\U\0', 'g')
+  return substitute(a:word, '\w', '\U\0', '')
 endfunction
