@@ -217,6 +217,10 @@ let g:switch_builtins =
       \   'vim_script_local_function': {
       \     '\<s:\(\h\w\+\)(':  '<SID>\1(',
       \     '<SID>\(\h\w\+\)(': 's:\1(',
+      \   },
+      \   'markdown_task_item': {
+      \     '^\(\s*\)- \[ \] \(.*\)':  '\1- [x] \2',
+      \     '^\(\s*\)- \[x\] \(.*\)':  '\1- [ ] \2',
       \   }
       \ }
 

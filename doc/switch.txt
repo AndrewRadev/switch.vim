@@ -765,6 +765,13 @@ built-in, but there are plugins for it):
     structopt = "0.3.5"
     structopt = { version = "0.3.5" }
 <
+Markdown ~
+
+Task items (g:switch_builtins.markdown_task_item)
+>
+    - [ ] Task 1
+    - [x] Task 1
+<
 
 ==============================================================================
 SETTINGS                                                       *switch-settings*

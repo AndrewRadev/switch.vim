@@ -612,6 +612,15 @@ structopt = "0.3.5"
 structopt = { version = "0.3.5" }
 ```
 
+### Markdown
+
+Task items
+
+``` markdown
+- [ ] Task 1
+- [x] Task 1
+```
+
 ## Similar work
 
 This plugin is very similar to two other ones:
