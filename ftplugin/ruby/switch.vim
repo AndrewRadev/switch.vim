@@ -17,6 +17,7 @@ let b:switch_definitions =
       \   g:switch_builtins.rspec_expect,
       \   g:switch_builtins.rspec_to,
       \   g:switch_builtins.rspec_be_truthy_falsey,
+      \   g:switch_builtins.rspec_be_present_blank,
       \   g:switch_builtins.ruby_keyword_string,
       \   g:switch_builtins.ruby_string,
       \   g:switch_builtins.ruby_short_blocks,

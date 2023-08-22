@@ -107,6 +107,7 @@ let g:switch_builtins =
       \     '\.to_not ': '.to ',
       \   },
       \   'rspec_be_truthy_falsey': ['be_truthy', 'be_falsey'],
+      \   'rspec_be_present_blank': ['be_present', 'be_blank'],
       \   'eruby_if_clause': {
       \     '<% if true or (\(.*\)) %>':          '<% if false and (\1) %>',
       \     '<% if false and (\(.*\)) %>':        '<% if \1 %>',
