@@ -251,8 +251,8 @@ function! s:SwitchReverse()
   silent! call repeat#set(":SwitchReverse\<cr>")
 endfunction
 
-nnoremap <silent> <Plug>(Switch)        :set opfunc=switch#OpfuncForward<cr>g@l
-nnoremap <silent> <Plug>(SwitchReverse) :set opfunc=switch#OpfuncReverse<cr>g@l
+nnoremap <silent><expr>  <Plug>(Switch)         execute("set opfunc=switch#OpfuncForward").'g@l'
+nnoremap <silent><expr>  <Plug>(SwitchReverse)  execute("set opfunc=switch#OpfuncReverse").'g@l'
 
 command! -nargs=* SwitchExtend call s:SwitchExtend(<args>)
 fun! s:SwitchExtend(...)

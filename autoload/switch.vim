@@ -35,7 +35,7 @@ function! switch#Switch(...)
     endfor
 
     if !min_match.IsNull()
-      call min_match.Replace()
+      call min_match.Replace(options)
       return 1
     else
       return 0
@@ -46,12 +46,12 @@ function! switch#Switch(...)
 endfunction
 
 function! switch#OpfuncForward(type)
-  silent call switch#Switch()
+  silent call switch#Switch({'count': v:count})
   return ''
 endfunction
 
 function! switch#OpfuncReverse(type)
-  silent call switch#Switch({'reverse': 1})
+  silent call switch#Switch({'reverse': 1, 'count': v:count})
   return ''
 endfunction
 

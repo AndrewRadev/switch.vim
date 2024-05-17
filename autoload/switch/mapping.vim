@@ -98,7 +98,7 @@ endfunction
 " Replaces the pattern from the match data with its Replacement. Takes care of
 " both simple replacements and nested ones.
 "
-function! switch#mapping#Replace(match) dict
+function! switch#mapping#Replace(match, options) dict
   let pattern     = a:match.pattern
   let Replacement = self.definitions[pattern]
   let oldsearch   = @/
@@ -128,7 +128,9 @@ function! switch#mapping#Replace(match) dict
     let g:Switch_replacer = Replacement
     let submatch_expression = join(map(range(0, 9), '"submatch(".v:val.")"'), ',')
 
-    let Replacement = '\=call(g:Switch_replacer, [['.submatch_expression.']])'
+    let rev = get(a:options, 'reverse')
+    let cnt = get(a:options, 'count')
+    let Replacement = '\=call(g:Switch_replacer, [['.submatch_expression.'],'.rev.','.cnt.'])'
     exe 's/'.pattern.'/'.Replacement.'/'
 
     unlet g:Switch_replacer

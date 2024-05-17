@@ -43,8 +43,8 @@ function! switch#match#IsBetter(other) dict
   endif
 endfunction
 
-function! switch#match#Replace() dict
-  call self.mapping.Replace(self)
+function! switch#match#Replace(...) dict
+  call self.mapping.Replace(self, get(a:,1))
 endfunction
 
 function! switch#match#IsNull() dict
