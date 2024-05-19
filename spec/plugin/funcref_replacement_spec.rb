@@ -5,7 +5,7 @@ describe "Funcref replacement" do
 
   specify "function call" do
     set_file_contents 'one'
-    vim.command("function! Custom(match) \n return a:match[0] . '1' \n endfunction")
+    vim.command("function! Custom(...) \n return a:1[0] . '1' \n endfunction")
     vim.command("let b:switch_custom_definitions = [{ 'one': funcref('Custom') }]")
 
     vim.switch
