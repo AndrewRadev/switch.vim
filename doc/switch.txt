@@ -291,15 +291,21 @@ The value of the dict keys can be a |Funcref|. For example, a lambda:
         \ ]
 <
 This would match a 10-digit number and pass it along to the external `date`
-command, replacing it with the result. The lambda takes one argument, which a
-list of the full match, and each individual subgroup. So, `m[0]` would be the
-entire match, while `m[2]` would be the second group, the equivalent of `\2`
-in a |subsitute()| call.
+command, replacing it with the result. The lambda (in this case) takes one
+argument, which a list of the full match, and each individual subgroup. So,
+`m[0]` would be the entire match, while `m[2]` would be the second group, the
+equivalent of `\2` in a |subsitute()| call.
+
+The lambda can take up to three arguments:
+
+- The match, as described
+- A flag, either 0 or 1 for whether a "reverse" switch was triggered
+- A count, so if you'd like, you can pick your replacement from a list
 
 Instead of a lambda, it could also be a named function, giving you more space
 to add more complicated logic:
 >
-    function! SwitchTimestamp(match)
+    function! SwitchTimestamp(match, reverse, count)
       let result = trim(system('...', a:match[0]))
 
       if v:shell_error
@@ -317,6 +323,12 @@ to add more complicated logic:
         \   }
         \ ]
 <
+Note that in the explicit function case, you need to handle the full list of
+three arguments that the function receives, where in a lambda you could skip
+the ones you don't need. You could, alternatively, define the function with
+variable arguments and take what you need with |a:1|, |a:000|, etc, see
+|function-argument| for more details.
+
 
 Nested dict definitions ~
 
