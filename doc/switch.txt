@@ -498,14 +498,17 @@ RSpec be_truthy/be_falsey (g:switch_builtins.rspec_be_truthy_falsey):
     expect(true).to be_truthy
     expect(true).to be_falsey
 <
-Ruby string style (g:switch_builtins.ruby_string):
+Ruby keyword string style (no spaces) (g:switch_builtins.ruby_keyword_string):
 >
     foo = 'bar'
     foo = "baz"
     foo = :baz
 <
-Note that it only works for single-word strings.
-
+Ruby string style (g:switch_builtins.ruby_keyword_string):
+>
+    foo = 'foo bar'
+    foo = "foo bar"
+<
 Ruby block shorthands (g:switch_builtins.ruby_short_blocks):
 >
     do_something { |x| x.some_work! }
@@ -707,7 +710,7 @@ Git Rebase Commands:
 
 Elixir ~
 
-Charlist -> Binary -> Atom (g:switch_builtins.ruby_string)
+Charlist -> Binary -> Atom (g:switch_builtins.ruby_keyword_string)
 >
     foo = 'bar'
     foo = "bar"
