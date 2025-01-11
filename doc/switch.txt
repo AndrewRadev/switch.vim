@@ -787,6 +787,28 @@ Task items (g:switch_builtins.markdown_task_item)
     - [ ] Task 1
     - [x] Task 1
 <
+Python ~
+
+Dict access (g:switch_builtins.python_dict_get)
+>
+    spam['eggs']
+    spam.get('eggs')
+<
+String style (g:switch_builtins.python_string_style)
+>
+    'Ham'
+    "Ham"
+    f"Ham"
+<
+Jinja ~
+
+Tag type (g:switch_builtins.jinja_tag_type)
+>
+    {{ content }}
+    {% content %}
+    {# content #}
+<
+
 
 ==============================================================================
 SETTINGS                                                       *switch-settings*
