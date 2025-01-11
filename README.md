@@ -1,17 +1,16 @@
 [![GitHub version](https://badge.fury.io/gh/andrewradev%2Fswitch.vim.svg)](https://badge.fury.io/gh/andrewradev%2Fswitch.vim)
-[![Build Status](https://secure.travis-ci.org/AndrewRadev/switch.vim.svg?branch=master)](http://travis-ci.org/AndrewRadev/switch.vim)
 
-## Screencast!
-
-This plugin is easier to demonstrate than explain. You can find a screencast
-[here](http://youtu.be/zIOOLZJb87U).
+![Demo](http://i.andrewradev.com/116a3b7f45b48186627def8662ffb133.gif)
 
 ## Usage
 
-The main entry point of the plugin is a single command, `:Switch`. When the
+Demo screencast: <https://www.youtube.com/watch?v=zIOOLZJb87U>
+
+The purpose of the plugin is to switch some text under the cursor based on
+regex patterns. The main entry point is a single command, `:Switch`. When the
 command is executed, the plugin looks for one of a few specific patterns under
-the cursor and performs a substitution depending on the pattern. For example, if
-the cursor is on the "true" in the following code:
+the cursor and performs a substitution depending on it. For example, if the
+cursor is on the "true" in the following code:
 
 ``` ruby
 flag = true
