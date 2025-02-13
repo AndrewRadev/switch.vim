@@ -25,4 +25,14 @@ describe "python definitions" do
     vim.switch
     assert_file_contents "foo['one']"
   end
+
+  specify "dict style" do
+    set_file_contents "data = {'foo': 'bar', 'bar': 'baz'}"
+
+    vim.search('{').switch
+    assert_file_contents "data = dict(foo='bar', bar='baz')"
+
+    vim.switch
+    assert_file_contents "data = {'foo': 'bar', 'bar': 'baz'}"
+  end
 end

@@ -800,6 +800,11 @@ String style (g:switch_builtins.python_string_style)
     "Ham"
     f"Ham"
 <
+Dictionary style (g:switch_builtins.python_dict_style)
+>
+    {'foo': 'bar', 'bar': 'baz'}
+    dict(foo='bar', bar='baz')
+<
 Jinja ~
 
 Tag type (g:switch_builtins.jinja_tag_type)
