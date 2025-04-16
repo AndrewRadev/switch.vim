@@ -7,4 +7,5 @@ let b:switch_definitions =
       \   g:switch_builtins.python_dict_get,
       \   g:switch_builtins.python_string_style,
       \   g:switch_builtins.python_dict_style,
+      \   g:switch_builtins.python_asserts,
       \ ]

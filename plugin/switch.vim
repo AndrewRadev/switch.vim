@@ -253,6 +253,12 @@ let g:switch_builtins =
       \     '''\(\%([^''\\]\|\\.\)*\)''':  '"\1"',
       \     'f\@!"\(\%([^"\\]\|\\.\)*\)"': 'f"\1"',
       \   },
+      \   'python_asserts': {
+      \     '\<assertTrue\>':      'assertFalse',
+      \     '\<assertFalse\>':     'assertTrue',
+      \     '\<assertIsNone\>':    'assertIsNotNone',
+      \     '\<assertIsNotNone\>': 'assertIsNone',
+      \   },
       \ }
 
 let g:switch_definitions =
