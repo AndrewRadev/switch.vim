@@ -88,37 +88,39 @@ There are three main principles that the substition follows:
    text.
 
 2. When several patterns match, the shortest match is performed. For example,
-   in ruby, the following switch is defined:
-
+   in markdown, the following switch is defined:
 >
-    { :foo => true }
-    # switches into:
-    { foo: true }
-<
+    - [ ] Implement true/false switching
 
-   This works if the cursor is positioned somewhere on the ":foo =>" part, but
-   if it's on top of "true", the abovementioned true -> false substition will
-   be performed instead. If you want to perform a "larger" substition instead,
-   you could move your cursor away from the "smaller" match. In this case,
-   move the cursor away from the "true" keyword.
+    switches into:
+
+    - [x] Implement true/false switching
+<
+   This works if the cursor is positioned anywhere on the line except if it's
+   on top of "true" or "false". In that case, the abovementioned true -> false
+   substition will be performed instead. If you want to perform a "larger"
+   substition instead, you could move your cursor away from the "smaller"
+   match. In this case, move the cursor away from the "true" or "false" words.
 
 3. When several patterns with the same size match, the order of the
    definitions is respected. For instance, in eruby, the following code can be
    transformed:
-
 >
     <% if foo? %>
-    # could switch into:
+
+    could switch into:
+
     <%# if foo? %>
-    # but instead, it would switch into:
+
+    but instead, it would switch into:
+
     <% if true or (foo?) %>
 <
-
    The second switch will be performed, simply because in the definition list,
    the pattern was placed at a higher spot. In this case, this seems to make
    sense to prioritize one over the other. If it's needed to prioritize in a
-   different way, the definition list should be redefined by the user -- see
-   |switch-customization|.
+   different way (or simply to remove unneeded switches), the definition list
+   should be redefined by the user -- see |switch-customization|.
 
 If you don't like the "smallest match" algorithm described on top, and you'd
 rather just attempt all matches in order, set the value of
