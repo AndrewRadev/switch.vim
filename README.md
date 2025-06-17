@@ -55,9 +55,9 @@ There are three main principles that the substitution follows:
    ```
 
    This works if the cursor is positioned anywhere on the line except if it's
-   on top of "true" or "false". In that case, the abovementioned true -> false
-   substition will be performed instead. If you want to perform a "larger"
-   substition instead, you could move your cursor away from the "smaller"
+   on top of "true" or "false". In that case, the above-mentioned true -> false
+   substitution will be performed instead. If you want to perform a "larger"
+   substitution instead, you could move your cursor away from the "smaller"
    match. In this case, move the cursor away from the "true" or "false" words.
 
 3. When several patterns with the same size match, the order of the

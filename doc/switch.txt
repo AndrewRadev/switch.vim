@@ -38,8 +38,8 @@ USAGE                                      *switch-usage* *:Switch* *:SwitchReve
 
 The main entry point of the plugin is a single command, |:Switch|. When the
 command is executed, the plugin looks for one of a few specific patterns under
-the cursor and performs a substition depending on the pattern. For example, if
-the cursor is on the "true" in the following code:
+the cursor and performs a substitution depending on the pattern. For example,
+if the cursor is on the "true" in the following code:
 >
     flag = true
 <
@@ -81,10 +81,10 @@ You can also map the <Plug>s directly, for example:
 <
 Using mappings brings the benefit that the commands become repeatable with `.`
 
-There are three main principles that the substition follows:
+There are three main principles that the substitution follows:
 
 1. The cursor needs to be on the match. Regardless of the pattern, the plugin
-   only performs the substition if the cursor is positioned in the matched
+   only performs the substitution if the cursor is positioned in the matched
    text.
 
 2. When several patterns match, the shortest match is performed. For example,
@@ -98,8 +98,8 @@ There are three main principles that the substition follows:
 <
    This works if the cursor is positioned anywhere on the line except if it's
    on top of "true" or "false". In that case, the abovementioned true -> false
-   substition will be performed instead. If you want to perform a "larger"
-   substition instead, you could move your cursor away from the "smaller"
+   substitution will be performed instead. If you want to perform a "larger"
+   substitution instead, you could move your cursor away from the "smaller"
    match. In this case, move the cursor away from the "true" or "false" words.
 
 3. When several patterns with the same size match, the order of the
