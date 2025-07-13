@@ -104,4 +104,17 @@ describe "javascript definitions" do
       something.forEach(function(one) { });
     EOF
   end
+
+  specify "string type" do
+    set_file_contents 'const foo = "bar?"'
+
+    vim.search('bar').switch
+    assert_file_contents 'const foo = `bar?`'
+
+    vim.switch
+    assert_file_contents "const foo = 'bar?'"
+
+    vim.switch
+    assert_file_contents 'const foo = "bar?"'
+  end
 end

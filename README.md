@@ -477,6 +477,7 @@ definitions with their patterns and replacements, look at the file
 Object* foo = bar.baz;
 Object* foo = bar->baz;
 ```
+
 ### JavaScript
 
 * Function definitions:
@@ -501,6 +502,13 @@ Object* foo = bar->baz;
   // const -> let
   ```
   Switching to var from const or let is unsupported, since it's assumed to be an unlikely case.
+
+* String styles:
+  ```javascript
+  const foo = "${bar}/baz"
+  const foo = `${bar}/baz`
+  const foo = '${bar}/baz'
+  ```
 
 ### CoffeeScript arrows
 

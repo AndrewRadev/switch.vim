@@ -652,6 +652,13 @@ ES6-style variable declaraions (g:switch_builtins.javascript_es6_declarations)
 <
 Switching to var from const or let is unsupported, since it's assumed to be an unlikely case.
 
+String styles (g:switch_builtings.javascript_string_style)
+>
+    const foo = "${bar}/baz"
+    const foo = `${bar}/baz`
+    const foo = '${bar}/baz'
+<
+
 Coffeescript ~
 
 Arrows (g:switch_builtins.coffee_arrow):
