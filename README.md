@@ -444,7 +444,7 @@ definitions with their patterns and replacements, look at the file
   <% foo = { one: 'two' } %>
   ```
 
-### Haml
+### Haml/Slim
 
 * If-clauses:
   ``` haml
@@ -510,19 +510,19 @@ Object* foo = bar->baz;
   const foo = '${bar}/baz'
   ```
 
-### CoffeeScript arrows
+### CoffeeScript
 
-``` coffeescript
-functionCall (foo) ->
-functionCall (foo) =>
-```
+* Arrows:
+  ``` coffeescript
+  functionCall (foo) ->
+  functionCall (foo) =>
+  ```
 
-### CoffeeScript dictionary shorthands
-
-``` coffeescript
-foo = {one, two}
-foo = {one: one, two}
-```
+* Dictionary shorthand:
+  ``` coffeescript
+  foo = {one, two}
+  foo = {one: one, two}
+  ```
 
 ### Clojure
 
@@ -583,39 +583,56 @@ foo = {one: one, two}
 
 ### Elixir
 
-Charlist -> Binary -> Atom
+* Charlist -> Binary -> Atom
+  ``` elixir
+  foo = 'bar'
+  foo = "bar"
+  foo = :bar
+  ```
 
-``` elixir
-foo = 'bar'
-foo = "bar"
-foo = :bar
-```
+* List shorthands
+  ``` elixir
+  ["one", "two", "three"]
+  ~w(one two three)
 
-Elixir list shorthands
-
-``` elixir
-["one", "two", "three"]
-~w(one two three)
-
-[:one, :two, :three]
-~w(one two three)a
-```
-
-Capitalized boolean constants :
-
-``` elixir
-flag = True
-flag = False
-```
+  [:one, :two, :three]
+  ~w(one two three)a
+  ```
 
 ### Rust
 
-Void typecheck
+* Void typecheck:
+  ``` rust
+  let value = complicated_expression();
+  let value: () = complicated_expression();
+  ```
 
-``` rust
-let value = complicated_expression();
-let value: () = complicated_expression();
-```
+* Turbofish:
+  ```rust
+  let value = iterator.collect();
+  let value = iterator.collect::<Todo>();
+  ```
+
+  The type inserted is a placeholder, but it should be relatively easy to jump to it and edit it with a `cw`. In the future, this might be improved.
+
+* String type:
+  ```rust
+  let hello = "Hello, World";
+  let hello = r"Hello, World";
+  let hello = r#"Hello, World"#;
+  ```
+
+* Option `is_some`/`is_none`:
+  ``` rust
+  list.get(1).is_some()
+  list.get(1).is_none()
+  ```
+
+* Equality assertion
+  ``` rust
+  assert_eq!(foo, bar);
+  assert_ne!(foo, bar);
+  ```
 
 ### TOML
 
@@ -634,6 +651,57 @@ Task items
 - [ ] Task 1
 - [x] Task 1
 ```
+
+### Python
+
+* Dict access:
+
+  ``` python
+  spam['eggs']
+  spam.get('eggs')
+  ```
+
+* String style:
+
+  ``` python
+  'Ham'
+  "Ham"
+  f"Ham"
+  ```
+
+* Dictionary style:
+
+  ``` python
+  {'foo': 'bar', 'bar': 'baz'}
+  dict(foo='bar', bar='baz')
+  ```
+
+  Note that this will only work for simple dictionaries. Nesting and more complicated expressions break this, because it uses a single regex. A future dedicated implementation using my "sideways" plugin might work better here.
+
+### Jinja
+
+Tag type:
+
+``` jinja
+{{ content }}
+{% content %}
+{# content #}
+```
+
+### Vimscript
+
+* Script-local functions:
+  ``` vim
+  call s:TestFunction()
+  call <SID>TestFunction()
+  ```
+
+* String styles:
+  ``` vim
+  let foo = "{bar}/baz"
+  let foo = $"{bar}/baz"
+  let foo = '{bar}/baz'
+  ```
 
 ## Similar work
 

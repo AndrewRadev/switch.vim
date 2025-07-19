@@ -629,7 +629,7 @@ Pointer dots/arrows (g:switch_builtins.cpp_pointer):
     Object* foo = bar->baz;
 <
 
-Javascript ~
+JavaScript ~
 
 Function definitions (g:switch_builtins.javascript_function)
 >
@@ -745,11 +745,6 @@ Elixir list shorthands (g:switch_builtins.elixir_list_shorthand)
     [:one, :two, :three]
     ~w(one two three)a
 <
-Capitalized boolean constants (g:switch_builtins.capital_true_false):
->
-    flag = True
-    flag = False
-<
 Rust ~
 
 Void typecheck (g:switch_builtins.rust_void_typecheck)
@@ -814,6 +809,8 @@ Dictionary style (g:switch_builtins.python_dict_style)
     {'foo': 'bar', 'bar': 'baz'}
     dict(foo='bar', bar='baz')
 <
+Note that this will only work for simple dictionaries. Nesting and more complicated expressions break this, because it uses a single regex. A future dedicated implementation using my "sideways" plugin might work better here.
+
 Jinja ~
 
 Tag type (g:switch_builtins.jinja_tag_type)
@@ -822,7 +819,19 @@ Tag type (g:switch_builtins.jinja_tag_type)
     {% content %}
     {# content #}
 <
+Vimscript~
 
+Script-local functions (g:switch_builtins.vim_script_local_function)
+>
+    call s:TestFunction()
+    call <SID>TestFunction()
+<
+String styles (g:switch_builtins.vim_string_style)
+>
+    let foo = "{bar}/baz"
+    let foo = $"{bar}/baz"
+    let foo = '{bar}/baz'
+<
 
 ==============================================================================
 SETTINGS                                                       *switch-settings*
