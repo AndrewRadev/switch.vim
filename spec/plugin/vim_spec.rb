@@ -18,4 +18,17 @@ describe "vim definitions" do
       call s:TestFunction()
     EOF
   end
+
+  specify "string type" do
+    set_file_contents 'let foo = "bar?"'
+
+    vim.search('bar').switch
+    assert_file_contents 'let foo = $"bar?"'
+
+    vim.switch
+    assert_file_contents "let foo = 'bar?'"
+
+    vim.switch
+    assert_file_contents 'let foo = "bar?"'
+  end
 end
