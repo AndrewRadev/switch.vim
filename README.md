@@ -717,7 +717,7 @@ switch.vim to take a look at one of these two.
 
 ## Contributing
 
-Pull requests are welcome, as long as they did not involve LLM usage. Take a look at [CONTRIBUTING.md](https://codeberg.org/AndrewRadev/newplugin.vim/blob/main/CONTRIBUTING.md) first for some guidelines. Be sure to abide by the [CODE_OF_CONDUCT.md](https://codeberg.org/AndrewRadev/newplugin.vim/blob/main/CODE_OF_CONDUCT.md) as well.
+Pull requests are welcome, as long as they did not involve LLM usage. Take a look at [CONTRIBUTING.md](https://github.com/AndrewRadev/switch.vim/blob/main/CONTRIBUTING.md) first for some guidelines. Be sure to abide by the [CODE_OF_CONDUCT.md](https://github.com/AndrewRadev/switch.vim/blob/main/CODE_OF_CONDUCT.md) as well.
 
 ## Issues
 
