@@ -270,6 +270,8 @@ let g:switch_builtins =
       \     '\<assertIsNotNone\>': 'assertIsNone',
       \     '\<assertIn\>':        'assertNotIn',
       \     '\<assertNotIn\>':     'assertIn',
+      \     '\<assertEqual\>':     'assertNotEqual',
+      \     '\<assertNotEqual\>':  'assertEqual',
       \   },
       \ }
 
