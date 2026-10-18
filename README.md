@@ -37,6 +37,32 @@ let g:switch_mapping = ""
 See the "customization" section below for information on how to create several
 mappings with different definitions.
 
+The same holds true for the secondary command, `:SwitchReverse`. For
+definitions that are built as lists (for example,
+`["one", "two", "three"]`), this command works the same way in the
+opposite direction. So, with the example definition, executing `:Switch`
+on "two" would result in "three", but executing `:SwitchReverse` on
+"two" would change it to "one.
+
+Again, for dictionary switches, this command will work exactly like `:Switch`.
+
+The mapping that controls the reverse switch is `g:switch_reverse_mapping`,
+and it's unset by default (no mapping is defined).
+
+```vim
+let g:switch_reverse_mapping = '+'
+```
+
+You can also create the mappings directly using the provided `<Plug>`
+mappings, for example:
+
+```vim
+nmap - <Plug>(Switch)
+nmap + <Plug>(SwitchReverse)
+```
+
+Using mappings brings the benefit that the commands become repeatable with `.`
+
 There are three main principles that the substitution follows:
 
 1. The cursor needs to be on the match. Regardless of the pattern, the plugin
